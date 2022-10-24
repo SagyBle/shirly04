@@ -1,0 +1,16 @@
+{
+    "songs": {
+      "song1": {
+        "title": "test123",
+        "lyrics": "surname123"
+      },
+      "song2": {
+        "title": "test456",
+        "lyrics": "surname456"
+      },
+      "song3": {
+        "title": "test789",
+        "lyrics": "surname789"
+      }
+    }
+  }
