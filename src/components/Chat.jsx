@@ -55,7 +55,9 @@ const Chat = (props) => {
 
   return (
     <>
-      {(messages.length > 0 ) && <Song playingNow={playingNext} />}
+      {/* {(messages.length > 0 ) && <Song playingNow={playingNext} />} */}
+      <Song playingNow={playingNext} />
+
       {(messages.length > 0) && <h2>Playing Next: {messages[0].text} </h2>} 
       <h3>Asked by: {askedBy}</h3>
 
