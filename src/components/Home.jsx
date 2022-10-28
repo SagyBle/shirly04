@@ -3,66 +3,63 @@ import Chat from './Chat'
 import { useState } from 'react'
 
 import {Link, Route, Routes} from 'react-router-dom'
+import GetARoom from './GetARoom'
 
 
 
 function Home() {
-    const [showChat, setShowCat] = useState(false);
+    // const [showChat, setShowCat] = useState(false);
     const [roomNumber, setRoomNumber] = useState('');
 
-
-    const handleCreateNewRoom = (e) => {
-        setShowCat(!showChat)
-        const id = Date.now()
-        setRoomNumber(id)
-        console.log(id)
-
-        // change url to ptah="/id"
-    }
-
     const handleRoomNumberChange = (e) => {
-    setRoomNumber(e.target.value)
+        setRoomNumber(e.target.value)
   }
 
-    const handleJoinRoom = (e) => {
-        e.preventDefault()
-        
-        console.log("join this room:");
-        console.log(roomNumber);
-
-        // change url to path ="/roomNumber"
-    }
     
   return (
     <>
         <div>
             <h3>Welcome to Shirly!</h3>
+            <Routes>
+                <Route path='/' element={<GetARoom/>}/>
+            </Routes>
             
-            {!showChat &&
-                <div>
-                    <div>
-                        <form onSubmit={handleJoinRoom}>
-                            <p>join a room</p>
-                            <input
-                                onChange={handleRoomNumberChange}
-                                type="text"
-                                name="room-number"
-                                placeholder="Enter Room Number"
-                                value={roomNumber}
-                            />
-                            <button type='submit'>Go!</button>
-                        
-                        </form>
-                    </div>
-                <div>
-                </div>
-                    <button onClick={()=> handleCreateNewRoom()}>Create new room</button>
-                </div>
-            }
-            {showChat && <Chat roomNumber={roomNumber}/>}
+            
         </div>
     </>
   )
 }
+
+
+// {!showChat &&
+//                 <div>
+//                     <div>
+//                         <form onSubmit={handleJoinRoom}>
+//                             <p>join a room</p>
+//                             <input
+//                                 onChange={handleRoomNumberChange}
+//                                 type="text"
+//                                 name="room-number"
+//                                 placeholder="Enter Room Number"
+//                                 value={roomNumber}
+//                             />
+//                             <a href={()=>createRoomURL(roomNumber)}>
+//                                 <button type='submit'>Go!</button>
+//                             </a>
+                            
+                        
+//                         </form>
+//                     </div>
+//                 <div>
+//                 </div>
+//                     <button onClick={()=> handleCreateNewRoom()}>Create new room</button>
+//                 </div>
+//             }
+//             <Routes>
+//                 {/* <Route element={showChat && <Chat roomNumber={roomNumber}/>} /> */}
+//                 <Route path='jam-room/:id' element={showChat && <Chat />} />
+
+                
+//             </Routes>
 
 export default Home

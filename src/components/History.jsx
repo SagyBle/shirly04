@@ -1,11 +1,16 @@
 import React, { useState } from 'react'
+import Message from './Message'
 
 function History(props) {
     
+    
     return (
         <div>
-            <h1>Already Played Today:</h1>
 
+          {props.history &&
+          props.history.map((message) => (
+            <Message key={message.id} message={message} />
+          ))}
         </div>
 
     )

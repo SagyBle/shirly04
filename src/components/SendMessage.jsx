@@ -26,6 +26,7 @@ export default class SendMessage extends React.Component {
       text: '',
       enableSend: false,
     }
+    
   }
   onTextChange = (e) => {
     const value = e.target.value;
@@ -67,7 +68,8 @@ export default class SendMessage extends React.Component {
     e.preventDefault();
     const { suggestions } = this.state;
     const { uid, displayName } = auth.currentUser;
-    await addDoc(collection(db, 'messages'), {
+    // TODO: PROBLEM: hardcoded as shit
+    await addDoc(collection(db, `rooms/room${this.props.roomID}/messages`), {
       text: this.state.text,
       name: displayName,
       uid,
@@ -83,6 +85,7 @@ export default class SendMessage extends React.Component {
 
 
   render() {
+
     const { text } = this.state;
     return (
       <form onSubmit={this.sendMessage}>

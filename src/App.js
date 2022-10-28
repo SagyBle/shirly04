@@ -5,6 +5,7 @@ import { auth } from './firebase'
 import { useAuthState } from 'react-firebase-hooks/auth'
 
 import {Link, Route, Routes} from 'react-router-dom'
+import Chat from "./components/Chat";
 
 
 const style = {
@@ -25,6 +26,7 @@ function App() {
             <Navbar />
           </div>
         }/>
+        <Route path="/jam-room/:id" element={<Chat />} />
           
       </Routes>
     </>

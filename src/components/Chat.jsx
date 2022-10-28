@@ -2,10 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import Message from './Message';
 import SendMessage from './SendMessage';
 import { db } from '../firebase';
-import { query, collection, orderBy, onSnapshot, doc, deleteDoc } from 'firebase/firestore';
+import { query, collection, orderBy, onSnapshot, doc, deleteDoc, setDoc } from 'firebase/firestore';
 import Song from './Song';
 import History from './History';
 // import songs from '../data/songs.json'
+import { useParams } from 'react-router-dom';
+
 
 const style = {
   main: `flex flex-col p-[10px]`,
@@ -15,15 +17,33 @@ const style = {
 const Chat = (props) => {
 
   const [messages, setMessages] = useState([]);
+  const [history, setHistory] = useState([]);
+
   const [playingNext, setPlayingNext] = useState('');
-  const [playingNow, setPlayingNow] = useState('');
+  // const [playingNow, setPlayingNow] = useState('');
   const [askedBy, setAskedBy] = useState('');
   const [playedSongs, setPlayedSongs] = useState([]);
 
+  const { id } = useParams();
+
   const scroll = useRef();
 
-  useEffect(() => {
-    const q = query(collection(db, 'messages'), orderBy('timestamp'));
+  // useEffect(() => {
+  //   const q = query(collection(db, 'messages'), orderBy('timestamp'));
+  //   const unsubscribe = onSnapshot(q, (querySnapshot) => {
+  //     let messages = [];
+  //     querySnapshot.forEach((doc) => {
+  //       messages.push({ ...doc.data(), id: doc.id });
+  //     });
+  //     setMessages(messages);
+  //   });
+  //   return () => unsubscribe();
+
+    
+  // }, []);
+
+    useEffect(() => {
+    const q = query(collection(db, `rooms/room${id}/messages`), orderBy('timestamp'));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       let messages = [];
       querySnapshot.forEach((doc) => {
@@ -32,7 +52,23 @@ const Chat = (props) => {
       setMessages(messages);
     });
     return () => unsubscribe();
+
+    
   }, []);
+
+  // creating room database: mesasages and users
+  useEffect(()=>{
+    console.log("running useEffect creating room");
+    async function createRoom(){
+      console.log(id);
+      const docRef1 = doc(db, `rooms/room${id}/messages`, 'examplemessage1');
+      await setDoc(docRef1, { title: 'title1', artist: 'artist1' });
+
+      const docRef2 = doc(db, `rooms/room${id}/users`, 'firstuser');
+      await setDoc(docRef2, { name: 'moshe', photo: 'moshephoto' });
+    }
+    createRoom(); 
+  },[])
 
   const moveNext = async () => {
     if (messages.length > 0) {
@@ -41,21 +77,27 @@ const Chat = (props) => {
 
       // TODO: code duplication from DeleteMessage inner function
       const docref = doc(db, "messages", messages[0].id)
-      // console.log(messages[0].id)
-      deleteDoc(docref).then(() => {
-        console.log("Entire document has been deleted successfully.")
-      }).catch(error => { console.log(error) })
+      console.log(messages[0].id)
 
+      let newHistory = [...history, messages[0]];
+      console.log("this is newHistory:");
+      console.log(newHistory);
+      setHistory(newHistory);
+      const subMessages = messages.slice(1);
+      // console.log(subMessages);
+      // setHistory(updatedHistory);
+      setMessages(subMessages);
+      
     }
 
     // work with history
-    let updatedPlayedSongs = playedSongs.push(playingNext)
-    setPlayedSongs(updatedPlayedSongs)
+    // let updatedPlayedSongs = playedSongs.push(playingNext)
+    // setPlayedSongs(updatedPlayedSongs)
   }
 
   return (
     <>
-      {/* {(messages.length > 0 ) && <Song playingNow={playingNext} />} */}
+      <h1>Room Number: {id}</h1>
       <Song playingNow={playingNext} />
 
       {(messages.length > 0) && <h2>Playing Next: {messages[0].text} </h2>} 
@@ -68,11 +110,11 @@ const Chat = (props) => {
           messages.map((message) => (
             <Message key={message.id} message={message} />
           ))}
-        <SendMessage />
+        <SendMessage roomID={id} />
       </main>
 
       <span ref={scroll}></span>
-      { playedSongs && <History playedSongs={playedSongs}/>}
+      {/* { history && <History history={history}/>} */}
     </>
   );
 };

@@ -12,7 +12,6 @@ const style = {
     button: `w-[20%] bg-red-300 border border-solid`,
     buttonLike: `bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded`,
     buttonDelete: `bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded`,
-
 }
 
 
