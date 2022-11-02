@@ -1,0 +1,26 @@
+.image1 {
+  border-radius: 50px;
+  height: 38px;
+}
+
+.userline {
+  display: flex;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  
+}
+.para{
+  padding-left: 10px;
+}
+
+.x{
+  height: 18px;
+
+}
+
+.x:hover {
+  height: 20px;
+  cursor: pointer;
+  transition: 0.15s;
+  transition-delay: 0.07s;
+}

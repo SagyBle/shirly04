@@ -14,7 +14,6 @@ const style = {
     buttonDelete: `bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded`,
 }
 
-
 const Message = ({ message }) => {
     const messageClass = 
     message.uid === auth.currentUser.uid
