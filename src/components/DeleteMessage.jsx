@@ -9,13 +9,10 @@ const style = {
 }
 
 function DeleteMessage(props) {
-
-    const { id } = useParams();
     
+    const { id } = useParams(); 
     const removeMessage = async (e) => {
         const docref = doc(db, `rooms/room${id}/messages`, props.message.id)
-        // console.log("props.message.id:")
-        // console.log(props.message.id)
         deleteDoc(docref).then(()=>{
             console.log("Entire document has been deleted successfully.")
         }).catch(error=> {console.log(error)})

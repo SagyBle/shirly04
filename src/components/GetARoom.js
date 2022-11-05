@@ -7,69 +7,61 @@ import { db, auth } from "../firebase";
 import {
   doc,
   setDoc,
-  updateDoc,
   collection,
   getDocs,
   getDoc,
-  addDoc,
-  getFirestore,
-  arrayUnion,
-  arrayRemove,
-  increment,
   serverTimestamp,
 } from "firebase/firestore";
-
-
 import { useAuthState } from "react-firebase-hooks/auth";
 
-function GetARoom() {
+function GetARoom(props) {
+
   const [roomNumber, setRoomNumber] = useState("");
   const [user] = useAuthState(auth);
-
-  // const [roomExists, setroomExists] = useState(true);
   const [showMessage, setShowMessage] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setShowMessage(false);
   }, [roomNumber]);
 
-  // const history = useHistory();
-  const navigate = useNavigate();
-
   const handleRoomNumberChange = (e) => {
     setShowMessage(false);
     setRoomNumber(e.target.value);
   };
-  // New Room
+
+  // Creating New Room
   const createNewRoomURLAndGetInside = async () => {
+    // Room id is the specific room creation time.
     const rid = Date.now();
 
-    //creating new room in firestore
     let roomStr = "room" + rid;
-
     await setDoc(doc(db, "rooms", roomStr), {
       roomNumber: rid,
     });
-
-    // adding the user who created the room as adimn
-    const docRef = await addDoc(collection(db, `rooms/room${rid}/users`),
-     { name: user.displayName, photoURL: user.photoURL, isAdmin: true, timestamp: serverTimestamp(),
-    });
-    console.log("user from create written with ID: ", docRef.id);
-
+    const data = { 
+      name: user.displayName,
+      photoURL: user.photoURL, 
+      isAdmin: true, 
+      timestamp: serverTimestamp(),
+      uid: props.uid,
+      // Room creator will be remember as room creator.
+      originalAdmin: true,
+    }
+    const docRef = await setDoc(doc(db, `rooms/room${rid}/users/${props.uid}`),data);
+    
+    // Move to the room, by navigation to the mutual url.
     navigate("/jam-room/" + rid);
-    console.log("this is rid from create");
-    console.log(rid);
   };
 
-  // Existing Room
+  // Enetering Existing Room
+
+  // if room exists, enter it. else, show an error message.
   const isRoomExists = async (id) => {
-    console.log("launch is room exists");
     const colRef = collection(db, "rooms");
     const rooms = await getDocs(colRef);
-
+    // check in all rooms, if one matches given id by user.
     let roomExists = false;
-
     rooms.forEach((room) =>
       room.data().roomNumber == parseInt(roomNumber)
         ? (roomExists = true)
@@ -79,12 +71,6 @@ function GetARoom() {
     if (roomExists) {
       const roomRef = doc(db, `rooms`, `room${id}`);
       const roomSnap = await getDoc(roomRef);
-      if (roomSnap.exists()) {
-        console.log("docSnap:");
-        console.log(roomSnap.data());
-      } else {
-        console.log("room ref wasn't found");
-      }
       joinRoom(id);
     } else {
       setShowMessage(true);
@@ -92,24 +78,48 @@ function GetARoom() {
   };
 
   const joinRoom = async (id) => {
-    // add name to users
-    // const docRef = doc(db, "rooms", `room${id}`);
-    // const docSnap = await getDoc(docRef);
-    // console.log(docSnap.data());
-    // // TODO: Find better solution using arrayUnion
-    // let newUsers = [...docSnap.data().users, user.displayName];
-    // setDoc(docRef, { users: newUsers });
 
-    // adding the user who joined the room as user
-    const docRef = await addDoc(collection(db, `rooms/room${roomNumber}/users`),
-    //  { name: user.displayName, photoURL: user.photoURL, isAdmin: false });
-    { name: user.displayName, photoURL: user.photoURL, isAdmin: false, timestamp: serverTimestamp(), });
-    console.log("user from join written with ID: ", docRef.id);
+    // Check if user had already participated in this specific room.
+    // If so, and he's also the original admin, hw would be an admin again.
+    // else, he would turn to be regular user.
+    const userRef = doc(db, `rooms/room${roomNumber}/users/${props.uid}`)
+    const docSnap = await getDoc(userRef);
     
+    let data = {}
+    // Check if this user is the original admin.
+    if (docSnap.exists() && docSnap.data().originalAdmin){
+      console.log("commiting join room start original admin");
+      data = {
+      name: user.displayName,
+      originalAdmin: true,
+      photoURL: user.photoURL, 
+      isAdmin: true, 
+      timestamp: serverTimestamp(),
+      uid: props.uid,
+      }  
+    }
+    else{
+      console.log("commiting join room start regular way");
+      data = {
+        name: user.displayName,
+        originalAdmin: false,
+        photoURL: user.photoURL, 
+        isAdmin: false, 
+        timestamp: serverTimestamp(),
+        uid: props.uid,
+      }
+    }
+
+    // Add/update user.
+    await setDoc(doc(db, `rooms/room${roomNumber}/users/${props.uid}`),
+    data);
+    
+
+    // Enter room.
     navigate("/jam-room/" + roomNumber);
-    console.log("this is id from join");
-    console.log(id);
+
   };
+
 
   return (
     <div>

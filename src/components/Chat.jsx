@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Message from "./Message";
 import SendMessage from "./SendMessage";
-import { db } from "../firebase";
+import { db, auth } from "../firebase";
 import {
   query,
   collection,
@@ -9,19 +9,15 @@ import {
   onSnapshot,
   doc,
   deleteDoc,
+  updateDoc,
   setDoc,
-  addDoc,
-  getDoc,
-  arrayUnion,
-  arrayRemove,
-  increment,
 } from "firebase/firestore";
 import Song from "./Song";
-import History from "./History";
-// import songs from '../data/songs.json'
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import ActiveUsers from "./ActiveUsers";
+import { useAuthState } from 'react-firebase-hooks/auth'
+
 
 const style = {
   main: `flex flex-col p-[10px]`,
@@ -30,38 +26,49 @@ const style = {
 };
 
 const Chat = (props) => {
+
+
+  
+
+
   const [messages, setMessages] = useState([]);
-  const [history, setHistory] = useState([]);
 
   const [playingNext, setPlayingNext] = useState("");
-  // const [playingNow, setPlayingNow] = useState('');
-  const [askedBy, setAskedBy] = useState("");
-  const [playedSongs, setPlayedSongs] = useState([]);
 
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [askedBy, setAskedBy] = useState("");
+
+  const [amIAdmin, setAmIAdmin] = useState(false);
+    const [amIOriginallyAdmin, setAmIOriginallyAdmin] = useState(false);
+
 
   const { id } = useParams();
+
+  const [user] = useAuthState(auth);
 
   const scroll = useRef();
 
   const navigate = useNavigate();
 
-  const tryFunction = async () => {
-    console.log("try function started!");
-    const docRef = doc(db, "rooms", "room1667145166870");
-    // setDoc(docRef, { users: [...users, "moshe"] });
-    const docSnap = await getDoc(docRef);
-    // TODO: Find better solution using arrayUnion
-    // let newUsers = [...docSnap.data().users, "yusuf"];
-    // setDoc(docRef, { users: newUsers });
-    // if (docSnap.exists()) {
-    //   console.log("Document data:", docSnap.data().users);
-    // } else {
-    //   // doc.data() will be undefined in this case
-    //   console.log("No such document!");
-    // }
+
+  // get amIAdmin field from firestore
+  const unsubAdmin = onSnapshot(doc(db, `rooms/room${id}/users`, user.uid), (doc) => {
+      console.log("Current data amIAdmin?: ", doc.data().isAdmin);
+      setAmIAdmin(doc.data().isAdmin)
+  });
+
+  // Update isAdmin field
+  const beAdminAgain = () => {
+    updateDoc(doc(db, `rooms/room${id}/users/${user.uid}`), {isAdmin: true});
   };
 
+  // Get amIOriginalAdmin from firestore
+  const unsubOriginal = onSnapshot(doc(db, `rooms/room${id}/users`, user.uid), (doc) => {
+      console.log("Current data amIOriginalAdmin?: ", doc.data().originalAdmin);
+      setAmIOriginallyAdmin(doc.data().originalAdmin)
+  });
+
+
+  // set messages 
   useEffect(() => {
     const q = query(
       collection(db, `rooms/room${id}/messages`),
@@ -77,26 +84,22 @@ const Chat = (props) => {
     return () => unsubscribe();
   }, []);
 
-  // creating room database: mesasages and users
+  // creating room document: mesasages and users as subdocument
   useEffect(() => {
     console.log("running useEffect creating room");
     async function createRoom() {
-      console.log(id);
       const docRef1 = doc(db, `rooms/room${id}/messages`, "examplemessage1");
       await setDoc(docRef1, { title: "title1", artist: "artist1" });
-
-      // const docRef2 = doc(db, `rooms/room${id}/users`, 'firstuser');
-      // await addDoc(docRef2, { name: 'moshe', photo: 'moshephoto' });
     }
     createRoom();
   }, []);
 
+  // Move to next song - Admin function only
   const moveNext = async () => {
     if (messages.length > 0) {
       setPlayingNext(messages[0].text);
       setAskedBy(messages[0].name);
 
-      // TODO: code duplication from DeleteMessage inner function
       const docref = doc(db, `rooms/room${id}/messages`, messages[0].id);
       const subMessages = messages.slice(1);
       setMessages(subMessages);
@@ -110,9 +113,6 @@ const Chat = (props) => {
         });
     }
 
-    // work with history
-    // let updatedPlayedSongs = playedSongs.push(playingNext)
-    // setPlayedSongs(updatedPlayedSongs)
   };
 
   return (
@@ -125,6 +125,12 @@ const Chat = (props) => {
       >
         Home
       </button>
+      <p>Hi, {user.displayName}</p>
+      {amIAdmin? <p>Logged in as an Admin</p> : <p>Logged in as <a href=""></a> User</p>}
+      <div>
+        {(amIOriginallyAdmin && !amIAdmin)? <p>you are the room creator, do you want to be an admin again?</p> : null}
+        {(amIOriginallyAdmin && !amIAdmin)? <button onClick={beAdminAgain}>Be room admin again</button> : null}
+      </div>
       <h1>Room Number: {id}</h1>
       
       <Song playingNow={playingNext} />
@@ -132,23 +138,21 @@ const Chat = (props) => {
       {messages.length > 0 && <h2>Playing Next: {messages[0].text} </h2>}
       <h3>Asked by: {askedBy}</h3>
 
-      <button onClick={() => moveNext()} className={style.button}>
+      {amIAdmin && <button onClick={() => moveNext()} className={style.button}>
         Move Next!
-      </button>
+      </button>}
       <h1>רשימת הבקשות</h1>
       <main className={style.main}>
         {messages &&
           messages.map((message) => (
-            <Message key={message.id} message={message} />
+            <Message key={message.id} message={message} rid={id} />
           ))}
         <SendMessage roomID={id} />
       </main>
 
       <span ref={scroll}></span>
 
-      <button onClick={() => tryFunction()}>Try Function</button>
-      <ActiveUsers roomID={id}/>
-      {/* { history && <History history={history}/>} */}
+      <ActiveUsers roomID={id} amIAdmin={amIAdmin} uid={user.uid}/>
     </>
   );
 };

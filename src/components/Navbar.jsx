@@ -15,6 +15,9 @@ const style = {
 
 function Navbar() {
     const [user] = useAuthState(auth);
+
+    // console.log("from navbar this uid:");
+    // console.log(user.uid)
     return ( 
         <>
             <div>
@@ -25,7 +28,7 @@ function Navbar() {
                     {user && <LogOut/>}
                 </div>
                 {/* <Routes> */}
-                        {user && <Home />}
+                        {user && <Home uid={user.uid}/>}
                     <div>
                         
                     </div>

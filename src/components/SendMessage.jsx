@@ -13,6 +13,7 @@ const style = {
 export default class SendMessage extends React.Component {
   constructor(props) {
     super(props);
+    // Locate here all songs' titles.
     this.items = [
       "אהבתיה - שלמה ארצי",
       "בוא - עברי לידר",
@@ -77,7 +78,6 @@ export default class SendMessage extends React.Component {
       timestamp: serverTimestamp()
     })
     this.setState(() => ({ suggestions, text: '', enableSend: false }))
-    // scroll.current.scrollIntoView({behavior: 'smooth'})
     const element = this.element.nativeElement;
     element.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' })
   }

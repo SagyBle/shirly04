@@ -7,8 +7,7 @@ import GetARoom from './GetARoom'
 
 
 
-function Home() {
-    // const [showChat, setShowCat] = useState(false);
+function Home(props) {
     const [roomNumber, setRoomNumber] = useState('');
 
     const handleRoomNumberChange = (e) => {
@@ -21,7 +20,7 @@ function Home() {
         <div>
             <h3>Welcome to Shirly!</h3>
             <Routes>
-                <Route path='/' element={<GetARoom/>}/>
+                <Route path='/' element={<GetARoom uid={props.uid}/>}/>
             </Routes>
             
             
