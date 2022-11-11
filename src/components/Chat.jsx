@@ -8,15 +8,24 @@ import {
   orderBy,
   onSnapshot,
   doc,
+  getDoc,
   deleteDoc,
   updateDoc,
   setDoc,
+  addDoc,
+  serverTimestamp,
+
 } from "firebase/firestore";
 import Song from "./Song";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import ActiveUsers from "./ActiveUsers";
-import { useAuthState } from 'react-firebase-hooks/auth'
+import { useAuthState } from 'react-firebase-hooks/auth';
+import CopyLink from "./CopyLink"
+import SendWhatsapp from "./SendWhatsapp";  
+import ChangeRoomName from "./ChangeRoomName";
+import History from "./History";
+import Loading from "./Loading";
 
 
 const style = {
@@ -27,18 +36,23 @@ const style = {
 
 const Chat = (props) => {
 
-
-  
-
-
   const [messages, setMessages] = useState([]);
+
+  const [allowPeopleIn, setAllowPeopleIn] = useState(false);
+  const [allowAddingRequsets, setAllowAddingRequsets] = useState(false);
 
   const [playingNext, setPlayingNext] = useState("");
 
   const [askedBy, setAskedBy] = useState("");
 
   const [amIAdmin, setAmIAdmin] = useState(false);
-    const [amIOriginallyAdmin, setAmIOriginallyAdmin] = useState(false);
+  const [amIOriginallyAdmin, setAmIOriginallyAdmin] = useState(false);
+
+  const [roomName, setRoomName] = useState("");
+  const [showLyrics, setShowLyrics] = useState(true);
+  const [addRequests, setAddRequests] = useState(true);
+  const [enterUsers, setEnterUSers] = useState(true);
+
 
 
   const { id } = useParams();
@@ -61,12 +75,51 @@ const Chat = (props) => {
     updateDoc(doc(db, `rooms/room${id}/users/${user.uid}`), {isAdmin: true});
   };
 
+
+  // toggle up showLyrics field
+  const toggleUpShowLyrics = () => {
+    updateDoc(doc(db, `rooms/room${id}`), {showLyrics: true});
+  };
+
+  // toggle down showLyrics field
+  const toggleDownShowLyrics = () => {
+    updateDoc(doc(db, `rooms/room${id}`), {showLyrics: false});
+  };
+
+   // toggle up addRequests field
+  const toggleUpAddRequests = () => {
+    updateDoc(doc(db, `rooms/room${id}`), {addRequests: true});
+  };
+
+  // toggle down addRequests field
+  const toggleDownAddRequests = () => {
+    updateDoc(doc(db, `rooms/room${id}`), {addRequests: false});
+  };
+
+   // toggle up enterUsers field
+  const toggleUpEnterUsers = () => {
+    updateDoc(doc(db, `rooms/room${id}`), {enterUsers: true});
+  };
+
+  // toggle down enterUsers field
+  const toggleDownEnterUsers = () => {
+    updateDoc(doc(db, `rooms/room${id}`), {enterUsers: false});
+  };
+
   // Get amIOriginalAdmin from firestore
   const unsubOriginal = onSnapshot(doc(db, `rooms/room${id}/users`, user.uid), (doc) => {
       console.log("Current data amIOriginalAdmin?: ", doc.data().originalAdmin);
       setAmIOriginallyAdmin(doc.data().originalAdmin)
   });
 
+
+  // Get room name, show lyrics, add requests and enter users.
+    const unsubRoomName = onSnapshot(doc(db, `rooms/room${id}`), (doc) => {
+      setRoomName(doc.data().roomName);
+      setShowLyrics(doc.data().showLyrics);
+      setAddRequests(doc.data().addRequests);
+      setEnterUSers(doc.data().enterUsers);
+  });
 
   // set messages 
   useEffect(() => {
@@ -92,6 +145,7 @@ const Chat = (props) => {
       await setDoc(docRef1, { title: "title1", artist: "artist1" });
     }
     createRoom();
+    props.setIsLoading(false);
   }, []);
 
   // Move to next song - Admin function only
@@ -99,10 +153,17 @@ const Chat = (props) => {
     if (messages.length > 0) {
       setPlayingNext(messages[0].text);
       setAskedBy(messages[0].name);
+      const data = messages[0];
 
       const docref = doc(db, `rooms/room${id}/messages`, messages[0].id);
+      
+      await addDoc(collection(db, `rooms/room${id}/history`), data)
+
+
       const subMessages = messages.slice(1);
       setMessages(subMessages);
+
+
 
       deleteDoc(docref)
         .then(() => {
@@ -115,6 +176,20 @@ const Chat = (props) => {
 
   };
 
+  const adminToUser = async () => {
+    console.log("starting adminToUser!");
+    const data = {isAdmin: false}
+    const docRef = doc(db, `rooms/room${id}/users/${user.uid}`);
+    await updateDoc(docRef, data)
+  };
+
+
+  const tryFunction = () => {
+    console.log("this is show lyrics: " + showLyrics);
+  }
+
+  
+
   return (
     <>
       <button
@@ -125,20 +200,39 @@ const Chat = (props) => {
       >
         Home
       </button>
+      {props.isLoading && <Loading/>}
+
       <p>Hi, {user.displayName}</p>
-      {amIAdmin? <p>Logged in as an Admin</p> : <p>Logged in as <a href=""></a> User</p>}
+      {amIAdmin ? <p>Logged in as an Admin</p> : <p>Logged in as <a href=""></a> User</p>}
+      {amIAdmin ? <button onClick={adminToUser}>Become a User</button> : null} 
       <div>
-        {(amIOriginallyAdmin && !amIAdmin)? <p>you are the room creator, do you want to be an admin again?</p> : null}
-        {(amIOriginallyAdmin && !amIAdmin)? <button onClick={beAdminAgain}>Be room admin again</button> : null}
+        <h1>Room Name: {roomName}</h1>
+        {amIAdmin ? <ChangeRoomName rid={id}/> : null}
+
+        <h2>Room Number: {id}</h2>
+        
       </div>
-      <h1>Room Number: {id}</h1>
-      
-      <Song playingNow={playingNext} />
+
+      {amIAdmin? <div>
+        {showLyrics ?
+        <button onClick={toggleDownShowLyrics}>Hide Lyrics</button>:
+        <button onClick={toggleUpShowLyrics}>Show Lyrics</button>
+        }
+         {addRequests ?
+        <button onClick={toggleDownAddRequests}>Disable Adding Requests</button>:
+        <button onClick={toggleUpAddRequests}>Allow Adding Requests</button>
+        }
+         {enterUsers ?
+        <button onClick={toggleDownEnterUsers}>Disable Users In</button>:
+        <button onClick={toggleUpEnterUsers}>Allow Users In</button>
+        }
+
+      </div> : null}
+      {showLyrics? <Song playingNow={playingNext} /> : <h1>Lyrics display was disabled by the admin</h1>}
 
       {messages.length > 0 && <h2>Playing Next: {messages[0].text} </h2>}
       <h3>Asked by: {askedBy}</h3>
-
-      {amIAdmin && <button onClick={() => moveNext()} className={style.button}>
+      {amIAdmin && showLyrics && <button onClick={() => moveNext()} className={style.button}>
         Move Next!
       </button>}
       <h1>רשימת הבקשות</h1>
@@ -147,12 +241,17 @@ const Chat = (props) => {
           messages.map((message) => (
             <Message key={message.id} message={message} rid={id} />
           ))}
-        <SendMessage roomID={id} />
+        <button onClick={()=>{tryFunction()}}>try</button>
+        {addRequests ? <SendMessage roomID={id} /> : <p>Adding song requests was disabled by admin.</p>}
       </main>
 
       <span ref={scroll}></span>
-
       <ActiveUsers roomID={id} amIAdmin={amIAdmin} uid={user.uid}/>
+      <div>
+        <CopyLink rid={id}/>
+        <SendWhatsapp rid={id} />
+      </div>
+      <History rid={id}/>
     </>
   );
 };

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import {auth} from '../firebase'
 import DeleteMessage from './DeleteMessage'
 import { db } from '../firebase'
-import {doc, updateDoc, collection,DocumentReference, getDoc, onSnapshot, increment} from 'firebase/firestore'
+import {doc, updateDoc, onSnapshot, increment} from 'firebase/firestore'
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 

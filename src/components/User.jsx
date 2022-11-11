@@ -1,7 +1,7 @@
 import React from 'react'
 import './User.css';
-import { db, auth } from '../firebase'
-import { doc, updateDoc, getDoc} from "firebase/firestore";
+import { db } from '../firebase'
+import { doc, updateDoc } from "firebase/firestore";
 
 
 function User(props) {
@@ -31,7 +31,7 @@ function User(props) {
         <img src={props.user.photoURL} alt="profile-pic" className='profile-pic'/>
         {props.amIAdmin && <img src="https://image.shutterstock.com/image-vector/businessman-icon-600w-564112600.jpg" alt="" className='admin-icon' onClick={hadnleButtonAdmin} />}
         {props.amIAdmin && <img className='x-icon' onClick={handleButtonX}  src="https://uxwing.com/wp-content/themes/uxwing/download/checkmark-cross/red-x-icon.png" alt="" />}
-        <p className='para'>{props.user.name}</p>{(props.user.id === props.myuid) && <p> &nbsp;(me)</p>}
+        <p className='para'>{props.user.name}</p>{(props.user.id === props.myuid) && <p> &nbsp;(me)</p>}{(props.user.isAdmin) && <p> &nbsp;(admin)</p>}
         
       </div>
     </div>

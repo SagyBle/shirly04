@@ -8,6 +8,7 @@ const style = {
     wrapper: `flex justify-center`
 }
 
+
 const googleSignIn = () => {
     const provider = new GoogleAuthProvider();
     signInWithRedirect(auth, provider)

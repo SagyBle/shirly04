@@ -1,26 +1,18 @@
 import React from 'react'
-import Chat from './Chat'
 import { useState } from 'react'
 
-import {Link, Route, Routes} from 'react-router-dom'
+import {Route, Routes} from 'react-router-dom'
 import GetARoom from './GetARoom'
 
 
-
 function Home(props) {
-    const [roomNumber, setRoomNumber] = useState('');
-
-    const handleRoomNumberChange = (e) => {
-        setRoomNumber(e.target.value)
-  }
-
     
   return (
     <>
         <div>
             <h3>Welcome to Shirly!</h3>
             <Routes>
-                <Route path='/' element={<GetARoom uid={props.uid}/>}/>
+                <Route path='/' element={<GetARoom uid={props.uid} isLoading={props.isLoading} setIsLoading={props.setIsLoading}/>}/>
             </Routes>
             
             
