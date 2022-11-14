@@ -13,6 +13,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase";
 import Song from './Song';
+import './styles/History.css'
 
 
 
@@ -44,6 +45,29 @@ function History(props) {
     }
     createHistory();
   }, []);
+
+  const handleButtonX = async (message)=>{
+    console.log(`X pressed! Remove ${message.text} from history list in room number ${props.rid}`)
+    console.log(`Message id is: ${message.id}`);
+    const docref = doc(db, `rooms/room${props.rid}/history`, message.id);
+    
+    // get doc to see if he exists (so we can add his full profile to banned users) already left
+    const docSnap = await getDoc(docref);
+
+    if (docSnap.exists()){
+      deleteDoc(docref)
+        .then(() => {
+          console.log(`${message.text} removed from history list`);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+    else{
+      console.log(`Error: ${message.text} has not been removed from history list Error`);
+    }
+    
+  };
     
     
     return (
@@ -51,9 +75,13 @@ function History(props) {
           <h1>History:</h1>
            {history &&
             history.map((message) => (
-            <p>{message.text}</p>
-            
+              <div>
+                <img onClick={()=>handleButtonX(message)} className='x-icon' src="https://uxwing.com/wp-content/themes/uxwing/download/checkmark-cross/red-x-icon.png" alt="" />
+                <p>{message.text}</p>
+              </div>
+
           ))}
+          
         </div>
 
     )

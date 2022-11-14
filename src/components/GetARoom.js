@@ -24,6 +24,7 @@ function GetARoom(props) {
 
   const [roomNumber, setRoomNumber] = useState("");
   const [roomName, setRoomName] = useState("");
+  const [queryRoomName, setQueryRoomName] = useState("");
 
   const [rooms, setRooms] = useState([]);
 
@@ -64,6 +65,7 @@ function GetARoom(props) {
       showLyrics: true,
       addRequests: true,
       enterUsers: true,
+      isRepeatAllowed: false,
     });
     const data = { 
       name: user.displayName,
@@ -113,6 +115,9 @@ function GetARoom(props) {
     // else, he would turn to be regular user.
     const userRef = doc(db, `rooms/room${roomNumber}/users/${props.uid}`)
     const docSnap = await getDoc(userRef);
+
+    // TODO Banned: check if user in banned users, if no continue regualry,
+    // else (he is banned) show him message that he is banned from this room.
     
     let data = {}
     // Check if this user is the original admin.
@@ -213,16 +218,25 @@ function GetARoom(props) {
         }
         
         
-        
-
+      
       </div>
       </div>
       <div>
         <h1>Current Active Rooms:</h1>
+        <input
+        type="text"
+        placeholder="serach by name..."
+        onChange={(e) => setQueryRoomName(e.target.value) }
+
+      ></input>
+        <ul>
           {rooms ?
-          rooms.map((room) => (
-            <Room room={room}/>
+          rooms.filter(
+            (room)=>(room.roomName.toLowerCase().includes(queryRoomName.toLocaleLowerCase()) || room.roomNumber.toString().includes(queryRoomName.toLocaleLowerCase()))
+          ).map((room) => (
+            <Room room={room} user={user} isLoading={props.isLoading} setIsLoading={props.setIsLoading}/>
           )) : <Loading/>}
+        </ul>
       </div>
     </div>
   );

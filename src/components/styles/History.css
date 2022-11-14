@@ -1,0 +1,11 @@
+.x-icon {
+  height: 18px;
+
+}
+
+.x-icon:hover {
+  height: 20px;
+  cursor: pointer;
+  transition: 0.15s;
+  transition-delay: 0.07s;
+}

@@ -7,6 +7,7 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import {Link, Route, Routes} from 'react-router-dom'
 import Error from "./components/Error";
 import Chat from "./components/Chat";
+import Banned from "./components/Banned";
 
 
 const style = {
@@ -33,6 +34,7 @@ function App() {
           </div>
         }/>
         <Route path="/jam-room/:id" element={<Chat isLoading={isLoading} setIsLoading={setIsLoading}/>} />
+        <Route path="/Banned" element={<Banned/>}/>
         <Route path="*" element={<Error/>}/>
           
       </Routes>

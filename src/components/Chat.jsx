@@ -37,6 +37,8 @@ const style = {
 const Chat = (props) => {
 
   const [messages, setMessages] = useState([]);
+  // const [bannedUsers, setBannedUsers] = useState([]);
+  // const [getTheFuckOut, setGetTheFuckOut] = useState(false);
 
   const [allowPeopleIn, setAllowPeopleIn] = useState(false);
   const [allowAddingRequsets, setAllowAddingRequsets] = useState(false);
@@ -52,6 +54,8 @@ const Chat = (props) => {
   const [showLyrics, setShowLyrics] = useState(true);
   const [addRequests, setAddRequests] = useState(true);
   const [enterUsers, setEnterUSers] = useState(true);
+  const [isRepeatAllowed, setIsRepeatAllowed] = useState(false);
+
 
 
 
@@ -62,6 +66,32 @@ const Chat = (props) => {
   const scroll = useRef();
 
   const navigate = useNavigate();
+
+  // // set banned users 
+  // useEffect(() => {
+  //   const q = query(
+  //     collection(db, `rooms/room${id}/bannedUsers`),
+  //     orderBy("timestamp")
+  //   );
+  //   const unsubscribe = onSnapshot(q, (querySnapshot) => {
+  //     let bannedUsers = [];
+  //     querySnapshot.forEach((doc) => {
+  //       messages.push({ ...doc.data(), id: doc.id });
+  //     });
+  //     setBannedUsers(bannedUsers);
+  //   });
+  //   return () => unsubscribe();
+  // }, []);
+
+  // // if bannedUsers array changed, check if its me, and go out if so.
+  // useEffect( async ()=>{
+  //   const docRef = doc(db, `rooms/room${id}/bannedUsers/${user.uid}`)
+  //   const docSnap = await getDoc(docRef);
+  //   // if (docSnap.exists()){
+  //   //   setGetTheFuckOut(true);
+  //   // }
+  // },[bannedUsers]);
+
 
 
   // get amIAdmin field from firestore
@@ -106,6 +136,16 @@ const Chat = (props) => {
     updateDoc(doc(db, `rooms/room${id}`), {enterUsers: false});
   };
 
+    // toggle up isRepeatAllowed field
+  const toggleUpIsRepeatAllowed = () => {
+    updateDoc(doc(db, `rooms/room${id}`), {isRepeatAllowed: true});
+  };
+
+  // toggle down isRepeatAllowed field
+  const toggleDownIsRepeatAllowed = () => {
+    updateDoc(doc(db, `rooms/room${id}`), {isRepeatAllowed: false});
+  };
+
   // Get amIOriginalAdmin from firestore
   const unsubOriginal = onSnapshot(doc(db, `rooms/room${id}/users`, user.uid), (doc) => {
       console.log("Current data amIOriginalAdmin?: ", doc.data().originalAdmin);
@@ -119,6 +159,7 @@ const Chat = (props) => {
       setShowLyrics(doc.data().showLyrics);
       setAddRequests(doc.data().addRequests);
       setEnterUSers(doc.data().enterUsers);
+      setIsRepeatAllowed(doc.data().isRepeatAllowed)
   });
 
   // set messages 
@@ -143,6 +184,8 @@ const Chat = (props) => {
     async function createRoom() {
       const docRef1 = doc(db, `rooms/room${id}/messages`, "examplemessage1");
       await setDoc(docRef1, { title: "title1", artist: "artist1" });
+      const docRef2 = doc(db, `rooms/room${id}/bannedUsers`, "examplemessage1");
+      await setDoc(docRef2, { title: "banni the banned" });
     }
     createRoom();
     props.setIsLoading(false);
@@ -218,14 +261,19 @@ const Chat = (props) => {
         <button onClick={toggleDownShowLyrics}>Hide Lyrics</button>:
         <button onClick={toggleUpShowLyrics}>Show Lyrics</button>
         }
-         {addRequests ?
+        {addRequests ?
         <button onClick={toggleDownAddRequests}>Disable Adding Requests</button>:
         <button onClick={toggleUpAddRequests}>Allow Adding Requests</button>
         }
-         {enterUsers ?
+        {enterUsers ?
         <button onClick={toggleDownEnterUsers}>Disable Users In</button>:
         <button onClick={toggleUpEnterUsers}>Allow Users In</button>
         }
+        {isRepeatAllowed ?
+        <button onClick={toggleDownIsRepeatAllowed}>Disable Song Repeat</button>:
+        <button onClick={toggleUpIsRepeatAllowed}>Allow Song Repeat</button>
+        }
+        
 
       </div> : null}
       {showLyrics? <Song playingNow={playingNext} /> : <h1>Lyrics display was disabled by the admin</h1>}
