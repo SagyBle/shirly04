@@ -10,6 +10,8 @@ const style = {
   renderSuggestions: `w-full text-xl p-3 bg-gray-900 text-white outline-none border-none`,
 };
 
+// fixed rid, uid
+
 export default class SendMessage extends React.Component {
   constructor(props) {
     super(props);
@@ -26,6 +28,7 @@ export default class SendMessage extends React.Component {
       suggestions: [],
       text: '',
       enableSend: false,
+      index: '',
     }
     
   }
@@ -50,6 +53,19 @@ export default class SendMessage extends React.Component {
     console.log(this.state.text);
   }
 
+  handleHistory = (message, index, item) => {
+    if (message.text === item){
+      this.index = index
+      return true;
+    }
+    return false;
+  }
+
+  handleChat = (item) => {
+    return (this.props.messages && this.props.messages.include(item)) 
+  }
+
+
   renderSuggestions() {
     const { suggestions } = this.state;
     if (suggestions.length === 0) {
@@ -58,7 +74,12 @@ export default class SendMessage extends React.Component {
     return (
 
       <ul className={style.renderSuggestions}>
-        {suggestions.map((item) => <li onClick={() => this.suggestionSelected(item)}>{item}</li>)}
+        {suggestions.map((item) => <li onClick={() => this.suggestionSelected(item)}>
+          {item}
+          {this.props.history &&
+          this.props.history.some((message, index)=>this.handleHistory(message, index, item)) && <p>played {(this.props.history.length) - (this.index)} songs ago</p>}
+          {this.props.messages.some(message=> message.text === item) && <p>song is about to be played...</p>}
+          </li>)}
       </ul>
 
     )
@@ -70,7 +91,7 @@ export default class SendMessage extends React.Component {
     const { suggestions } = this.state;
     const { uid, displayName } = auth.currentUser;
     // TODO: PROBLEM: hardcoded as shit
-    await addDoc(collection(db, `rooms/room${this.props.roomID}/messages`), {
+    await addDoc(collection(db, `rooms/room${this.props.rid}/messages`), {
       text: this.state.text,
       name: displayName,
       uid,
@@ -82,10 +103,7 @@ export default class SendMessage extends React.Component {
     element.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' })
   }
 
-
-
   render() {
-
     const { text } = this.state;
     return (
       <form onSubmit={this.sendMessage}>

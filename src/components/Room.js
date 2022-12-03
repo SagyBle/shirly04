@@ -2,71 +2,101 @@ import React, { useEffect } from "react";
 
 import { useNavigate } from "react-router-dom";
 
+import './styles/Room.css'
+
+
 import { db } from "../firebase";
 import {
   doc,
   setDoc,
   getDoc,
   serverTimestamp,
+  onSnapshot,
+  query,
+  collection,
+  orderBy,
 } from "firebase/firestore";
+import { useState } from "react";
+import JoinRoom from "./JoinRoom";
+
+// fixed rid, uid
 
 
 function Room(props) {
 
+  const rid = props.room.roomNumber;
+  const uid = props.user.uid;
+
+  const [users, setUsers] = useState([]);
+
+  const [showBannedMessage, setShowBannedMessage] = useState(false);
+  const [isEntranceAllowed, setIsEntranceAllowed] = useState(false);
+
+  useEffect(() => {
+    const q = query(
+      collection(db, `rooms/room${rid}/users`),
+      orderBy("timestamp")
+    );
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      let users = [];
+      querySnapshot.forEach((doc) => {
+        users.push({ ...doc.data(), id: doc.id });
+      });
+      setUsers(users);
+    });
+    return () => unsubscribe();
+  }, []);
+
+
+  // TODO: Fix this shit (too much logs because of changes in roomNumber)
+  // Get room name, show lyrics, add requests and enter users.
+  const unsubRoomName = onSnapshot(doc(db, `rooms/room${rid}`), (doc) => {
+      console.log('unsubRoomName');
+      setIsEntranceAllowed(doc.data().isEntranceAllowed);
+  });
+
   const navigate = useNavigate();
 
-  const joinRoom = async () => {
-    props.setIsLoading(true);
-
-    // Check if user had already participated in this specific room.
-    // If so, and he's also the original admin, hw would be an admin again.
-    // else, he would turn to be regular user.
-    const userRef = doc(db, `rooms/room${props.room.roomNumber}/users/${props.user.uid}`)
-    const docSnap = await getDoc(userRef);
-    
-    let data = {}
-    // Check if this user is the original admin.
-    if (docSnap.exists() && docSnap.data().originalAdmin){
-      console.log("commiting join room start original admin");
-      data = {
-      name: props.user.displayName,
-      originalAdmin: true,
-      photoURL: props.user.photoURL, 
-      isAdmin: true, 
-      timestamp: serverTimestamp(),
-      uid: props.user.uid,
-      }  
-    }
-    else{
-      console.log("commiting join room start regular way");
-      data = {
-        name: props.user.displayName,
-        originalAdmin: false,
-        photoURL: props.user.photoURL, 
-        isAdmin: false, 
-        timestamp: serverTimestamp(),
-        uid: props.user.uid,
-      }
-    }
-
-    // Add/update user.
-    await setDoc(doc(db, `rooms/room${props.room.roomNumber}/users/${props.user.uid}`),
-    data);
-    
-
-    // Enter room.
-    navigate("/jam-room/" + props.room.roomNumber);
-  };
+  const tryUsers = async ()=> {
+    console.log(users[0].photoURL);
+  }
 
 
   return (
     <li>
       <div>
-        {props.room && <div>
+        {props.room && 
+        <div>
           <p>{props.room.roomName}</p>
-          <p>{props.room.roomNumber}</p>
-          <button onClick={joinRoom}>Join!</button>
+          <p>Participants: {users.length}/{props.room.roomMaxParticipantsQuantity}</p>
+          <div className="avatar-group">
+            {users.map((user)=>{
+              return(
+              <div className="avatar">
+                <img src={user.photoURL} alt="" />
+            </div>)
+            })}
+          <div className="hidden-avatars">
+            +10
+          </div>
+        </div>
+    
+          <p>playing now: {props.room.currPlayingNow} </p>
+          <p>{rid}</p>
+          {!isEntranceAllowed && <p style={{ color: "red" }}>LOCKED</p>}
+          {/* {showBannedMessage ?
+          <div>
+            <p style={{ color: "red" }}>It seems like you are banned from this room</p>
+            <button onClick={()=> {setShowBannedMessage(false)}}>OK</button>
+          </div> :
+          <button onClick={checkIfAllowed}>-Join!-</button>} */}
+          <JoinRoom setIsLoading={props.setIsLoading} room={props.room} />
+          
+          
+          {/* <button onClick={roomtryfunc}>roomtryfunc</button> */}
+          
         </div>}
+        <button onClick={tryUsers}>try users</button>
       </div>
     </li>
   )

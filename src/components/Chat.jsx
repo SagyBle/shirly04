@@ -26,6 +26,9 @@ import SendWhatsapp from "./SendWhatsapp";
 import ChangeRoomName from "./ChangeRoomName";
 import History from "./History";
 import Loading from "./Loading";
+import PlayingNow from "./PlayingNow";
+import PlayingTest from "./PlayingTest";
+import Toggle from "./Toggle";
 
 
 const style = {
@@ -37,13 +40,10 @@ const style = {
 const Chat = (props) => {
 
   const [messages, setMessages] = useState([]);
-  // const [bannedUsers, setBannedUsers] = useState([]);
-  // const [getTheFuckOut, setGetTheFuckOut] = useState(false);
+  const [users, setUsers] = useState([]);
+  const [history, setHistory] = useState([]);
 
-  const [allowPeopleIn, setAllowPeopleIn] = useState(false);
-  const [allowAddingRequsets, setAllowAddingRequsets] = useState(false);
-
-  const [playingNext, setPlayingNext] = useState("");
+  const [currPlayingNow, setCurrPlayingNow] = useState("");
 
   const [askedBy, setAskedBy] = useState("");
 
@@ -51,121 +51,111 @@ const Chat = (props) => {
   const [amIOriginallyAdmin, setAmIOriginallyAdmin] = useState(false);
 
   const [roomName, setRoomName] = useState("");
-  const [showLyrics, setShowLyrics] = useState(true);
+  const [roomDescription, setRoomDescription] = useState("");
+  const [showLyrics, setShowLyrics] = useState("");
   const [addRequests, setAddRequests] = useState(true);
-  const [enterUsers, setEnterUSers] = useState(true);
+  const [isEntranceAllowed, setIsEntranceAllowed] = useState(true);
   const [isRepeatAllowed, setIsRepeatAllowed] = useState(false);
+  
+  const [maxParticipantsQuantity, setMaxParticipantsQuantity] = useState(null);
 
-
-
+  const tryHis = [
+    "אהבתיה - שלמה ארצי",
+    "בוא - עברי לידר",
+    "גן סגור - הכבש השישה עשר",
+  ];
 
   const { id } = useParams();
+  const rid = id;
 
   const [user] = useAuthState(auth);
+  const uid = user.uid;
 
   const scroll = useRef();
 
+
   const navigate = useNavigate();
-
-  // // set banned users 
-  // useEffect(() => {
-  //   const q = query(
-  //     collection(db, `rooms/room${id}/bannedUsers`),
-  //     orderBy("timestamp")
-  //   );
-  //   const unsubscribe = onSnapshot(q, (querySnapshot) => {
-  //     let bannedUsers = [];
-  //     querySnapshot.forEach((doc) => {
-  //       messages.push({ ...doc.data(), id: doc.id });
-  //     });
-  //     setBannedUsers(bannedUsers);
-  //   });
-  //   return () => unsubscribe();
-  // }, []);
-
-  // // if bannedUsers array changed, check if its me, and go out if so.
-  // useEffect( async ()=>{
-  //   const docRef = doc(db, `rooms/room${id}/bannedUsers/${user.uid}`)
-  //   const docSnap = await getDoc(docRef);
-  //   // if (docSnap.exists()){
-  //   //   setGetTheFuckOut(true);
-  //   // }
-  // },[bannedUsers]);
-
 
 
   // get amIAdmin field from firestore
-  const unsubAdmin = onSnapshot(doc(db, `rooms/room${id}/users`, user.uid), (doc) => {
+  const unsubAdmin = onSnapshot(doc(db, `rooms/room${rid}/users`, uid), (doc) => {
       console.log("Current data amIAdmin?: ", doc.data().isAdmin);
       setAmIAdmin(doc.data().isAdmin)
   });
 
+  // contin here
+    // get amIAdmin field from firestore
+  const unsubMaxParticipantsQuantity = onSnapshot(doc(db, `rooms/room${rid}`), (doc) => {
+      setMaxParticipantsQuantity(doc.data().roomMaxParticipantsQuantity)
+  });
+
   // Update isAdmin field
   const beAdminAgain = () => {
-    updateDoc(doc(db, `rooms/room${id}/users/${user.uid}`), {isAdmin: true});
+    updateDoc(doc(db, `rooms/room${rid}/users/${uid}`), {isAdmin: true});
   };
 
 
-  // toggle up showLyrics field
-  const toggleUpShowLyrics = () => {
-    updateDoc(doc(db, `rooms/room${id}`), {showLyrics: true});
-  };
+  // // toggle up showLyrics field
+  // const toggleUpShowLyrics = () => {
+  //   updateDoc(doc(db, `rooms/room${rid}`), {showLyrics: true});
+  // };
 
-  // toggle down showLyrics field
-  const toggleDownShowLyrics = () => {
-    updateDoc(doc(db, `rooms/room${id}`), {showLyrics: false});
-  };
+  // // toggle down showLyrics field
+  // const toggleDownShowLyrics = () => {
+  //   updateDoc(doc(db, `rooms/room${rid}`), {showLyrics: false});
+  // };
 
    // toggle up addRequests field
   const toggleUpAddRequests = () => {
-    updateDoc(doc(db, `rooms/room${id}`), {addRequests: true});
+    updateDoc(doc(db, `rooms/room${rid}`), {addRequests: true});
   };
 
   // toggle down addRequests field
   const toggleDownAddRequests = () => {
-    updateDoc(doc(db, `rooms/room${id}`), {addRequests: false});
+    updateDoc(doc(db, `rooms/room${rid}`), {addRequests: false});
   };
 
-   // toggle up enterUsers field
-  const toggleUpEnterUsers = () => {
-    updateDoc(doc(db, `rooms/room${id}`), {enterUsers: true});
-  };
+  //  // toggle up enterUsers field
+  // const toggleUpEnterUsers = () => {
+  //   updateDoc(doc(db, `rooms/room${rid}`), {enterUsers: true});
+  // };
 
-  // toggle down enterUsers field
-  const toggleDownEnterUsers = () => {
-    updateDoc(doc(db, `rooms/room${id}`), {enterUsers: false});
-  };
+  // // toggle down enterUsers field
+  // const toggleDownEnterUsers = () => {
+  //   updateDoc(doc(db, `rooms/room${rid}`), {enterUsers: false});
+  // };
 
     // toggle up isRepeatAllowed field
   const toggleUpIsRepeatAllowed = () => {
-    updateDoc(doc(db, `rooms/room${id}`), {isRepeatAllowed: true});
+    updateDoc(doc(db, `rooms/room${rid}`), {isRepeatAllowed: true});
   };
 
   // toggle down isRepeatAllowed field
   const toggleDownIsRepeatAllowed = () => {
-    updateDoc(doc(db, `rooms/room${id}`), {isRepeatAllowed: false});
+    updateDoc(doc(db, `rooms/room${rid}`), {isRepeatAllowed: false});
   };
 
   // Get amIOriginalAdmin from firestore
-  const unsubOriginal = onSnapshot(doc(db, `rooms/room${id}/users`, user.uid), (doc) => {
+  const unsubOriginal = onSnapshot(doc(db, `rooms/room${rid}/users`, uid), (doc) => {
       console.log("Current data amIOriginalAdmin?: ", doc.data().originalAdmin);
       setAmIOriginallyAdmin(doc.data().originalAdmin)
   });
 
-
   // Get room name, show lyrics, add requests and enter users.
-    const unsubRoomName = onSnapshot(doc(db, `rooms/room${id}`), (doc) => {
+    const unsubRoomName = onSnapshot(doc(db, `rooms/room${rid}`), (doc) => {
       setRoomName(doc.data().roomName);
+      setRoomDescription(doc.data().roomDescription)
       setShowLyrics(doc.data().showLyrics);
       setAddRequests(doc.data().addRequests);
-      setEnterUSers(doc.data().enterUsers);
-      setIsRepeatAllowed(doc.data().isRepeatAllowed)
+      setIsEntranceAllowed(doc.data().isEntranceAllowed);
+      setIsRepeatAllowed(doc.data().isRepeatAllowed);
+      setCurrPlayingNow(doc.data().currPlayingNow);
   });
 
   // set messages 
   useEffect(() => {
     const q = query(
-      collection(db, `rooms/room${id}/messages`),
+      collection(db, `rooms/room${rid}/messages`),
       orderBy("timestamp")
     );
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -182,10 +172,8 @@ const Chat = (props) => {
   useEffect(() => {
     console.log("running useEffect creating room");
     async function createRoom() {
-      const docRef1 = doc(db, `rooms/room${id}/messages`, "examplemessage1");
+      const docRef1 = doc(db, `rooms/room${rid}/messages`, "examplemessage1");
       await setDoc(docRef1, { title: "title1", artist: "artist1" });
-      const docRef2 = doc(db, `rooms/room${id}/bannedUsers`, "examplemessage1");
-      await setDoc(docRef2, { title: "banni the banned" });
     }
     createRoom();
     props.setIsLoading(false);
@@ -194,19 +182,13 @@ const Chat = (props) => {
   // Move to next song - Admin function only
   const moveNext = async () => {
     if (messages.length > 0) {
-      setPlayingNext(messages[0].text);
-      setAskedBy(messages[0].name);
-      const data = messages[0];
 
-      const docref = doc(db, `rooms/room${id}/messages`, messages[0].id);
-      
-      await addDoc(collection(db, `rooms/room${id}/history`), data)
-
-
+      updateDoc(doc(db, `rooms/room${rid}`),{currPlayingNow: messages[0].text});
+      const data = messages[0];   
+      await setDoc(doc(db, `rooms/room${rid}/history/${messages[0].id}`), data)
+      const docref = doc(db, `rooms/room${rid}/messages`, messages[0].id);
       const subMessages = messages.slice(1);
       setMessages(subMessages);
-
-
 
       deleteDoc(docref)
         .then(() => {
@@ -222,20 +204,24 @@ const Chat = (props) => {
   const adminToUser = async () => {
     console.log("starting adminToUser!");
     const data = {isAdmin: false}
-    const docRef = doc(db, `rooms/room${id}/users/${user.uid}`);
+    const docRef = doc(db, `rooms/room${rid}/users/${uid}`);
     await updateDoc(docRef, data)
   };
 
 
   const tryFunction = () => {
-    console.log("this is show lyrics: " + showLyrics);
+    console.log("start printing messages[0]:");
+    console.log(messages[0]);      
+    console.log("end printing messages[0]:");
   }
 
   
 
   return (
     <>
-      <button
+      
+      <div>
+        <button
         className={style.home}
         onClick={() => {
           navigate("/");
@@ -250,22 +236,27 @@ const Chat = (props) => {
       {amIAdmin ? <button onClick={adminToUser}>Become a User</button> : null} 
       <div>
         <h1>Room Name: {roomName}</h1>
+        <p>Room Description: {roomDescription}</p>
         {amIAdmin ? <ChangeRoomName rid={id}/> : null}
 
         <h2>Room Number: {id}</h2>
+        <p>Participants: {users.length}/{maxParticipantsQuantity}</p>
         
       </div>
 
       {amIAdmin? <div>
-        {showLyrics ?
-        <button onClick={toggleDownShowLyrics}>Hide Lyrics</button>:
-        <button onClick={toggleUpShowLyrics}>Show Lyrics</button>
-        }
-        {addRequests ?
-        <button onClick={toggleDownAddRequests}>Disable Adding Requests</button>:
-        <button onClick={toggleUpAddRequests}>Allow Adding Requests</button>
-        }
-        {enterUsers ?
+        <p>תצוגת מילים</p>
+        <Toggle toggle={showLyrics} rid={rid} dataT={{showLyrics: true}} dataF={{showLyrics: false}}/>
+        <p>הוספת שירים</p>
+        <Toggle toggle={addRequests} rid={rid} dataT={{addRequests: true}} dataF={{addRequests: false}}/>
+        <p>הצטרפות לחדר</p>
+        <Toggle toggle={isEntranceAllowed} rid={rid} dataT={{isEntranceAllowed: true}} dataF={{isEntranceAllowed: false}}/>
+        <p>חזרה על שירים</p>
+        <Toggle toggle={isRepeatAllowed} rid={rid} dataT={{isRepeatAllowed: true}} dataF={{isRepeatAllowed: false}}/>
+        
+        {/* const [enterUsers, setEnterUsers] = useState(true);
+        const [isRepeatAllowed, setIsRepeatAllowed] = useState(false); */}
+        {/* {enterUsers ?
         <button onClick={toggleDownEnterUsers}>Disable Users In</button>:
         <button onClick={toggleUpEnterUsers}>Allow Users In</button>
         }
@@ -273,10 +264,17 @@ const Chat = (props) => {
         <button onClick={toggleDownIsRepeatAllowed}>Disable Song Repeat</button>:
         <button onClick={toggleUpIsRepeatAllowed}>Allow Song Repeat</button>
         }
-        
+         */}
 
       </div> : null}
-      {showLyrics? <Song playingNow={playingNext} /> : <h1>Lyrics display was disabled by the admin</h1>}
+      {showLyrics ? 
+        <div>
+          <p>playing now id: {currPlayingNow}</p>
+          <p>playing now name:</p>
+          <p>playing now lyrics:</p>
+          <p>playing as test: <PlayingTest/></p>
+        </div>:
+        <p>Lyrics are currently not displayed by admin.</p>}
 
       {messages.length > 0 && <h2>Playing Next: {messages[0].text} </h2>}
       <h3>Asked by: {askedBy}</h3>
@@ -287,19 +285,20 @@ const Chat = (props) => {
       <main className={style.main}>
         {messages &&
           messages.map((message) => (
-            <Message key={message.id} message={message} rid={id} />
+            <Message key={message.id} message={message} rid={rid} />
           ))}
-        <button onClick={()=>{tryFunction()}}>try</button>
-        {addRequests ? <SendMessage roomID={id} /> : <p>Adding song requests was disabled by admin.</p>}
+        <button onClick={()=>{tryFunction()}}>try chat</button>
+        {addRequests ? <SendMessage messages={messages} history={history} tryHis={tryHis} rid={rid} /> : <p>Adding song requests was disabled by admin.</p>}
       </main>
 
       <span ref={scroll}></span>
-      <ActiveUsers roomID={id} amIAdmin={amIAdmin} uid={user.uid}/>
+      <ActiveUsers users={users} setUsers={setUsers} rid={rid} amIAdmin={amIAdmin} uid={uid}/>
       <div>
-        <CopyLink rid={id}/>
-        <SendWhatsapp rid={id} />
+        <CopyLink rid={rid}/>
+        <SendWhatsapp rid={rid} />
       </div>
-      <History rid={id}/>
+      <History history={history} setHistory={setHistory} amIAdmin={amIAdmin} rid={rid}/>
+      </div>
     </>
   );
 };

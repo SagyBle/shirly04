@@ -5,6 +5,8 @@ function SendWhatsapp(props) {
   const [showSendLink, setShowSendLink] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState('05');
 
+  const rid = props.rid;
+
   //  https://wa.me/919234567812?text=%7B0%7D+Balaji+CTest
   // {0} Balaji CTest
   // https://wa.me/919234567812?text=+Balaji+CTest
@@ -12,7 +14,7 @@ function SendWhatsapp(props) {
 
   const send  = () => {
 
-    let linkToRoom = `https://shirly04.netlify.app/jam-room/${props.rid}`
+    let linkToRoom = `https://shirly04.netlify.app/jam-room/${rid}`
     let text = 'hey!+join+our+jam+in+this+link+:'
     let phoneNumberPlus = `+9725${phoneNumber.substring(2)}`
     let wa = `https://wa.me/${phoneNumberPlus}?text=${text}${linkToRoom}`;
@@ -63,22 +65,3 @@ function SendWhatsapp(props) {
 }
 
 export default SendWhatsapp
-
-
-//  <div>
-
-//       <form>
-//         <label>Enter Phone Number: </label>
-//         <input
-//           onChange={handlePhoneNumberChange}
-//           type="text"
-//           placeholder="05..."
-//           value={phoneNumber}
-//         > 
-//         </input>
-//       </form>
-      
-//       <button onClick={send}>
-//         Send link in Whatsapp
-//       </button>
-//     </div>

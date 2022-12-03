@@ -33,6 +33,7 @@ function App() {
             <Navbar isLoading={isLoading} setIsLoading={setIsLoading}/>
           </div>
         }/>
+        
         <Route path="/jam-room/:id" element={<Chat isLoading={isLoading} setIsLoading={setIsLoading}/>} />
         <Route path="/Banned" element={<Banned/>}/>
         <Route path="*" element={<Error/>}/>

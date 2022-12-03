@@ -1,0 +1,45 @@
+.toggle-l{
+  background-color: #EEEEEE;
+  height: 30px;
+  width: 60px;
+  border-radius: 30px;
+  margin-top: 10px;
+  display: flex;
+  transition: 0.25s;
+  /* justify-content: center; */
+}
+.toggle-l:hover{
+  cursor: pointer;
+}
+.toggle-r {
+  background-color: #246BFD;
+  height: 30px;
+  width: 60px;
+  border-radius: 30px;
+  margin-top: 10px;
+  display: flex;
+  transition: 0.25s;
+  /* justify-content: center; */
+}
+.toggle-r:hover {
+  cursor: pointer;
+}
+
+.toggle-left {
+  height: 20px;
+  width: 20px;
+  background-color: white;
+  border-radius: 20px;
+  margin: 5px 2px 5px 35px;
+  transition: 0.2s;}
+
+.toggle-right {
+  height: 20px;
+  width: 20px;
+  background-color: white;
+  border-radius: 20px;
+  margin: 5px;
+  transition: 0.2s;
+}
+
+

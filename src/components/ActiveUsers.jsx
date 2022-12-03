@@ -12,6 +12,8 @@ import { useNavigate } from "react-router-dom";
 import User from "./User";
 import './ActiveUsers.css';
 
+// fixed rid, uid
+
 const style = {
   button: `bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded`,
   home: `bg-purple-100 hover:bg-purple-300 text-black  py-2 px-2 rounded`,
@@ -19,13 +21,17 @@ const style = {
 
 
 const ActiveUsers = (props) => {
-  const [users, setUsers] = useState([]);
+  // const [users, setUsers] = useState([]);
+  const users = props.users;
+  const setUsers = props.setUsers;
+  
+  const rid = props.rid;
 
   const scroll = useRef();
 
   useEffect(() => {
     const q = query(
-      collection(db, `rooms/room${props.roomID}/users`),
+      collection(db, `rooms/room${rid}/users`),
       orderBy("timestamp")
     );
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -41,13 +47,13 @@ const ActiveUsers = (props) => {
   return (
     <>
 
-      <h1>Room Number: {props.roomID}</h1>
+      <h1>Room Number: {rid}</h1>
       
       <h1>Users:</h1>
       <main className="main">
         {users &&
           users.map((user) => (
-            <User key={user.id} user={user} myuid={props.uid} amIAdmin={props.amIAdmin} roomID={props.roomID} />
+            <User key={user.id} user={user} myuid={props.uid} amIAdmin={props.amIAdmin} rid={rid} />
           ))}
       </main>
 

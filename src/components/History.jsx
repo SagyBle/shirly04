@@ -19,7 +19,8 @@ import './styles/History.css'
 
 function History(props) {
 
-  const [history, setHistory] = useState([]);
+  const history = props.history;
+  const setHistory = props.setHistory;
 
   // set history 
   useEffect(() => {
@@ -68,26 +69,40 @@ function History(props) {
     }
     
   };
+
+  const cleanAll = async () => {
+    console.log("pressed clean all");
+    history.map((message)=>{handleButtonX(message)})
+  }
+
+  const tryFunc = () => {
+    history.map((message)=>{console.log(message.text);})
+  }
     
     
     return (
+      <div>
         <div>
           <h1>History:</h1>
-           {history &&
-            history.map((message) => (
+          <button onClick={()=>cleanAll()}>Clean All History</button>
+          {/* length cannot be less than 1 */}
+           {(history.length > 1) ? 
+           history.map((message) => (
               <div>
-                <img onClick={()=>handleButtonX(message)} className='x-icon' src="https://uxwing.com/wp-content/themes/uxwing/download/checkmark-cross/red-x-icon.png" alt="" />
+                {props.amIAdmin && <img onClick={()=>handleButtonX(message)} className='x-icon' src="https://uxwing.com/wp-content/themes/uxwing/download/checkmark-cross/red-x-icon.png" alt="" />}
                 <p>{message.text}</p>
               </div>
 
-          ))}
+          )) :
+          <p>no history available</p>
+            }
           
         </div>
+        <button onClick={tryFunc}>tryfunc</button>
+      </div>
 
     )
 }
 
 export default History
-
-
 

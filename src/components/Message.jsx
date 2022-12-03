@@ -9,7 +9,7 @@ import { useParams } from 'react-router-dom';
 
 const style = {
     message: `flex items-center shadow-xl m-4 py-2 rounded-tl-full rounded-tr-full`,
-    name: `fixed mt-[-4rem] text-gray-600`,
+    name: `fixed mt-[-4rem] text-gray-600 `,
     sent: `bg-[#bababa] text-black flex-row-reverse text-end float-left rounded-bl-full`,
     received: `bg-[#e5e5ea] text-black float-left rounded-br-full`,
     button: `w-[20%] bg-red-300 border border-solid`,
@@ -22,6 +22,7 @@ const style = {
 const Message = ({ message }) => {
       
     const { id } = useParams();
+    const rid = id;
 
 
     const messageClass = 
@@ -34,10 +35,7 @@ const Message = ({ message }) => {
 
     // Subscribe to likes 
       useEffect(()=>{
-        const unsubLikes = onSnapshot(doc(db, `rooms/room${id}/messages/${message.id}`), (doc) => {
-        console.log(`rooms/room${id}/messgaes/${message.id}`);
-        // console.log("Current data likes?: ", doc.data().likes);
-        console.log("Current data likes?: ", doc.data().likes);
+        const unsubLikes = onSnapshot(doc(db, `rooms/room${rid}/messages/${message.id}`), (doc) => {
         setLikes(doc.data().likes);
       });
       }
@@ -45,7 +43,7 @@ const Message = ({ message }) => {
 
     // Add like to likes field im messages document
     const likeMessage = async ( likesToAdd ) => {
-      const docref = doc(db, `rooms/room${id}/messages/${message.id}`);
+      const docref = doc(db, `rooms/room${rid}/messages/${message.id}`);
         await updateDoc(docref, {likes: increment(likesToAdd)})
         setLiked(!liked);
       }
@@ -53,7 +51,8 @@ const Message = ({ message }) => {
     return (
       <div>
         <div className={`${style.message} ${messageClass}`}>
-          <p className={style.name}>{message.name}</p>
+          {/* <p className={style.name}>{message.name}</p> */}
+          <p>{message.name}</p>
           <p>{message.text}</p>
 
           {<p>&nbsp; {likes} likes</p>}
