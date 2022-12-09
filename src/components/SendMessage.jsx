@@ -18,6 +18,8 @@ export default class SendMessage extends React.Component {
     // Locate here all songs' titles.
     this.items = [
       "אהבתיה - שלמה ארצי",
+      "אם הייתי יכול - חנן בן ארי",
+      "אור הירח - אביב גפן",
       "בוא - עברי לידר",
       "גן סגור - הכבש השישה עשר",
       "דובשנייה - שחר סיאול ונורוז",

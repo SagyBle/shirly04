@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
+import { PinInput } from 'react-input-pin-code'
 
 import { db, auth } from "../firebase";
 import {
@@ -20,22 +21,28 @@ import Room from "./Room";
 import { useSyncExternalStore } from "react";
 import Loading from "./Loading";
 import JoinRoom from "./JoinRoom";
-import Toggle from "./Toggle";
 
-// fixed uid
+import './styles/GetARoom.css'
+import FormDialog from "./FormDialog";
+import Toggle from "./Toggle";
+import ToggleBoolean from "./ToggleBoolean";
+
 
 
 function GetARoom(props) {
-
+  
   const uid = props.uid;
+
+  const [values, setValues] = useState(['','','','','','']);
 
   const [roomNumber, setRoomNumber] = useState("");
   const [roomName, setRoomName] = useState("");
   const [roomMaxParticipantsQuantity, setRoomMaxParticipantsQuantity] = useState("");
   const [queryRoomName, setQueryRoomName] = useState("");
   const [roomDescription, setRoomDescription] = useState("");
+  const [roomPassword, setRoomPassword] = useState("");
 
-  const [toggle, setToggle] = useState(false);
+  const [isLockedWithPassword, setIsLockedWithPassword] = useState(false);
 
 
   const [rooms, setRooms] = useState([]);
@@ -46,7 +53,7 @@ function GetARoom(props) {
   const [showShortName, setShowShortName] = useState(false);
   const [showEntranceNotAllowed, setShowEntranceNotAllowed] = useState(false);
 
-  const [showCreateForm, setShowCreateForm] = useState(false);
+  const [showCreateDialog, setShowCreateDialog] = useState(false);
   const [showJoinForm, setShowJoinForm] = useState(false);
 
   const navigate = useNavigate();
@@ -79,6 +86,10 @@ function GetARoom(props) {
     setRoomDescription(e.target.value);
   }
 
+  const handlePasswordChange = (e) => {
+    setRoomPassword(e.target.value);
+  }
+
   // Creating New Room
   const createNewRoomURLAndGetInside = async () => {
     if (roomName.length < 3) {
@@ -88,7 +99,13 @@ function GetARoom(props) {
     else {
       props.setIsLoading(true);
 
-      const rid = Date.now();
+      const rid = Date.now().toString().slice(-6);
+
+      // making room 6 digits only
+      console.log("new rid: " + rid);
+      // console.log("after substring-6: " + rid);
+      // TODO: check if this id is not already exists.
+
 
       let roomStr = "room" + rid;
       await setDoc(doc(db, "rooms", roomStr), {
@@ -112,7 +129,7 @@ function GetARoom(props) {
       }
       const docRef = await setDoc(doc(db, `rooms/room${rid}/users/${uid}`),data);
       
-      setShowCreateForm(false);
+      // setShowCreateForm(false);
       // Move to the room, by navigation to the mutual url.
       navigate("/jam-room/" + rid)}
   };
@@ -184,7 +201,6 @@ function GetARoom(props) {
 
   const joinRoom = async () => {
 
-  
     // check if user is banned
     // get array of banned users id 
     // check if array includes userid only if array exists
@@ -239,7 +255,6 @@ function GetARoom(props) {
   };
 
 
-  
 
   // Get cuurent active rooms
   useEffect(() => {
@@ -264,95 +279,229 @@ function GetARoom(props) {
   
   }
 
+  const tryGetAAroom = async () => {
+    console.log("try get a room started");
+    let rid = Date.now().toString().slice(-6);
+    // rid = rid.;
+    // rid = rid.;
+    console.log(rid);
+  }
+
 
   return (
+    /* 0start total div */
     <div>
-      <div>
-        <h1>Get a Room</h1>
-        {props.isLoading && <Loading/>}
-      <div>
-        {showCreateForm ? 
-          <div>
-          <form>
-            <input
-              onChange={handleRoomNameChange}
-              type="text"
-              placeholder="Enter Room Name"
-              value={roomName}
-            > 
-            </input>
-            <input
-              onChange={handleMaxParticipantsQuantity}
-              type="number"
-              placeholder="Enter Max Participants Number"
-              value={roomMaxParticipantsQuantity}
-            > 
-            </input>
-            <input
-              onChange={handleRoomDescriptionChange}
-              type="text"
-              placeholder="Describe the meeting in a few words..."
-              value={roomDescription}
-            > 
-            </input>
-          </form>
-          {showShortName && <p style={{ color: "red" }}>Room name has to be at least 3 characters</p>}          
-          <button onClick={createNewRoomURLAndGetInside}>Create!</button>
-        </div> : 
-          <button onClick={()=>setShowCreateForm(true)}>Create New Room</button>}
-      </div>
-      <div>
-        {showJoinForm ? 
-          <div>
-          <form>
-            <input
-              onChange={handleRoomNumberChange}
-              type="text"
-              placeholder="Enter Room Number"
-              value={roomNumber}
-            />
-          </form>
+ 
 
-          {/* check if the room exists */}
-          {showNotFindMessage && (
-            <p style={{ color: "red" }}>we can't find this room... try again?</p>
-          )}
-          {showBannedMessage && (
-            <p style={{ color: "red" }}>It seems like you are banned from this room</p>
-          )}
-          {showEntranceNotAllowed && <p>Entrance to room number {roomNumber.substring(roomNumber.length -5)} is prohibited</p>}
-          <button onClick={() => isRoomExists()}>-Join!-</button>
-          <JoinRoom roomNumber={roomNumber}/>
-        </div> : 
-          <button onClick={()=>setShowJoinForm(true)}>Join A Room!</button>
-        }
-        
-        
-      
-      </div>
-      </div>
+      {/* 1start right side */}
       <div>
-        <h1>Current Active Rooms:</h1>
-        <input
-        type="text"
-        placeholder="serach by name..."
-        onChange={(e) => setQueryRoomName(e.target.value) }
 
-      ></input>
-        <ul>
-          {rooms ?
-          rooms.filter(
-            (room)=>(room.roomName.toLowerCase().includes(queryRoomName.toLocaleLowerCase()) || room.roomNumber.toString().includes(queryRoomName.toLocaleLowerCase()))
-          ).map((room) => (
-            <div>
-              <Room key={room.roomNumber} room={room} user={user} isLoading={props.isLoading} setIsLoading={props.setIsLoading}/>
-              {/* <button onClick={()=>console.log(room)}>try func</button> */}
+        {/* 2 headers div */}
+        <div className="headers">
+
+          <h1 className="main-header">הגיע הזמן להצטרף לחגיגה בחינם וזמין לכולם</h1>
+          <h2 className="sub-header">הנדסנו מחדש את השירות שבנינו לפגישות עסקיות מאובטחות, כדי להפוך אותו בחינם וזמין לכולם.</h2>
+        </div>
+        {/* 2 headers div */}
+
+        {/* 2 loading div */}
+        <div>
+            {props.isLoading && <Loading/>}
+        </div>
+        {/* 2 loading div */}
+
+
+
+        {/* 2start get in by pincode */}
+        <div>
+          {/* 3 header */}
+          <div>
+            <h3 className="sub-header">קוד כניסה לחדר</h3>
+          </div>
+          {/* 3 header */}
+          
+          {/* 3 pincode */}
+          <div>
+            <form>
+              <PinInput
+              className="pin-input"
+              values={values}
+              placeholder=''
+              onChange={(value, index, values) => setValues(values)}
+              onComplete={()=>setRoomNumber(values.join(""))}
+              />
+            </form>
+            <JoinRoom setIsLoading={props.setIsLoading} roomNumber={roomNumber} />
+          </div>
+          {/* 3 pincode */}
+
+        </div>
+        {/* 2end get in by pincode */}
+
+        {/* 1start or */}
+        <div>
+          <h3 className="or">או</h3>
+        </div>
+        {/* 1end or */}
+
+        {/* 2start cerate new room */}
+        <div>
+          {/* 3start button create */}
+          <div>
+            <button className="create-room-button" onClick={createNewRoomURLAndGetInside}>צור חדר חדש +</button>
+
+            {/* 4 room creation format */}
+            <div className="dialog-create-room">
+
+              <div>
+                <h3 className="dialog-headline">יצירת חדר חדש</h3>
+              </div>
+              
+              {/* <form className="form-create-room"> */}
+                <div>
+                <input
+                className="input-create-room"
+                  onChange={handleRoomNameChange}
+                  type="text"
+                  placeholder="שם החדר"
+                  value={roomName}
+                > 
+                </input>
+                </div>
+                <div>
+                <input
+                className="input-create-room"
+                  onChange={handleRoomDescriptionChange}
+                  type="text"
+                  placeholder="תיאור החדר"
+                  value={roomDescription}
+                > 
+                </input>
+                </div>
+                <div>
+                <input
+                className="input-create-room"
+                  onChange={handleMaxParticipantsQuantity}
+                  type="number"
+                  placeholder="כמות המשתתפים"
+                  value={roomMaxParticipantsQuantity}
+                > 
+                </input>
+                </div>
+
+                <div>
+                  <div>
+                    <p className="password-headline">נעל חדר בסיסמה</p>
+                    <ToggleBoolean toggle={isLockedWithPassword} setToggle={setIsLockedWithPassword}/>
+                  </div>
+                  {isLockedWithPassword && 
+                    <div>
+                      <input
+                      className="input-create-room"
+                      onChange={handlePasswordChange}
+                      type="password"
+                      placeholder="הכנס סיסמה"
+                      value={roomPassword}> 
+                    </input>
+                  </div>}
+
+                  <div>
+                    <button className="create-room-dialog-button">צור חדר</button>
+                  </div>
+
+
+                </div>
+                
+              {/* </form> */}
             </div>
-          )) : <Loading/>}
-        </ul>
+            {/* 4 room creation format */}
+
+
+
+          </div>
+          {/* 3end button create */}
+
+ 
+
+        </div>
+        {/* 2end cerate new room */}
+
+
+
+
       </div>
+      {/* 1end right side */}
+
+
+
+
+      {/* 1start left side */}
+      <div className="left-div">    
+
+        {/* 2start search room */}
+        <div className="search-room-div">
+          <input
+          className="search-room-box"
+          type="text"
+          placeholder="חיפוש"
+          onChange={(e) => setQueryRoomName(e.target.value) }>
+          </input>
+        </div>
+        {/* 2end search room */}
+
+        {/* 2start header */}
+        <div className="active-rooms-header">
+          <h1>חדרים פעילים</h1>
+        </div>
+        {/* 2end header */}
+
+        {/* 2start list of rooms  */}
+        <div>
+          <ul>
+            {rooms ?
+              rooms.filter((room)=>
+                (room.roomName.toLowerCase().includes(queryRoomName.toLocaleLowerCase())
+                ||
+                room.roomNumber.toString().includes(queryRoomName.toLocaleLowerCase()))
+                ).map((room) => (
+              <div>
+                <Room key={room.roomNumber} room={room} user={user} isLoading={props.isLoading} setIsLoading={props.setIsLoading}/>
+              </div>
+                ))
+            : <Loading/>}
+
+
+          </ul>
+
+          {rooms.filter((room)=>
+                (room.roomName.toLowerCase().includes(queryRoomName.toLocaleLowerCase())
+                ||
+                room.roomNumber.toString().includes(queryRoomName.toLocaleLowerCase()))
+                ).length === 0 ?
+                <div>
+                  <div className="not-found-room">
+                    <h4>לא נמצאו תוצאות לחיפוש זה</h4>
+                  </div>
+                  
+                  <div className="outside-box">
+                    <div className="circle">
+                      <div className="inner-circle"></div>
+                    </div>
+                  </div>
+                </div>
+                 : null}
+        </div>
+        {/* 2end list of rooms  */}
+
+
+      </div>
+      {/* 1end left side */}
+
     </div>
+    /* 0end total div */   
+    
   );
 }
+
 
 export default GetARoom;

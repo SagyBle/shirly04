@@ -1,10 +1,5 @@
 import React, { useEffect } from "react";
-
 import { useNavigate } from "react-router-dom";
-
-import './styles/Room.css'
-
-
 import { db } from "../firebase";
 import {
   doc,
@@ -19,7 +14,7 @@ import {
 import { useState } from "react";
 import JoinRoom from "./JoinRoom";
 
-// fixed rid, uid
+import './styles/Room.css'
 
 
 function Room(props) {
@@ -64,40 +59,66 @@ function Room(props) {
 
   return (
     <li>
-      <div>
-        {props.room && 
-        <div>
-          <p>{props.room.roomName}</p>
-          <p>Participants: {users.length}/{props.room.roomMaxParticipantsQuantity}</p>
+      {props.room &&
+      // 0start total div
+      <div className="room-card">
+
+        {/* 1start users images*/}
+        <div className="room-card-top">
           <div className="avatar-group">
             {users.map((user)=>{
               return(
-              <div className="avatar">
-                <img src={user.photoURL} alt="" />
-            </div>)
+                <div className="avatar">
+                  <img src={user.photoURL} alt="" />
+                </div>
+              )
             })}
-          <div className="hidden-avatars">
-            +10
+
+            <div className="hidden-avatars">
+              +10
+            </div>
           </div>
         </div>
-    
-          <p>playing now: {props.room.currPlayingNow} </p>
-          <p>{rid}</p>
-          {!isEntranceAllowed && <p style={{ color: "red" }}>LOCKED</p>}
-          {/* {showBannedMessage ?
-          <div>
-            <p style={{ color: "red" }}>It seems like you are banned from this room</p>
-            <button onClick={()=> {setShowBannedMessage(false)}}>OK</button>
-          </div> :
-          <button onClick={checkIfAllowed}>-Join!-</button>} */}
-          <JoinRoom setIsLoading={props.setIsLoading} room={props.room} />
-          
-          
-          {/* <button onClick={roomtryfunc}>roomtryfunc</button> */}
-          
-        </div>}
-        <button onClick={tryUsers}>try users</button>
-      </div>
+        {/* 1end users images */}
+
+        {/* 1start room name and description*/}
+        <div>
+            {!isEntranceAllowed && <p style={{ color: "red" }}>LOCKED</p>}
+            <div className="room-name">
+              <h5>{props.room.roomName}</h5>
+            </div>
+            <div className="room-description">
+              <p>{props.room.roomDescription}</p>
+            </div>
+            
+            
+        </div>
+        {/* 1end room name and description */}
+
+        {/* 1start room time */}
+        <div>
+            
+        </div>
+        {/* 1end room time */}
+
+        {/* 1start capacity */}
+        <div className="room-curr-situation">
+          <div className="room-capacity">
+              <h3>{users.length} / {props.room.roomMaxParticipantsQuantity}</h3>
+          </div>
+          <div className="join-now-button">
+            <JoinRoom setIsLoading={props.setIsLoading} room={props.room} />
+          </div>
+          <div className="room-playing-now">
+            <p>{props.room.currPlayingNow}</p>
+          </div>
+        </div>
+        {/* 1end capcity */}
+
+        
+      </div>}
+      {/* 0end total div */}
+
     </li>
   )
 }

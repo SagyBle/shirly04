@@ -18,6 +18,7 @@ import {
 function JoinRoom(props) {
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
+  const showPinCode = props.showPinCode;
 
 
   const joinRoom1 = async () => {
@@ -66,7 +67,6 @@ function JoinRoom(props) {
         else {
           joinRoomAsUser(rid, uid, isExist, docSnapRoom)
         }
-        
       }
       else {
           joinRoomAsUser(rid, uid, isExist, docSnapRoom)
@@ -143,7 +143,7 @@ function JoinRoom(props) {
   return (
     <div>
       <div>
-        <button onClick={joinRoom1}>Join!</button>
+        <button onClick={joinRoom1}>הצטרף כעת</button>
       </div>
     </div>
   )
