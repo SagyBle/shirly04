@@ -8,8 +8,8 @@ import Loading from "./Loading";
 
 
 const style = {
-    nav: `bg-gray-800 h-20 flex justify-between items-center p-4`,
-    heading: `text-white text-3xl`
+    // nav: `bg-gray-800 h-20 flex justify-between items-center p-4`,
+    // heading: `text-white text-3xl`
 }
 
 function Navbar(props) {
@@ -28,9 +28,11 @@ function Navbar(props) {
             </div>
             :
             <div>
-                <div className={style.nav}>
+                {/* <div className={style.nav}> */}
+                <div>
                     {(!user) && <Signin />}
-                    { user && <h1 className={style.heading}>Hello {user.displayName}</h1>}
+                    {/* { user && <h1 className={style.heading}>Hello {user.displayName}</h1>} */}
+                    { user && <h4>Hello {user.displayName}</h4>}
 
                     {user && <LogOut/>}
                 </div>
@@ -41,7 +43,6 @@ function Navbar(props) {
                     </div>
                 {/* </Routes> */}
                 { !user && <div>
-                    <h1>Welcome to Shirly04!</h1>
                     <p><br></br>Please identify with your google account,<br></br> and reach your jam room soon</p>
                 </div>}
             </div>

@@ -218,6 +218,7 @@ input::-webkit-inner-spin-button {
   border-radius: 12px;
   direction: rtl;
   padding-right: 15px;
+  transition: 0.7s;
   
 }
 .input-create-room::placeholder{
@@ -303,4 +304,18 @@ input::-webkit-inner-spin-button {
       color: #FFFFFF;
 }
 
+
+.blue{
+  background-color: lightblue;
+  border: 1px solid blue;
+  min-height: 1200px;
+  font-size: 2rem;
+}
+
+.pink{
+  background-color: lightpink;
+  border: 1px solid pink;
+  min-height: 150px;
+  font-size: 2rem;
+}
 

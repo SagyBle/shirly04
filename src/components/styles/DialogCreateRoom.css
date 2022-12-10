@@ -1,0 +1,369 @@
+* {
+  transition: all 0.2s;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.left-div {
+  background-color: #EEEEEE;
+  align-items: center;
+  width: 540px;
+  ;
+}
+
+.active-rooms-header {
+  font-family: 'NarkisBlockMF';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 120%;
+
+  /* display: flex; */
+  align-items: center;
+  text-align: right;
+
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.search-room-div {}
+
+.search-room-box {
+  background: #F5F5F5;
+  direction: rtl;
+  height: 56px;
+  width: 460px;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px 20px;
+  gap: 12px;
+  font-family: 'NarkisBlockMF';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  border-radius: 12px;
+}
+
+.search-room-box:focus {
+  background-color: #dee6ee;
+  direction: rtl;
+  height: 56px;
+  width: 460px;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px 20px;
+  gap: 12px;
+  font-family: 'NarkisBlockMF';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  border: 1px solid #246BFD;
+  border-radius: 12px;
+}
+
+
+
+/* non found rooms */
+
+.outside-box {
+  margin-top: 40px;
+  width: 220px;
+  height: 220px;
+  background: white;
+  text-align: center;
+}
+
+.circle {
+  width: 220px;
+  height: 220px;
+  border: 40px solid #616161;
+  border-radius: 200px;
+}
+
+.inner-circle {}
+
+.not-found-room {
+  font-family: 'NarkisBlockMF';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 120%;
+  font: #212121;
+}
+
+.headers {
+  margin-bottom: 100px;
+}
+
+.main-header {
+  /* width: 533px;
+  height: 106px; */
+
+
+  font-family: 'NarkisBlockMF';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 110%;
+
+  text-align: right;
+  color: #212121;
+  direction: rtl;
+}
+
+.sub-header {
+
+  font-family: 'NarkisBlockMF';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 140%;
+
+  text-align: right;
+  letter-spacing: 0.2px;
+
+  color: #212121;
+  direction: rtl;
+}
+
+.pin-input {
+  background: #616161;
+}
+
+.create-room-button {
+  color: white !important;
+  direction: rtl !important;
+  background: #246BFD !important;
+  padding: 18px 16px;
+  width: 548px;
+  height: 55px;
+  box-shadow: 4px 8px 24px rgba(36, 107, 253, 0.25);
+  border-radius: 100px !important;
+  font-family: 'NarkisBlockMF' !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  font-size: 16px !important;
+  line-height: 140% !important;
+  /* or 22px */
+
+  /* display: flex; */
+  /* align-items: center; */
+  /* text-align: center; */
+  /* letter-spacing: 0.2px; */
+  transition: 0.2s !important;
+
+}
+
+.create-room-button:hover {
+  direction: trl;
+  background: #1f5fe0;
+  transition: 0.2s;
+}
+
+.or {
+  font-family: 'NarkisBlockMF';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 140%;
+  letter-spacing: 0.2px;
+  color: #616161;
+
+  margin-top: 30px;
+  margin-bottom: 30px;
+
+}
+
+.textfield {
+  color: aqua !important;
+  direction: "rtl" !important;
+}
+
+.dialog-create-room {
+  outline: #212121;
+  background: #246BFD;
+
+  width: 428px;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 36px 24px;
+  gap: 24px;
+  background: #FFFFFF;
+  /* Greyscale / 100 */
+
+  border: 1px solid #F5F5F5;
+  border-radius: 40px;
+
+  max-width: 600px;
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  background-color: #FFFFFF;
+  box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.45);
+}
+
+.overlay{
+  background-color: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+.form-create-room {
+  background: pink;
+}
+
+.input-create-room {
+  font-family: 'NarkisBlockMF';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  background: #FAFAFA;
+  width: 380px;
+  height: 56px;
+  border-radius: 12px;
+  direction: rtl;
+  padding-right: 15px;
+
+}
+
+.input-create-room::placeholder {
+  font-family: 'NarkisBlockMF';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  /* identical to box height, or 20px */
+
+  display: flex;
+  align-items: center;
+  text-align: right;
+  letter-spacing: 0.2px;
+
+  /* Greyscale / 500 */
+
+  color: #9E9E9E;
+
+}
+
+.dialog-headline {
+  font-family: 'NarkisBlockMF';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 120%;
+  /* identical to box height, or 29px */
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  /* Greyscale / 900 */
+
+  color: #212121;
+}
+
+.password-headline {
+  font-family: 'NarkisBlockMF';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  color: #9E9E9E;
+}
+
+.create-room-dialog-button {
+  margin-top: 30px;
+  margin-bottom: 20px;
+  /* display: flex;
+    flex-direction: row; */
+  justify-content: center;
+  align-items: center;
+  padding: 18px 16px;
+  gap: 10px;
+
+  width: 380px;
+  height: 58px;
+
+  background: #246BFD;
+
+  box-shadow: 4px 8px 24px rgba(36, 107, 253, 0.25);
+  border-radius: 100px;
+  flex: none;
+  order: 3;
+  align-self: stretch;
+  flex-grow: 0;
+  font-family: 'NarkisBlockMF';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 140%;
+  /* or 22px */
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.2px;
+
+  /* Others / White */
+
+  color: #FFFFFF;
+}
+
+.cancel-dialog-button {
+  margin-top: 30px;
+  margin-bottom: 20px;
+  /* display: flex;
+    flex-direction: row; */
+  justify-content: center;
+  align-items: center;
+  padding: 18px 16px;
+  gap: 10px;
+
+  width: 380px;
+  height: 58px;
+
+  background: #93989f;
+
+  box-shadow: 4px 8px 24px rgba(36, 107, 253, 0.25);
+  border-radius: 100px;
+  flex: none;
+  order: 3;
+  align-self: stretch;
+  flex-grow: 0;
+  font-family: 'NarkisBlockMF';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 140%;
+  /* or 22px */
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.2px;
+
+  /* Others / White */
+
+  color: #FFFFFF;
+}
+/* 
+.line{
+  position: absolute;
+    left: 0%;
+    right: 0%;  
+  
+    border: 1px solid #EEEEEE;
+} */
