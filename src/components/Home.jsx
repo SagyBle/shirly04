@@ -10,7 +10,6 @@ function Home(props) {
   return (
     <>
         <div>
-            <h3>Welcome to Shirly!</h3>
             <Routes>
                 <Route path='/' element={<GetARoom uid={props.uid} isLoading={props.isLoading} setIsLoading={props.setIsLoading}/>}/>
             </Routes>

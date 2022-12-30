@@ -3,12 +3,15 @@ import React from 'react'
 import { auth, db } from '../firebase'
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
 
-const style = {
-  form: `h-14 w-full max-w-[728px]  flex text-xl absolute bottom-0`,
-  input: `w-full text-xl p-3 bg-gray-900 text-white outline-none border-none`,
-  button: `bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded`,
-  renderSuggestions: `w-full text-xl p-3 bg-gray-900 text-white outline-none border-none`,
-};
+import './styles/SendMessage.css'
+
+
+// const style = {
+//   form: `h-14 w-full max-w-[728px]  flex text-xl absolute bottom-0`,
+//   input: `w-full text-xl p-3 bg-gray-900 text-white outline-none border-none`,
+//   button: `bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded`,
+//   renderSuggestions: `w-full text-xl p-3 bg-gray-900 text-white outline-none border-none`,
+// };
 
 // fixed rid, uid
 
@@ -67,6 +70,12 @@ export default class SendMessage extends React.Component {
     return (this.props.messages && this.props.messages.include(item)) 
   }
 
+  splitSongArtist = (item) => {
+    
+    const array = item.split(" - ");
+    return {songName: array[0], artistName: array[1]}
+  }
+
 
   renderSuggestions() {
     const { suggestions } = this.state;
@@ -75,15 +84,25 @@ export default class SendMessage extends React.Component {
     }
     return (
 
-      <ul className={style.renderSuggestions}>
-        {suggestions.map((item) => <li onClick={() => this.suggestionSelected(item)}>
-          {item}
-          {this.props.history &&
+      <ul className='song-suggestions-container'>
+        {suggestions.map((item) => 
+        
+        <li className='song-line' onClick={() => this.suggestionSelected(item)}>
+          <div>
+            <div className='song-name'><p>{this.splitSongArtist(item).songName}</p></div>
+            <div className='artist-name'><p>{this.splitSongArtist(item).artistName}</p></div>
+            
+          </div>
+          <div>
+            {this.props.history &&
           this.props.history.some((message, index)=>this.handleHistory(message, index, item)) && <p>played {(this.props.history.length) - (this.index)} songs ago</p>}
-          {this.props.messages.some(message=> message.text === item) && <p>song is about to be played...</p>}
+          </div>
+          <div>
+            {this.props.messages.some(message=> message.text === item) && <p>song is about to be played...</p>}
+          </div>
           </li>)}
       </ul>
-
+  
     )
 
   }
@@ -108,11 +127,13 @@ export default class SendMessage extends React.Component {
   render() {
     const { text } = this.state;
     return (
-      <form onSubmit={this.sendMessage}>
-        <input className={style.input} placeholder="הקלידו ובחרו מהשירים הקיימים" value={text} onChange={this.onTextChange} type='text' />
+      <form className="search-song-form" onSubmit={this.sendMessage}>
+        <input className="search-song-box" placeholder="הקלידו ובחרו מהשירים הקיימים" value={text} onChange={this.onTextChange} type='text' />
         {this.renderSuggestions()}
-        {this.state.enableSend && <button className={style.button} type="submit">Send</button>}
+        {this.state.enableSend && <button type="submit">Send</button>}
       </form>
+
+
     )
 
   }

@@ -82,16 +82,14 @@ function Room(props) {
         {/* 1end users images */}
 
         {/* 1start room name and description*/}
-        <div>
+        <div className="room-headers">
             {!isEntranceAllowed && <p style={{ color: "red" }}>LOCKED</p>}
             <div className="room-name">
-              <h5>{props.room.roomName}</h5>
+              <h5 className="room-name-letters">{props.room.roomName}</h5>
             </div>
             <div className="room-description">
-              <p>{props.room.roomDescription}</p>
-            </div>
-            
-            
+              <p className="room-description-letters">{props.room.roomDescription}</p>
+            </div>  
         </div>
         {/* 1end room name and description */}
 
@@ -102,18 +100,42 @@ function Room(props) {
         {/* 1end room time */}
 
         {/* 1start capacity */}
+{/*         
         <div className="room-curr-situation">
           <div className="room-capacity">
-              <h3>{users.length} / {props.room.roomMaxParticipantsQuantity}</h3>
+              <p className="room-capacity-letters">{users.length} / {props.room.roomMaxParticipantsQuantity}</p>
           </div>
           <div className="join-now-button">
             <JoinRoom setIsLoading={props.setIsLoading} room={props.room} />
           </div>
           <div className="room-playing-now">
-            <p>{props.room.currPlayingNow}</p>
+            <p className="room-playing-now-letters">{props.room.currPlayingNow}</p>
+          </div>
+        </div> */}
+
+        {/* 1end capcity */}
+
+
+        {/* try 1start capacity */}
+        
+        <div className="row g-0">
+          <div className="col-4">
+             <div className="room-capacity">
+                <p className="center room-capacity-letters">{users.length} / {props.room.roomMaxParticipantsQuantity}</p>
+             </div>
+             
+          </div>
+          <div className="col-4">
+             <div className="pink center">
+              <JoinRoom setIsLoading={props.setIsLoading} room={props.room} />
+             </div>
+          </div>
+          <div className="col-4">
+             <div className="center room-playing-now-letters">{props.room.currPlayingNow}</div>
           </div>
         </div>
-        {/* 1end capcity */}
+
+        {/* try 1end capcity */}
 
         
       </div>}

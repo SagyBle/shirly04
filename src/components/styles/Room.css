@@ -1,60 +1,59 @@
-  
-  @font-face {
+  * {
     font-family: 'NarkisBlockMF';
-    src: url();
   }
 
-  .room-name{    
-    font-family: 'NarkisBlockMF';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 20px;
-
-    line-height: 120%;
+  .room-headers{
     text-align: right;
-    letter-spacing: 0.2px;
-    align-items: center;
-    
-    margin-top: 20px;
-    margin-right: 30px;
+    margin-right: 28px;
+  }
+
+
+  .room-name{    
+    margin-top: 28px;
   }
 
   .room-description{
-  
-    font-family: 'NarkisBlockMF';
-    font-style: normal;
+  }
+
+  .room-description-letters{
     font-weight: 400;
     font-size: 14px;
-  
-    align-items: center;
-    text-align: right;
-    letter-spacing: 0.2px;
-    color: #424242;
-    
-    margin-top: 10px;
-    margin-right: 30px;
+    line-height: 140%;
+    padding-right: 2px;
   }
+
+
   .room-curr-situation{
-      display: flex;
+      /* display: flex; */
       margin-left: 28px;
-      font-family: 'NarkisBlockMF';
-      font-style: normal;
       font-weight: 500;
       font-size: 14px;
       line-height: 140%;
+  
   }
 
   .room-capacity{
-
-    width: 50px;
-    height: 20px;
-
-    /* height: 32px; */
     background: linear-gradient(286.17deg, #246BFD 0%, #6F9EFF 100%);
     border-radius: 100px;
-    color: #FFFFFF;
-        transition: 0.4px;
+    /* padding: 6px 16px; */
+    width: 82px;
+    height: 32px;
+    /* ask yahalom */
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
 
+    /* gap: 4px; */
+  }
+
+  .room-capacity-letters{
+    color: white;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 140%;
+    margin-top: 6px;
+    
   }
 
   .join-now-button{
@@ -63,17 +62,26 @@
   }
 
   .room-playing-now{
-    margin-left: 50px;
-    
+    text-align: right;
+    background-color: pink;    
   }
 
+  .room-playing-now-letters{
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 13px;
+    color: #9E9E9E;
+    margin-top: 16px;
+    margin-right: 28px;
+    
+  }
  
   
   .room-card {
     width: 460px;
     height: 244px;
     background-color: #FFFFFF;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     border-radius: 20px;
     transition: 0.4px;
   }
@@ -101,12 +109,12 @@
   }
 
   .avatar {
-    width: 28px;
-    height: 28px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     overflow: hidden;
     border: 2px solid white;
-    margin-top: 30px;
+    margin-top: 25px;
     margin-left: -12px;
     cursor: pointer;
     position: relative;
@@ -130,9 +138,10 @@
     
   }
   .hidden-avatars {
-    width: 28px;
-    height: 28px;
-    font-size: 9px;
+    width: 32px;
+    height: 32px;
+    font-size:12px;
+    
     border-radius: 50%;
     background-color: #2c303a;
     color: #fff;
@@ -143,11 +152,34 @@
     border: 2px solid white;
     cursor: pointer;
     position: relative;
-    margin-top: 30px;
+    margin-top: 25px;
     margin-left: -10px;
   }
 
 
+
+  .pink{
+    background-color: pink;
+    min-height: 30px;
+  }
+
+  .red {
+    background-color: red;
+    min-height: 700px;
+
+  }
+
+  .center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .right {
+    display: flex;
+    align-items: right;
+    justify-content: right;
+  }
 
 
 

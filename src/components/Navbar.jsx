@@ -28,6 +28,15 @@ function Navbar(props) {
             </div>
             :
             <div>
+                {/* rmv */}
+                        <div class="alert alert-info">
+                            <div class="d-none d-xl-block font-weight-bold">size of screen: X-LARGE (XL)</div>
+                            <div class="d-none d-lg-block d-xl-none font-weight-bold">size of screen: LARGE (LG)</div>
+                            <div class="d-none d-md-block d-lg-none font-weight-bold">size of screen: MEDIUM (M)</div>
+                            <div class="d-none d-sm-block d-md-none font-weight-bold">size of screen: SMALL (SM)</div>
+                            <div class="d-block d-sm-none alert font-weight-bold">size of screen: X-SMALL (Defaut)</div>
+                        </div>  
+                {/* rmv */}
                 {/* <div className={style.nav}> */}
                 <div>
                     {(!user) && <Signin />}

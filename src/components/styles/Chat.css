@@ -1,0 +1,245 @@
+.container-div{
+  display: flex; 
+  background-color: aqua;
+  min-height: 100vh;
+}
+
+.left-side{
+  width: 540px;
+  display: flex;
+  flex-direction: column;
+  background-color: #FAFAFA;;
+  
+}
+
+.search-song-to-add-sector{
+  height: 100px;
+  display: flex;
+}
+
+.search-song-div{
+  margin: auto;
+}
+
+.search-song-input{
+  width: 460px;
+  height: 56px;
+  background: #F5F5F5;
+  border-radius: 12px;
+  direction: rtl;
+  padding-right: 10px;
+  font-size: 14px;
+  font-weight: lighter;
+  padding-right: 30px;
+  
+}
+
+.search-song-input::placeholder{
+}
+
+
+.search-song-input:focus{
+  background: rgba(36, 107, 253, 0.08);
+  outline: 1px solid #246BFD;
+
+}
+
+.choose-songs-or-history-div{
+  height: 80px;
+  display: block;
+  margin: auto;
+  margin-top: 20px;
+}
+
+.button-history{
+  border-bottom: solid 1px #c1bcbc;;
+  width: 230px;
+  height: 50px;
+  font-size: 18px;
+  font-weight: 200;
+  color: #9E9E9E;
+  
+}
+
+.button-history:active{
+  border-bottom: solid 3px #246BFD;
+  border-radius: 2px;
+  color: #246BFD;
+}
+
+.main-left-side{
+  flex: 1;
+}
+
+.next-songs-div{
+  display: flex;
+}
+
+.song-div{
+ 
+
+}
+
+.room-history-div{
+  /* display: flex; */
+}
+
+.history-song-div{
+  display: flex;
+  width: 460px;
+  height: 108px;
+  margin: auto;
+  margin-bottom: 20px;
+  border-radius: 20px;
+  justify-content: space-between;
+  background: #FFFFFF;
+  opacity: 0.7;
+
+}
+
+.trash-bin-icon-div{
+  display: flex;
+  justify-content: center;
+  margin-left: 30px;
+  
+  /* vertical-align: middle; */
+  
+
+}
+
+.trash-bin-icon{
+  width: 30px;
+  height: 30px;
+  margin-top: 40px;
+}
+
+.history-song-info-div{
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  direction: rtl;
+  justify-content: space-between;
+  margin-right: 25px;
+  margin-bottom: 0px;
+}
+
+
+.song-header-p{
+  margin-top: 25px;
+  font-size: 20px;
+  margin-bottom: 0px;
+
+}
+
+.history-song-author-div{
+  width: fit-content;
+  height: fit-content;
+  margin-bottom: 10px;
+  
+}
+
+.song-author-p{
+  color: #424242;
+  font-size: 14px;
+  font-weight: 100;
+
+}
+
+
+
+
+.room-setting-div{
+  display: flex;
+  width: 460px;
+  height: 80px;
+  margin: auto;
+  margin-bottom: 20px;
+  border-radius: 20px;
+  justify-content: space-between;
+  opacity: 0.7;
+  align-items: center;
+  outline: 1px solid black;
+}
+
+.room-setting-div-open{
+  height: 370px;
+}
+
+.setting-info-header-open{
+  /* display: flex; */
+  width: 460px;
+  height: 350px;
+  margin: auto;
+  margin-bottom: 20px;
+  border-radius: 20px;
+  opacity: 0.7;
+  outline: 1px solid black;
+}
+
+.open-setting-div{
+  margin-left: 20px;
+}
+.open-setting-button{
+  background-color: none;
+  color: #246BFD;
+  font-size: 16px;
+
+}
+
+.setting-line-div{
+  height: 48px;
+}
+.room-header-open-div{
+  height: 58px;
+}
+
+.room-desc-open-div{
+  height: 50px;
+
+}
+
+
+.room-header-div{
+  margin-top: 5px;
+  margin-right: 20px;
+}
+.room-header-h4{
+  font-weight: 700;
+  font-size: 24px;
+}
+
+
+.room-header{
+  background-color: aliceblue;
+}
+
+
+ .right-side{
+  flex: 1;
+ }
+
+.blue{
+  background-color: blue;
+  min-height: 700px;
+}
+
+.purple{
+  background-color: purple;
+    min-height: 250px;
+
+}
+
+.pink{
+  background-color: pink;
+  min-height: 40px;
+}
+
+.coral{
+  background-color: coral;
+}
+
+.white{
+  background-color: white;
+}
+
+

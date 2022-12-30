@@ -1,0 +1,20 @@
+.blanchedalmond{
+  /* Auto layout */
+background-color: blanchedalmond;
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 0px;
+gap: 12px;
+
+width: 380px;
+height: 60px;
+
+
+/* Inside auto layout */
+
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+}

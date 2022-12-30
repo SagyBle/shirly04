@@ -1,6 +1,15 @@
 
 *{
   transition: all 0.2s;
+  font-family: 'NarkisBlockMF';
+  font-style: normal;
+  font-weight: 700;
+  color: #212121;
+  letter-spacing: 0.2px;
+}
+
+h1 {
+  font-size: 48px;
 }
 
 input::-webkit-outer-spin-button,
@@ -13,11 +22,12 @@ input::-webkit-inner-spin-button {
   background-color: #EEEEEE;
   align-items: center;
   width: 540px;
+  padding-bottom: 10px;
+  padding-left: 0;
+
 ;}
 
 .active-rooms-header{
-  font-family: 'NarkisBlockMF';
-    font-style: normal;
     font-weight: 700;
     font-size: 24px;
     line-height: 120%;
@@ -27,6 +37,7 @@ input::-webkit-inner-spin-button {
     text-align: right;
 
     margin-top: 30px;
+    margin-right: 40px;
     margin-bottom: 30px;
 }
 
@@ -42,12 +53,11 @@ input::-webkit-inner-spin-button {
   align-items: center;
   padding: 0px 20px;
   gap: 12px;
-  font-family: 'NarkisBlockMF';
-  font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 140%;
   border-radius: 12px;
+  margin-top: 40px;
 }
 
 .search-room-box:focus {
@@ -59,8 +69,6 @@ input::-webkit-inner-spin-button {
   align-items: center;
   padding: 0px 20px;
   gap: 12px;
-  font-family: 'NarkisBlockMF';
-  font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 140%;
@@ -85,51 +93,43 @@ input::-webkit-inner-spin-button {
   border: 40px solid #616161;
   border-radius: 200px;
 }
-.inner-circle{
 
-}
 
 .not-found-room{
-  font-family: 'NarkisBlockMF';
-  font-style: normal;
   font-weight: 700;
   font-size: 24px;
   line-height: 120%;
   font: #212121;
 }
+
 .headers{
-  margin-bottom: 100px;
+  height: 106px;
+  
+  
 }
 
 .main-header {
-  /* width: 533px;
-  height: 106px; */
-
-
-  font-family: 'NarkisBlockMF';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 48px;
   line-height: 110%;
-
   text-align: right;
-  color: #212121;
   direction: rtl;
+  padding-right: 30px;
 }
 
 .sub-header{
   
-  font-family: 'NarkisBlockMF';
-  font-style: normal;
   font-weight: 400;
   font-size: 18px;
-  line-height: 140%;
+  /* line-height: 140%; */
 
   text-align: right;
   letter-spacing: 0.2px;
-
-  color: #212121;
   direction: rtl;
+  padding-right: 30px;
+
+}
+
+.enter-room{
+  padding-right: 15px;
 }
 
 .pin-input{
@@ -137,19 +137,19 @@ input::-webkit-inner-spin-button {
 }
 
 .create-room-button{
-  color: white !important;
-  direction: rtl !important;
-  background: #246BFD !important;
+  color: white;
+  direction: rtl ;
+  background: #246BFD;
   padding: 18px 16px;
   width: 548px;
   height: 55px;
   box-shadow: 4px 8px 24px rgba(36, 107, 253, 0.25);
-  border-radius: 100px !important;
-  font-family: 'NarkisBlockMF' !important;
-    font-style: normal !important;
-    font-weight: 700 !important;
-    font-size: 16px !important;
-    line-height: 140% !important;
+  border-radius: 100px ;
+  font-family: 'NarkisBlockMF';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 140%;
     /* or 22px */
   
     /* display: flex; */
@@ -304,18 +304,24 @@ input::-webkit-inner-spin-button {
       color: #FFFFFF;
 }
 
+.logo{
+    display: flex;
 
-.blue{
-  background-color: lightblue;
-  border: 1px solid blue;
-  min-height: 1200px;
-  font-size: 2rem;
+    /* align-items: center; */
+    justify-content: right;
+    min-height: 29px;
+    padding-right: 40px;
 }
 
-.pink{
-  background-color: lightpink;
-  border: 1px solid pink;
+.purple{
+  background-color: purple;
+}
+.break {
   min-height: 150px;
-  font-size: 2rem;
 }
+
+.small-break {
+  min-height: 100px;
+}
+
 

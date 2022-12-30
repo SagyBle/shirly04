@@ -23,7 +23,7 @@ export default function FormDialog(props) {
 
   return (
     <div>
-      <Button className={"create-room-button"} onClick={handleClickOpen}>
+      <Button className="create-room-button" onClick={handleClickOpen}>
         צור חדר חדש +
       </Button>
       <Dialog open={open} onClose={handleClose}>

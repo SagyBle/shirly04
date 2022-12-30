@@ -288,33 +288,18 @@ function GetARoom(props) {
     console.log(rid);
   }
 
-
-      // <div className="container-fluid">
-      //   <div className="row">
-      //     {/* left part */}
-      //     <div className="col-4">
-      //       <div className="blue">
-      //         <div className="pink"></div>
-      //       </div>
-      //     </div>
-      //     {/* right part */}
-      //     <div className="col offset-0">
-      //       <div className="blue">
-      //         <div className="row">
-      //           <div className="col-12">
-      //             <div className="pink"></div>
-      //           </div>
-      //         </div>
-      //       </div>
-      //     </div>
-      //   </div>
-      // </div>
-
-
   return (
+
+    
     /* 0start total div */
     <div className="container-fluid">
-      <div className="row">
+      {/* 2 loading div */}
+        <div>
+            {props.isLoading && <Loading/>}
+        </div>
+      {/* 2 loading div */}
+
+      <div className="row g-0 px-0">
 
         {/* start col4 */}
         <div className="col-4">
@@ -337,7 +322,7 @@ function GetARoom(props) {
 
             {/* 2start header */}
             <div className="active-rooms-header">
-              <h1 className="justify-content-center">חדרים פעילים</h1>
+              <h4 className="justify-content-center">חדרים פעילים</h4>
             </div>
             {/* 2end header */}
 
@@ -365,13 +350,12 @@ function GetARoom(props) {
                     room.roomNumber.toString().includes(queryRoomName.toLocaleLowerCase()))
                     ).length === 0 ?
                     <div>
-                      <div className="not-found-room">
-                        <h4>לא נמצאו תוצאות לחיפוש זה</h4>
-                      </div>
-                      
-                      <div className="outside-box">
-                        <div className="circle">
-                          <div className="inner-circle"></div>
+                      <div className="container">
+                          <div className="not-found-room">
+                            <h4>לא נמצאו תוצאות לחיפוש זה</h4>
+                          </div>
+                          <div className="circle">
+                            <div className="inner-circle"></div>
                         </div>
                       </div>
                     </div>
@@ -387,107 +371,105 @@ function GetARoom(props) {
           
         </div>
         {/* end col4 */}
-        <div className="col-2"></div>
-
-        {/* start col */}
-        <div className="col-5">
-          {/* 1start right side */}
-            <div className="container">
-
-              {/* 2 headers div */}
-              <div className="headers">
-
-                <h1 className="main-header">הגיע הזמן להצטרף לחגיגה בחינם וזמין לכולם</h1>
-                <div className="col-11 ">
-                  <h2 className="sub-header">הנדסנו מחדש את השירות שבנינו לפגישות עסקיות מאובטחות, כדי להפוך אותו בחינם וזמין לכולם.</h2>
-                </div>
-              </div>
-              {/* 2 headers div */}
-
-              {/* 2 loading div */}
-              <div>
-                  {props.isLoading && <Loading/>}
-              </div>
-              {/* 2 loading div */}
-
-
-
-              {/* 2start get in by pincode */}
-              <div className="container">
-                <div>
-                {/* 3 header */}
-                <div>
-                  <h3 className="sub-header">קוד כניסה לחדר</h3>
-                </div>
-                {/* 3 header */}
                 
-                {/* 3 pincode */}
-                <div className=" d-flex justify-content-center">
-                  <form>
-                    <PinInput
-                    className="pin-input"
-                    values={values}
-                    placeholder=''
-                    onChange={(value, index, values) => setValues(values)}
-                    onComplete={()=>setRoomNumber(values.join(""))}
-                    />
-                  </form>
-                  <JoinRoom setIsLoading={props.setIsLoading} roomNumber={roomNumber} />
+        {/* start col */}
+        <div className="col">
+              <div className="row">
+                <div className="col">
+                  <div className="logo">
+                    <h4>לוגו</h4>
+                  </div>
                 </div>
-                {/* 3 pincode */}
-
               </div>
-              {/* 2end get in by pincode */}
+              <div className="row">
+                <div className="col">
+                  <div className=" break"></div>
+                </div>
               </div>
-
-              {/* 1start or */}
-              <div className=" d-flex justify-content-center">
-                <h3 className="or">או</h3>
-              </div>
-              {/* 1end or */}
-
-              {/* 2start cerate new room */}
-              <div>
-                {/* 3start button create */}
-                <div className=" d-flex justify-content-center">
-                  {/* <button className="create-room-button" onClick={createNewRoomURLAndGetInside}>צור חדר חדש +</button> */}
-                  {/* button below to open create room dialog */}
-
-                  <button className="create-room-button" onClick={()=>setShowCreateDialog(true)}>צור חדר חדש +</button>
-
-                  {showCreateDialog   && <DialogCreateRoom setRoomName={setRoomName} setRoomMaxParticipantsQuantity={setRoomMaxParticipantsQuantity} setRoomDescription={setRoomDescription}
-                  setRoomPassword={setRoomPassword} roomName={roomName} roomDescription={roomDescription} roomMaxParticipantsQuantity={roomMaxParticipantsQuantity}
-                  roomPassword={roomPassword} isLockedWithPassword={isLockedWithPassword} setIsLockedWithPassword={setIsLockedWithPassword} setShowCreateDialog={setShowCreateDialog}
-                  createNewRoomURLAndGetInside={createNewRoomURLAndGetInside}
-                  />}
-
-
+              <div className="row">
+                <div className="col-3">
+                  
+                </div>
+                <div className="col-9">
+                  <h1 className="main-header">הגיע הזמן להצטרף לחגיגה בחינם וזמין לכולם</h1>
+                  <h2 className="sub-header">הנדסנו מחדש את השירות שבנינו לפגישות עסקיות מאובטחות, כדי להפוך אותו בחינם וזמין לכולם.</h2>
 
                 </div>
-                {/* 3end button create */}
-
-      
-
               </div>
-              {/* 2end cerate new room */}
+              <div className="row">
 
+                <div className="col-9 offset-3">
+                  <div className=" small-break"></div>
+                </div>
+              </div>
+              <div className="row">
+                {/* <div className="col-3">
+                  
+                </div> */}
+                <div className="col-9 offset-3">
+                  <div className="">
+                    {/* 2start get in by pincode */}
+               <div className="container">
+                 <div>
+                 {/* 3 header */}
+                 <div>
+                   <h3 className="sub-header enter-room">קוד כניסה לחדר</h3>
+                 </div>
+                 {/* 3 header */}
+                
+                 {/* 3 pincode */}
+                 <div className=" d-flex justify-content-center">
+                   <div>
+                     <PinInput
+                     className="pin-input"
+                     values={values}
+                     placeholder=''
+                     onChange={(value, index, values) => setValues(values)}
+                     onComplete={()=>setRoomNumber(values.join(""))}
+                     size="lg"
+                     borderColor="#EEEEEE"
+                     focusBorderColor="#246BFD"
+                     />
+                   </div>
+                   {/* <JoinRoom setIsLoading={props.setIsLoading} roomNumber={roomNumber} /> */}
+                 </div>
+                 {/* 3 pincode */}
 
+               </div>
+               {/* 2end get in by pincode */}
+               </div>
 
+               {/* 1start or */}
+                <div className=" d-flex justify-content-center">
+                  <h3 className="or">או</h3>
+                </div>
+                {/* 1end or */}
 
-            </div>
-            {/* 1end right side */}
+                {/* 2start cerate new room */}
+               <div>
+                 {/* 3start button create */}
+                 <div className=" d-flex justify-content-center">
+                   {/* <button className="create-room-button" onClick={createNewRoomURLAndGetInside}>צור חדר חדש +</button> */}
+                   {/* button below to open create room dialog */}
+
+                   <button className="create-room-button" onClick={()=>setShowCreateDialog(true)}>צור חדר חדש +</button>
+
+                   {showCreateDialog   && <DialogCreateRoom setRoomName={setRoomName} setRoomMaxParticipantsQuantity={setRoomMaxParticipantsQuantity} setRoomDescription={setRoomDescription}
+                   setRoomPassword={setRoomPassword} roomName={roomName} roomDescription={roomDescription} roomMaxParticipantsQuantity={roomMaxParticipantsQuantity}
+                   roomPassword={roomPassword} isLockedWithPassword={isLockedWithPassword} setIsLockedWithPassword={setIsLockedWithPassword} setShowCreateDialog={setShowCreateDialog}
+                   createNewRoomURLAndGetInside={createNewRoomURLAndGetInside}
+                   />}
+                 </div>
+                 {/* 3end button create */}
+               </div>
+               {/* 2end cerate new room */}
+                  </div>
+                </div>
+              </div>
+
         </div>
         {/* end col */}
-  
-
       </div>
-
-
-      
- 
-      
-      
-
     </div>
     /* 0end total div */   
     
@@ -496,3 +478,89 @@ function GetARoom(props) {
 
 
 export default GetARoom;
+
+          // {/* 1start right side */}
+          //   <div className="container">
+
+          //     {/* 2 headers div */}
+          //     <div className="headers">
+
+          //       <h1 className="main-header">הגיע הזמן להצטרף לחגיגה בחינם וזמין לכולם</h1>
+          //       <div className="col-11 ">
+          //         <h2 className="sub-header">הנדסנו מחדש את השירות שבנינו לפגישות עסקיות מאובטחות, כדי להפוך אותו בחינם וזמין לכולם.</h2>
+          //       </div>
+          //     </div>
+          //     {/* 2 headers div */}
+
+          //     {/* 2 loading div */}
+          //     <div>
+          //         {props.isLoading && <Loading/>}
+          //     </div>
+          //     {/* 2 loading div */}
+
+
+
+          //     {/* 2start get in by pincode */}
+          //     <div className="container">
+          //       <div>
+          //       {/* 3 header */}
+          //       <div>
+          //         <h3 className="sub-header">קוד כניסה לחדר</h3>
+          //       </div>
+          //       {/* 3 header */}
+                
+          //       {/* 3 pincode */}
+          //       <div className=" d-flex justify-content-center">
+          //         <div>
+          //           <PinInput
+          //           className="pin-input"
+          //           values={values}
+          //           placeholder=''
+          //           onChange={(value, index, values) => setValues(values)}
+          //           onComplete={()=>setRoomNumber(values.join(""))}
+          //           />
+          //         </div>
+          //         <JoinRoom setIsLoading={props.setIsLoading} roomNumber={roomNumber} />
+          //       </div>
+          //       {/* 3 pincode */}
+
+          //     </div>
+          //     {/* 2end get in by pincode */}
+          //     </div>
+
+          //     {/* 1start or */}
+          //     <div className=" d-flex justify-content-center">
+          //       <h3 className="or">או</h3>
+          //     </div>
+          //     {/* 1end or */}
+
+          //     {/* 2start cerate new room */}
+          //     <div>
+          //       {/* 3start button create */}
+          //       <div className=" d-flex justify-content-center">
+          //         {/* <button className="create-room-button" onClick={createNewRoomURLAndGetInside}>צור חדר חדש +</button> */}
+          //         {/* button below to open create room dialog */}
+
+          //         <button className="create-room-button" onClick={()=>setShowCreateDialog(true)}>צור חדר חדש +</button>
+
+          //         {showCreateDialog   && <DialogCreateRoom setRoomName={setRoomName} setRoomMaxParticipantsQuantity={setRoomMaxParticipantsQuantity} setRoomDescription={setRoomDescription}
+          //         setRoomPassword={setRoomPassword} roomName={roomName} roomDescription={roomDescription} roomMaxParticipantsQuantity={roomMaxParticipantsQuantity}
+          //         roomPassword={roomPassword} isLockedWithPassword={isLockedWithPassword} setIsLockedWithPassword={setIsLockedWithPassword} setShowCreateDialog={setShowCreateDialog}
+          //         createNewRoomURLAndGetInside={createNewRoomURLAndGetInside}
+          //         />}
+
+
+
+          //       </div>
+          //       {/* 3end button create */}
+
+      
+
+          //     </div>
+          //     {/* 2end cerate new room */}
+
+
+
+
+          //   </div>
+          //   {/* 1end right side */}

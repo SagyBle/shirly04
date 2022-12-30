@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { db, auth } from "../firebase";
+import Swal from "sweetalert2";  
 
 import { useNavigate } from "react-router-dom";
 import {
@@ -74,8 +75,16 @@ function JoinRoom(props) {
     }
     // room doesnt exists
     else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!',
+      })
+
     }
-    console.log(isAdmin);
+    
+
+    props.setIsLoading(false);    
     
   }
 
@@ -128,7 +137,15 @@ function JoinRoom(props) {
       //loading false
       else {
         props.setIsLoading(false);
-        alert("its seems like you are banned from this room")
+        Swal.fire({
+        title: 'שובב אחד',
+        text: 'נראה שהמנהל חסם אותך',
+        icon: 'question',
+        confirmButtonText: 'אנטישמי',
+        cancelButtonText: 'הוא צודק',
+        showCancelButton: true,
+        showCloseButton: true
+      })
         
       }
     }
