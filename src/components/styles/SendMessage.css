@@ -24,40 +24,11 @@
   border: 1px solid #246BFD;
 }
 
-
 .song-suggestions-container{
-  margin-top: 15px;
-  background-color: black;
-  background: #FFFFFF;
-/* Card/Shadow 2 */
-
-  box-shadow: 0px 4px 60px rgba(4, 6, 15, 0.05);
-  border-radius: 20px;
-  padding-top: 25px;
-}
-
-.song-suggestion{
-  margin-top: 10px;
-  background-color: brown;
-}
-
-.pink{
-  background-color: pink;
-}
-
-.song-line{
-  background-color: aquamarine;
-}
-
-.artist-name{
-  background-color: aquamarine;
-    float: right;
-
-}
-
-.song-name{
-
-  background-color: bisque;
-  float: right;
-   text-align: center;
+  
+  width: 500px;
+  height: fit-content;
+  margin-top: 50px;
+  position: absolute;
+  justify-content: space-between;
 }

@@ -4,16 +4,9 @@ import { auth, db } from '../firebase'
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
 
 import './styles/SendMessage.css'
+import Plus from "./styles/icons/add-plus.png"
 
 
-// const style = {
-//   form: `h-14 w-full max-w-[728px]  flex text-xl absolute bottom-0`,
-//   input: `w-full text-xl p-3 bg-gray-900 text-white outline-none border-none`,
-//   button: `bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded`,
-//   renderSuggestions: `w-full text-xl p-3 bg-gray-900 text-white outline-none border-none`,
-// };
-
-// fixed rid, uid
 
 export default class SendMessage extends React.Component {
   constructor(props) {
@@ -43,7 +36,9 @@ export default class SendMessage extends React.Component {
     if (value.length > 0) {
       const regex = new RegExp(`^${value}`, 'i');
       suggestions = this.items.sort().filter(v => regex.test(v));
+      
     }
+
     this.setState(() => ({ suggestions, text: value, enableSend: false }));
 
   }
@@ -84,24 +79,37 @@ export default class SendMessage extends React.Component {
     }
     return (
 
-      <ul className='song-suggestions-container'>
-        {suggestions.map((item) => 
+      // <ul className='song-suggestions-container'>
+      //   {suggestions.map((item) => 
         
-        <li className='song-line' onClick={() => this.suggestionSelected(item)}>
-          <div>
-            <div className='song-name'><p>{this.splitSongArtist(item).songName}</p></div>
-            <div className='artist-name'><p>{this.splitSongArtist(item).artistName}</p></div>
+      //   <li className='song-line' onClick={() => this.suggestionSelected(item)}>
+      //     <div>
+      //       <div className='song-name'><p>{this.splitSongArtist(item).songName}</p></div>
+      //       <div className='artist-name'><p>{this.splitSongArtist(item).artistName}</p></div>
             
+      //     </div>
+      //     <div>
+      //       {this.props.history &&
+      //     this.props.history.some((message, index)=>this.handleHistory(message, index, item)) && <p>played {(this.props.history.length) - (this.index)} songs ago</p>}
+      //     </div>
+      //     <div>
+      //       {this.props.messages.some(message=> message.text === item) && <p>song is about to be played...</p>}
+      //     </div>
+      //     </li>)}
+      // </ul>
+      
+      suggestions.map((item)=> 
+        <div className="suggestion-line-div">
+          <div className="suggestion-add-song-div">
+            <button className="suggestion-add-song-button"><img className="suggestion-add-song-icon" src={Plus} alt="" /></button>
+            <div className="suggestion-was-before-div">{this.props.messages.some(message=> message.text === item) && <p>song is about to be played...</p> || this.props.history && this.props.history.some((message, index)=>this.handleHistory(message, index, item)) &&  <p className="suggestion-was-before-p">נוגן לפני כמה שירים</p>}  </div>
           </div>
-          <div>
-            {this.props.history &&
-          this.props.history.some((message, index)=>this.handleHistory(message, index, item)) && <p>played {(this.props.history.length) - (this.index)} songs ago</p>}
+          <div className="suggestion-song-info-div">
+            <div className="suggestion-song-name-div"><h6 className="suggestion-song-name-h6">{this.splitSongArtist(item).songName}</h6></div>
+            <div className="suggestion-author-name-div"><p className="suggestion-author-name-p">{this.splitSongArtist(item).artistName}</p></div>
           </div>
-          <div>
-            {this.props.messages.some(message=> message.text === item) && <p>song is about to be played...</p>}
-          </div>
-          </li>)}
-      </ul>
+        </div>
+      )
   
     )
 

@@ -14,6 +14,8 @@ import {
 import { db } from "../firebase";
 import Song from './Song';
 import './styles/History.css'
+import TrashBin from "./styles/icons/trash-bin.png"
+
 
 
 
@@ -78,28 +80,54 @@ function History(props) {
   const tryFunc = () => {
     history.map((message)=>{console.log(message.text);})
   }
+
+  const getSongName = (item) => {
+    
+    const array = item.split(" - ");
+    return array[0]
+  }
+
+    const getArtistName = (item) => {
+    
+    const array = item.split(" - ");
+    return array[1]
+  }
     
     
     return (
-      <div>
-        <div>
-          <h1>History:</h1>
-          <button onClick={()=>cleanAll()}>Clean All History</button>
-          {/* length cannot be less than 1 */}
-           {(history.length > 1) ? 
-           history.map((message) => (
-              <div>
-                {props.amIAdmin && <img onClick={()=>handleButtonX(message)} className='x-icon' src="https://uxwing.com/wp-content/themes/uxwing/download/checkmark-cross/red-x-icon.png" alt="" />}
-                <p>{message.text}</p>
-              </div>
+      // <div>
+      //   <div>
+      //     <h1>History:</h1>
+      //     <button onClick={()=>cleanAll()}>Clean All History</button>
+      //     {/* length cannot be less than 1 */}
+      //      {(history.length > 1) ? 
+      //      history.map((message) => (
+      //         <div>
+      //           {props.amIAdmin && <img onClick={()=>handleButtonX(message)} className='x-icon' src="https://uxwing.com/wp-content/themes/uxwing/download/checkmark-cross/red-x-icon.png" alt="" />}
+      //           <p>{message.text}</p>
+      //         </div>
 
-          )) :
-          <p>no history available</p>
-            }
+      //     )) :
+      //     <p>no history available</p>
+      //       }
           
-        </div>
-        <button onClick={tryFunc}>tryfunc</button>
-      </div>
+      //   </div>
+      //   <button onClick={tryFunc}>tryfunc</button>
+      // </div>
+
+
+      history.map((message)=>{
+        return (        
+        <div className="history-song-div">
+          <div className="trash-bin-icon-div"><img className="trash-bin-icon" src={TrashBin} alt="" /></div>
+          <div className="history-song-info-div">
+            <div className="history-song-header-div"><p className="song-header-p">{getSongName(message.text)}</p></div>
+            <div className="history-song-author-div"><p className="song-author-p">{getArtistName(message.text)}</p></div>
+          </div>
+        </div>)
+        }
+      )
+      
 
     )
 }
