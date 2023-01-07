@@ -15,59 +15,6 @@ input::-webkit-inner-spin-button {
   ;
 }
 
-.active-rooms-header {
-  font-family: 'NarkisBlockMF';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 120%;
-
-  /* display: flex; */
-  align-items: center;
-  text-align: right;
-
-  margin-top: 30px;
-  margin-bottom: 30px;
-}
-
-.search-room-div {}
-
-.search-room-box {
-  background: #F5F5F5;
-  direction: rtl;
-  height: 56px;
-  width: 460px;
-  flex-direction: row;
-  align-items: center;
-  padding: 0px 20px;
-  gap: 12px;
-  font-family: 'NarkisBlockMF';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 140%;
-  border-radius: 12px;
-}
-
-.search-room-box:focus {
-  background-color: #dee6ee;
-  direction: rtl;
-  height: 56px;
-  width: 460px;
-  flex-direction: row;
-  align-items: center;
-  padding: 0px 20px;
-  gap: 12px;
-  font-family: 'NarkisBlockMF';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 140%;
-  border: 1px solid #246BFD;
-  border-radius: 12px;
-}
-
-
 
 /* non found rooms */
 

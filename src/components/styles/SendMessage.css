@@ -15,8 +15,7 @@
   flex: none;
   order: 0;
   align-self: stretch;
-  flex-grow: 0;
-  
+  flex-grow: 0;  
 }
 
 .search-song-box:focus{
@@ -31,4 +30,17 @@
   margin-top: 50px;
   position: absolute;
   justify-content: space-between;
+}
+
+.search-song-form{
+  position: relative;
+  z-index: 1;
+}
+
+.suggestion-hide-everything{
+    min-height: 500px;
+    /* outline: 1px solid purple; */
+    background: #FFFFFF;
+    display: flex;
+    justify-content: space-between;
 }

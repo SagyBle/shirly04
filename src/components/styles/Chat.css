@@ -45,8 +45,14 @@
 
 .choose-songs-or-history-div{
   height: 80px;
-  display: block;
+  display: flex;
   margin-top: 20px;
+}
+
+.choose-songs-or-history-buttons{
+  width: fit-content;
+  margin: auto;
+  
 }
 
 .button-history{
@@ -109,25 +115,26 @@
 }
 
 .number-of-likes{
-  padding-bottom: 10px;
-  background-color:#9E9E9E;
-  padding-top: 15px;
   display: inline-block;
-  
+  margin-bottom: 10px;  
 }
 
 .trash-bin-icon{
   width: 30px;
   height: 30px;
   margin-top: 40px;
+  cursor: pointer;
 }
 
 .number-of-likes-p{
   width: fit-content;
   height: fit-content;
-  background-color: blue;
   margin-bottom: 10px;
   margin: 0px 0px 0px 0px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 100;
+  font-size: 15px;
+  color:#616161;
   
 }
 
@@ -139,6 +146,36 @@
   justify-content: space-between;
   margin-right: 25px;
   margin-bottom: 0px;
+}
+
+.move-next-div{
+  
+  display: flex;
+  width: 460px;
+  height: 60px;
+  margin: auto;
+  margin-top: 7px;
+  margin-bottom: 20px;
+  border-radius: 20px;
+  justify-content: space-between;
+  background: #FFFFFF;
+  background-color: rgba(153, 205, 50, 0.57);
+  opacity: 0.7;
+}
+
+.move-next-button{
+  align-self: center;
+  margin: auto;
+  width: 460px;
+  height: 60px;
+  border-radius: 20px;
+  color: #424242;
+
+}
+
+.move-next-button:hover{
+  background-color: rgba(153, 205, 50, 0.812);
+  color: black;
 }
 
 
@@ -320,10 +357,11 @@
  }
 
 
- .logo-arrow-div{
+ /* .logo-arrow-div{
   display: flex;
   height: 136px;
   direction: ltr;
+  background-color: tomato;
  }
 
  .space-logo-div{
@@ -334,8 +372,6 @@
   width: 30px;
  }
 
- .logo-img-div{
-width: 350x; }
 
 .logo-img{
   height: 300px;
@@ -346,6 +382,25 @@ width: 350x; }
 .right-arrow-img{
   width: 30px;
   float: right;
+} */
+.logo-arrow-div{
+  display: flex;
+  justify-content: space-between;
+  height: 125px;
+  direction: rtl;
+  /* background-color: tomato; */
+ }
+
+.logo-img-div{
+  /* background-color: violet; */
+  margin-left: 10px;
+  width: 180px;
+  height: 80px;
+  margin-right: 30px;
+  margin-top: 12px;
+}
+
+.logo-img{
 }
 
 .lyrics-author-song-header-div{
@@ -379,11 +434,7 @@ width: 350x; }
   color: #212121;
   padding-top: 15px;
 }
-.lyrics-main-div{
-  display: flex;
-  flex-direction: row-reverse;
-  background-color: #212121;
-}
+
 
 .artist_lyrics_text{
   direction: rtl;
@@ -508,4 +559,21 @@ width: 350x; }
   background-color: white;
 }
 
+.user-greetings-div{
+  width: fit-content;
+  display: flex;
+  margin-left: 20px;
+}
 
+.hello-username-p{
+  font-weight: 100;
+  font-size: 14px;
+  height: fit-content;
+  margin-top: 38px;
+  color:#616161;
+  
+}
+
+.admin-notadmin-p{
+  padding-right: 4px;
+}

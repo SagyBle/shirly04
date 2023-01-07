@@ -92,6 +92,8 @@
     left: 0px;
     top: 0px;
     border-radius: 20px 20px 0px 0px;
+    display: flex;
+    justify-content: space-between;
 
 
     background-color: #E0E0E0;;
@@ -179,6 +181,21 @@
     display: flex;
     align-items: right;
     justify-content: right;
+  }
+
+  .lock-icon{
+    height: 30px;
+    width: auto;
+  }
+
+  .room-header-div{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .lock-icon-div{
+    margin-right: 25px;
+    margin-top: 23px;
   }
 
 

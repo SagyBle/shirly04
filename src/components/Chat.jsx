@@ -39,6 +39,8 @@ import Logo from "./styles/images/Logo.png"
 import Heart from "./styles/icons/heart.png"
 import RedHeart from "./styles/icons/heart-red.png"
 import Plus from "./styles/icons/add-plus.png"
+import SongLyrics from "./SongLyrics";
+import SongInfo from "./SongInfo";
 
 
 
@@ -111,16 +113,6 @@ const Chat = (props) => {
   };
 
 
-  // // toggle up showLyrics field
-  // const toggleUpShowLyrics = () => {
-  //   updateDoc(doc(db, `rooms/room${rid}`), {showLyrics: true});
-  // };
-
-  // // toggle down showLyrics field
-  // const toggleDownShowLyrics = () => {
-  //   updateDoc(doc(db, `rooms/room${rid}`), {showLyrics: false});
-  // };
-
    // toggle up addRequests field
   const toggleUpAddRequests = () => {
     updateDoc(doc(db, `rooms/room${rid}`), {addRequests: true});
@@ -130,16 +122,6 @@ const Chat = (props) => {
   const toggleDownAddRequests = () => {
     updateDoc(doc(db, `rooms/room${rid}`), {addRequests: false});
   };
-
-  //  // toggle up enterUsers field
-  // const toggleUpEnterUsers = () => {
-  //   updateDoc(doc(db, `rooms/room${rid}`), {enterUsers: true});
-  // };
-
-  // // toggle down enterUsers field
-  // const toggleDownEnterUsers = () => {
-  //   updateDoc(doc(db, `rooms/room${rid}`), {enterUsers: false});
-  // };
 
     // toggle up isRepeatAllowed field
   const toggleUpIsRepeatAllowed = () => {
@@ -235,25 +217,31 @@ const Chat = (props) => {
     console.log("display setting: " + displaySettings);
   }
 
-  let heart = false;
+  let heart = true;
+
+  
+  const getSongName = (item) => {
+    
+    const array = item.split(" - ");
+    return array[0]
+  }
+
+  const getArtistName = (item) => {
+    
+    const array = item.split(" - ");
+    return array[1]
+  }
 
   
 
   return (
     <>
-    <div>
-        <button
-        // className={}
-        onClick={() => {
-          navigate("/");
-        }}
-      >
-        Home
-      </button>
+    {/* <div>
+      <button onClick={() => {navigate("/")}}><img src={Logo}/></button>
       {props.isLoading && <Loading/>}
 
       <p>Hi, {user.displayName}</p>
-      {amIAdmin ? <p>Logged in as an Admin</p> : <p>Logged in as <a href=""></a> User</p>}
+      {amIAdmin ? <p>Logged in as an Admin</p> : <p>Logged in as a User</p>}
       {amIAdmin ? <button onClick={adminToUser}>Become a User</button> : null} 
       <div>
         <h1>Room Name: {roomName}</h1>
@@ -312,7 +300,10 @@ const Chat = (props) => {
         <SendWhatsapp rid={rid} />
       </div>
       <History history={history} setHistory={setHistory} amIAdmin={amIAdmin} rid={rid}/>
-      </div> 
+      </div>  */}
+
+
+      {/* !!!current version!!! */}
 
       <div className="container-div">
         
@@ -321,35 +312,37 @@ const Chat = (props) => {
 
           <div className="search-song-to-add-sector">
             <div className="search-song-div">
-              <SendMessage messages={messages} history={history} tryHis={tryHis} rid={rid} />
-              {isTyping? <div> typing...</div> : null}
+              <SendMessage messages={messages} history={history} tryHis={tryHis} rid={rid} addRequests={addRequests} />
+              {/* {isTyping? <div> typing...</div> : null} */}
             <div className="drop-down"></div></div>
           </div>
           {/* strart */}
           {!isTyping ? 
           <div>
             <div className="choose-songs-or-history-div">
-              <button onClick={()=>setDisplayNextSongs(false)} className={displayNextSongs? "button-history" : "button-history-active" }>היסטוריית החדר</button>
-              <button onClick={()=>setDisplayNextSongs(true)} className={displayNextSongs? "button-history-active" : "button-history"}>השירים הבאים</button>
+              <div className="choose-songs-or-history-buttons">
+                <button onClick={()=>setDisplayNextSongs(false)} className={displayNextSongs? "button-history" : "button-history-active" }>היסטוריית החדר</button>
+                <button onClick={()=>setDisplayNextSongs(true)} className={displayNextSongs? "button-history-active" : "button-history"}>השירים הבאים</button>
+              </div>
+              
             </div>
+            {amIAdmin && <div className="move-next-div">
+              {amIAdmin && showLyrics && <button className="move-next-button" onClick={() => moveNext()} >
+                  עבור לשיר הבא
+                </button>}
+            </div>}
             <div className="main-left-side"> 
               {displayNextSongs? 
               // next songs div
               <div className="room-history-div">
+                {/* {messages &&
+                  messages.map((message) => ) */}
+
+                  {messages && messages.map((message)=>
+                    <Message key={message.id} message={message} rid={rid}/>
+                  )}
 
 
-                <div className="history-song-div">
-                  <div>
-                    <div className="trash-bin-icon-div"><img className="trash-bin-icon" src={TrashBin} alt="" /></div>
-                    <div className="trash-bin-icon-div"><img className="trash-bin-icon" src={heart? RedHeart : Heart} alt="" /></div>
-                    <div className="trash-bin-icon-div number-of-likes"><p className="number-of-likes-p">1</p></div>
-                  </div>
-                  
-                  <div className="history-song-info-div">
-                    <div className="history-song-header-div"><p className="song-header-p">קרן שמש</p></div>
-                    <div className="history-song-author-div"><p className="song-author-p">בניה ברבי</p></div>
-                  </div>
-                </div>
 
 
               </div> 
@@ -368,51 +361,27 @@ const Chat = (props) => {
           {/* start2 */}
           <div className="serach-songs-suggestions-div">
 
-            
-
-            {/* <div className="suggestion-line-div">
-              <div className="suggestion-add-song-div">
-                <button className="suggestion-add-song-button"><img className="suggestion-add-song-icon" src={Plus} alt="" /></button>
-                <div className="suggestion-was-before-div"><p className="suggestion-was-before-p">נוגן לפני 3 שירים</p></div>
-              </div>
-              <div className="suggestion-song-info-div">
-                <div className="suggestion-song-name-div"><h6 className="suggestion-song-name-h6">אהבה קטנה</h6></div>
-                <div className="suggestion-author-name-div"><p className="suggestion-author-name-p">שירי מימון</p></div>
-              </div>
-            </div>
-
-            <div className="suggestion-line-div">
-              <div className="suggestion-add-song-div">
-                <button className="suggestion-add-song-button"><img className="suggestion-add-song-icon" src={Plus} alt="" /></button>
-                <div className="suggestion-was-before-div"><p className="suggestion-was-before-p">נוגן לפני 3 שירים</p></div>
-              </div>
-              <div className="suggestion-song-info-div">
-                <div className="suggestion-song-name-div"><h6 className="suggestion-song-name-h6">אהבה קטנה</h6></div>
-                <div className="suggestion-author-name-div"><p className="suggestion-author-name-p">שירי מימון</p></div>
-              </div>
-            </div> */}
-
-
           </div>
           {/* end2 */}
 
-          {displaySettings? 
+          {displaySettings?
+           
           <div className="room-setting-div-open">
             <div className="setting-info-header-open">
               <div className="room-header-open-div">
                 <div className="open-setting-div"><button onClick={()=>setDisplaySettings(!displaySettings)} className="open-setting-button">סגור</button></div>
-                <div className="room-header-div"><h4 className="room-header-h4"> החדר של שגיא</h4></div>
+                <div className="room-header-div"><h4 className="room-header-h4">{roomName}</h4></div>
               </div>
               <div className="room-desc-open-div">
                 <div className="order-the-right-side"></div>
-                <p className="room-desc-open-p">מפגש חברים בית קפה ״שמיים גדול״</p></div>
+                <p className="room-desc-open-p">{roomDescription}</p></div>
               
               <div className="setting-line-div ">
                 <div className="room-menager-profile-pic-div">
                   <img className="room-menager-profile-pic-img" src={Person} alt="" />
                 </div>
                 <div className="room-setting-toggle-header">
-                  <p className="room-setting-toggle-header-p"> 19/20 משתמשים בחדר</p>
+                  <p className="room-setting-toggle-header-p">{users.length}/{maxParticipantsQuantity} משתמשים בחדר</p>
                 </div>
               </div>
 
@@ -455,7 +424,7 @@ const Chat = (props) => {
           :
           <div className="room-setting-div">
             <div className="open-setting-div"><button onClick={()=>setDisplaySettings(!displaySettings)} className="open-setting-button">פתח הגדרות</button></div>
-            <div className="room-header-div"><h4 className="room-header-h4"> החדר של שגיא</h4></div>
+            <div className="room-header-div"><h4 className="room-header-h4">{roomName}</h4></div>
           </div>}
             
 
@@ -465,80 +434,25 @@ const Chat = (props) => {
 
         <div className="right-side">
 
-          <div className="logo-arrow-div coral"></div>
+          <div className="logo-arrow-div">
+            <div className="logo-img-div">
+              <button onClick={() => {navigate("/")}}><img className="logo-img" src={Logo}/></button>
+            </div>
+            <div className="user-greetings-div">
+              <p className="hello-username-p">שלום {user.displayName} ,</p>
+              {amIAdmin ? <p className="hello-username-p admin-notadmin-p">אתה מחובר כאדמין.</p> : <p className="admin-notadmin-p">אתה מחובר כמשתמש</p>}  
+            </div>
+          </div>
 
 
 
           <div className="lyrics-author-song-header-div">
-            <div className="song-header-div">
-              <h1 className="song-header-h1">קצת אהבה לא תזיק</h1>
-            </div>
-            <div className="author-header-div">
-              <h5 className="author-header-h5">אלון עדר  / </h5>
-            </div>
             
-
-            
+            {showLyrics ? <SongLyrics/> : <p>הצגת מילות השיר הושהתה על ידי מנהל החדר.</p>}
           </div>
-          {/* <div className="lyrics-main-div">
-            <span itemprop="Lyrics" class="artist_lyrics_text">אל תלכי,
-            <br/>קרן שמש 
-            <br/>לא נגמר לנו היום. 
-            <br/>למה את, מסתתרת 
-            <br/>עננים בכל מקום.
-            <br/>
-            <br/>אל תבכי, כמו הגשם
-            <br/>לא חבל על הדמעות.
-            <br/>יד חמה, מבקשת 
-            <br/>לחבק אותך שעות.
-            <br/>
-            <br/>אשים שירים שאת אוהבת,
-            <br/>אתן לך יום להירגע.
-            <br/>אני נגנב שאת צוחקת 
-            <br/>ככה אליי.
-            <br/>תגידי מה את מבקשת 
-            <br/>שלא יהיה לי שום תירוץ.
-            <br/>כשאין מילים את מתרגשת 
-            <br/>ככה אליי.
-            <br/>
-            <br/>תחייכי,
-            <br/>זה יפה לך
-            <br/>זה עושה לי את היום.
-            <br/>אם פתאום את נרדמת 
-            <br/>תחייכי גם בחלום.
-            <br/>
-            <br/>מטוסים בשמיים,
-            <br/>אנשים על רכבות.
-            <br/>אל תבכי, קרן שמש
-            <br/>זה הזמן שלך לחיות.
-            <br/>
-            <br/>אשים שירים שאת אוהבת 
-            <br/>אתן לך יום להירגע 
-            <br/>אני נגנב כשאת צוחקת 
-            <br/>ככה אליי.
-            <br/>תגידי מה את מבקשת,
-            <br/>שלא יהיה לי שום תירוץ.
-            <br/>כשאין מילים את מתרגשת
-            <br/>ככה אליי.
-            <br/>
-            <br/>אל תבכי, קרן שמש,
-            <br/>קחי לך בית אחרון.
-            <br/>איך תמיד את אומרת 
-            <br/>ניפגש עם אור ראשון.
-            <br/>
-            <br/>אשים שירים שאת אוהבת,
-            <br/>אתן לך יום להירגע.
-            <br/>אני נגנב שאת צוחקת,
-            <br/>ככה אליי.
-            <br/>
-            <br/>תגידי מה את מבקשת,
-            <br/>שלא יהיה לי שום תירוץ.
-            <br/>כשאין מילים את מתרגשת 
-            <br/>ככה אליי.</span>
-                      </div> */}
-                    </div>
+         </div>
                     
-                  </div>
+      </div>
 
 
 

@@ -15,6 +15,7 @@ import { useState } from "react";
 import JoinRoom from "./JoinRoom";
 
 import './styles/Room.css'
+import LockedIcon from './styles/icons/locked.png'
 
 
 function Room(props) {
@@ -73,17 +74,20 @@ function Room(props) {
                 </div>
               )
             })}
-
+            
             <div className="hidden-avatars">
               +10
             </div>
+          </div>
+          <div className="lock-icon-div">
+            {isEntranceAllowed && <img className="lock-icon" src={LockedIcon} alt="" />}
           </div>
         </div>
         {/* 1end users images */}
 
         {/* 1start room name and description*/}
         <div className="room-headers">
-            {!isEntranceAllowed && <p style={{ color: "red" }}>LOCKED</p>}
+            
             <div className="room-name">
               <h5 className="room-name-letters">{props.room.roomName}</h5>
             </div>
@@ -98,23 +102,6 @@ function Room(props) {
             
         </div>
         {/* 1end room time */}
-
-        {/* 1start capacity */}
-{/*         
-        <div className="room-curr-situation">
-          <div className="room-capacity">
-              <p className="room-capacity-letters">{users.length} / {props.room.roomMaxParticipantsQuantity}</p>
-          </div>
-          <div className="join-now-button">
-            <JoinRoom setIsLoading={props.setIsLoading} room={props.room} />
-          </div>
-          <div className="room-playing-now">
-            <p className="room-playing-now-letters">{props.room.currPlayingNow}</p>
-          </div>
-        </div> */}
-
-        {/* 1end capcity */}
-
 
         {/* try 1start capacity */}
         

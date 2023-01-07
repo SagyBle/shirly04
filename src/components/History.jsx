@@ -87,7 +87,7 @@ function History(props) {
     return array[0]
   }
 
-    const getArtistName = (item) => {
+  const getArtistName = (item) => {
     
     const array = item.split(" - ");
     return array[1]
@@ -119,7 +119,7 @@ function History(props) {
       history.map((message)=>{
         return (        
         <div className="history-song-div">
-          <div className="trash-bin-icon-div"><img className="trash-bin-icon" src={TrashBin} alt="" /></div>
+          <div className="trash-bin-icon-div"><img onClick={()=>handleButtonX(message)} className="trash-bin-icon" src={TrashBin} alt="" /></div>
           <div className="history-song-info-div">
             <div className="history-song-header-div"><p className="song-header-p">{getSongName(message.text)}</p></div>
             <div className="history-song-author-div"><p className="song-author-p">{getArtistName(message.text)}</p></div>

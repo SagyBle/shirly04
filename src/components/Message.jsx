@@ -6,6 +6,11 @@ import {doc, updateDoc, onSnapshot, increment} from 'firebase/firestore'
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 
+import TrashBin from "./styles/icons/trash-bin.png"
+import Heart from "./styles/icons/heart.png"
+import RedHeart from "./styles/icons/heart-red.png"
+
+
 
 const style = {
     message: `flex items-center shadow-xl m-4 py-2 rounded-tl-full rounded-tr-full`,
@@ -47,29 +52,54 @@ const Message = ({ message }) => {
         await updateDoc(docref, {likes: increment(likesToAdd)})
         setLiked(!liked);
       }
+
+  const splitSongArtist = (item) => {
+    const array = item.split(" - ");
+    return {songName: array[0], artistName: array[1]}
+  }
     
     return (
-      <div>
-        <div className={`${style.message} ${messageClass}`}>
-          {/* <p className={style.name}>{message.name}</p> */}
-          <p>{message.name}</p>
-          <p>{message.text}</p>
+      // <div>
+      //   <div className={`${style.message} ${messageClass}`}>
+      //     {/* <p className={style.name}>{message.name}</p> */}
+      //     <p>{message.name}</p>
+      //     <p>{message.text}</p>
 
-          {<p>&nbsp; {likes} likes</p>}
+      //     {<p>&nbsp; {likes} likes</p>}
 
-          {(message.uid === auth.currentUser.uid) && <DeleteMessage message={message}/>}
+      //     {(message.uid === auth.currentUser.uid) && <DeleteMessage message={message}/>}
 
-          {(message.uid !== auth.currentUser.uid) && !liked && 
-          <button className={style.buttonLike} onClick={()=>likeMessage(1)}>Like</button>}
+      //     {(message.uid !== auth.currentUser.uid) && !liked && 
+      //     <button className={style.buttonLike} onClick={()=>likeMessage(1)}>Like</button>}
 
-          {(message.uid !== auth.currentUser.uid) && liked && 
-          <button className={style.buttonLike} onClick={()=>likeMessage(-1)}>Unlike</button>}
+      //     {(message.uid !== auth.currentUser.uid) && liked && 
+      //     <button className={style.buttonLike} onClick={()=>likeMessage(-1)}>Unlike</button>}
           
           
 
-        </div>
+      //   </div>
         
-      </div>
+      // </div>
+
+                <div className="history-song-div">
+                  <div>
+                    {(message.uid === auth.currentUser.uid) && <DeleteMessage message={message}/>}
+                          {(message.uid !== auth.currentUser.uid) && !liked && 
+                          <div className="trash-bin-icon-div"><img onClick={()=>likeMessage(1)} className="trash-bin-icon" src={Heart} alt="" /></div>}
+
+                          {(message.uid !== auth.currentUser.uid) && liked && 
+                          <div className="trash-bin-icon-div"><img onClick={()=>likeMessage(-1)} className="trash-bin-icon" src={RedHeart} alt="" /></div>}
+                          
+                          {(likes > 0) && 
+                            <div className="trash-bin-icon-div number-of-likes"><p className="number-of-likes-p">{likes} likes</p></div>}
+
+                  </div>
+                  
+                  <div className="history-song-info-div">
+                    <div className="history-song-header-div"><p className="song-header-p"></p>{(splitSongArtist(message.text)).songName}</div>
+                    <div className="history-song-author-div"><p className="song-author-p">{(splitSongArtist(message.text)).artistName}</p></div>
+                  </div>
+                </div>
     );
   };
   

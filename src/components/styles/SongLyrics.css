@@ -1,0 +1,64 @@
+.lyrics-main-div{
+  /* display: flex; */
+  /* flex-direction: colum; */
+  /* background-color: #212121; */
+  margin-right: 30px;
+}
+
+.song-header-div{
+  display:block;
+  flex-direction: row-reverse;
+  margin-bottom: 20px;
+}
+
+.song-name-div{
+  display: inline-block;
+}
+
+.author-name-div{
+  display: inline-block;
+}
+
+.song-lyrics-div{
+  min-height: 300px;
+}
+
+.lyrics-text{
+  direction: rtl;
+  font-family: 'NarkisBlockMF';
+font-style: normal;
+font-weight: 400;
+font-size: 18px;
+line-height: 140%;
+/* or 25px */
+
+display: flex;
+align-items: center;
+text-align: right;
+letter-spacing: 0.2px;
+
+/* Greyscale / 900 */
+
+color: #212121;
+
+}
+
+.song-name-h1{
+  font-family: 'NarkisBlockMF';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 110%;
+}
+
+.author-name-h5{
+  font-family: 'NarkisBlockMF';
+font-style: normal;
+font-weight: 400;
+font-size: 18px;
+line-height: 140%;
+
+letter-spacing: 0.2px;
+color: #212121;
+margin-right: 12px;
+}

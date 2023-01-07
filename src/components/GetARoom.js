@@ -28,6 +28,8 @@ import Toggle from "./Toggle";
 import ToggleBoolean from "./ToggleBoolean";
 import DialogCreateRoom from "./DialogCreateRoom";
 
+import Logo from "./styles/images/Logo.png"
+
 
 
 function GetARoom(props) {
@@ -310,13 +312,21 @@ function GetARoom(props) {
             {/* 2start search room */}
             <div className="d-flex justify-content-center">
               <div className="search-room-div">
-              <input
-              className="search-room-box"
-              type="text"
-              placeholder="חיפוש"
-              onChange={(e) => setQueryRoomName(e.target.value) }>
-              </input>
-            </div>
+                {/* <input
+                className="search-room-box"
+                type="text"
+                placeholder="חיפוש"
+                onChange={(e) => setQueryRoomName(e.target.value) }
+                >
+                </input> */}
+
+              
+                <input
+                  type="text" 
+                  className="search-room-box"
+                  placeholder="חיפוש"
+                  onChange={(e)=> setQueryRoomName(e.target.value)}/>
+              </div>
             </div>
             {/* 2end search room */}
 
@@ -328,6 +338,7 @@ function GetARoom(props) {
 
             {/* 2start list of rooms  */}
             <div>
+              
               <ul>
                 {rooms ?
                   rooms.filter((room)=>
@@ -349,15 +360,15 @@ function GetARoom(props) {
                     ||
                     room.roomNumber.toString().includes(queryRoomName.toLocaleLowerCase()))
                     ).length === 0 ?
-                    <div>
-                      <div className="container">
+                    // <div className="not-found-room-div-div">
+                      <div className="not-found-room-div">
                           <div className="not-found-room">
                             <h4>לא נמצאו תוצאות לחיפוש זה</h4>
                           </div>
                           <div className="circle">
                             <div className="inner-circle"></div>
-                        </div>
-                      </div>
+                          </div>
+                      {/* </div> */}
                     </div>
                     : null}
             </div>
@@ -374,28 +385,34 @@ function GetARoom(props) {
                 
         {/* start col */}
         <div className="col">
-              <div className="row">
-                <div className="col">
-                  <div className="logo">
-                    <h4>לוגו</h4>
+          <div className="row">
+            <div className="col">
+              <div className="logo">
+                <div className="logo-arrow-div">
+                  <div className="logo-img-div">
+                    <button onClick={() => {navigate("/")}}><img className="logo-img" src={Logo}/></button>
+                  </div>
+                  <div className="user-greetings-div">
+                    <p className="hello-username-p">שלום {user.displayName}</p>
                   </div>
                 </div>
               </div>
-              <div className="row">
-                <div className="col">
-                  <div className=" break"></div>
-                </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col">
+              <div className="break">  
               </div>
-              <div className="row">
-                <div className="col-3">
-                  
-                </div>
-                <div className="col-9">
-                  <h1 className="main-header">הגיע הזמן להצטרף לחגיגה בחינם וזמין לכולם</h1>
-                  <h2 className="sub-header">הנדסנו מחדש את השירות שבנינו לפגישות עסקיות מאובטחות, כדי להפוך אותו בחינם וזמין לכולם.</h2>
-
-                </div>
-              </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-3">
+            </div>
+            <div className="col-9">
+              <h1 className="main-header">הגיע הזמן להינות יותר מערבי הנגינה שלכם</h1>
+              <h2 className="sub-header">הנדסנו מחדש את הדרך שלכם לנגן ולשיר עם החברים. הצטרפו לאותו החדר ונגנו ללא דאגות.</h2>
+            </div>
+          </div>
               <div className="row">
 
                 <div className="col-9 offset-3">
