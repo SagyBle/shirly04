@@ -39,6 +39,14 @@ input::-webkit-inner-spin-button {
     margin-top: 30px;
     margin-right: 40px;
     margin-bottom: 30px;
+ 
+}
+
+.list-of-rooms{
+  padding-top: 20px;
+margin-right: -8px;
+  max-height: 700px;
+  overflow: auto;
 }
 
 .search-room-div{
@@ -60,7 +68,7 @@ input::-webkit-inner-spin-button {
   border-radius: 12px;
   margin-top: 40px;
   height: 56px;
-  /* width: 460px;  */
+  width: 460px; 
 }
 
 
@@ -137,12 +145,12 @@ input::-webkit-inner-spin-button {
   background: #616161;
 }
 
-.create-room-button{
+.create-room-button-index{
   color: white;
   direction: rtl ;
   background: #246BFD;
   padding: 18px 16px;
-  width: 548px;
+  width: 420px;
   height: 55px;
   box-shadow: 4px 8px 24px rgba(36, 107, 253, 0.25);
   border-radius: 100px ;
@@ -151,14 +159,8 @@ input::-webkit-inner-spin-button {
   font-weight: 700;
   font-size: 16px;
   line-height: 140%;
-    /* or 22px */
-  
-    /* display: flex; */
-    /* align-items: center; */
-    /* text-align: center; */
-    /* letter-spacing: 0.2px; */
-    transition: 0.2s !important;
 
+    transition: 0.2s !important;
 }
 
 .create-room-button:hover {
