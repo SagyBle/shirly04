@@ -27,6 +27,7 @@ import FormDialog from "./FormDialog";
 import Toggle from "./Toggle";
 import ToggleBoolean from "./ToggleBoolean";
 import DialogCreateRoom from "./DialogCreateRoom";
+import LogOut from "./LogOut";
 
 import Logo from "./styles/images/Logo.png";
 
@@ -388,6 +389,7 @@ function GetARoom(props) {
                   </div>
                   <div className="user-greetings-div">
                     <p className="hello-username-p">שלום {user.displayName}</p>
+                    <LogOut />
                   </div>
                 </div>
               </div>

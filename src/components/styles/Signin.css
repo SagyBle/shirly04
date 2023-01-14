@@ -1,0 +1,145 @@
+
+.lets-start-card-div{
+  /* background-color:blue; */
+  height: 500px;
+  width: 450px;
+  margin: auto;
+  margin-top: 240px;
+}
+
+.header-div{
+  direction: rtl;
+  height: 53px;
+}
+
+.header-h1{
+  font-family: 'NarkisBlockMF';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 110%;
+  text-align: center;
+}
+
+.login-div{
+  
+  display: flex;
+}
+.login-button{
+  background-color:blueviolet;
+  margin: auto;
+  width: 380px;
+height: 60px;
+font-family: 'NarkisBlockMF';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 140%;
+/* or 22px */
+
+letter-spacing: 0.2px;
+
+/* Greyscale / 900 */
+
+color: #212121;
+
+background: #FFFFFF;
+
+border: 1px solid #EEEEEE;
+border-radius: 16px;
+direction: rtl;
+margin-top: 100px;
+}
+
+.button-text-google{
+  display: inline;
+  font-weight: 400;
+}
+
+.button-image-google{
+  display: inline;
+  width: 25px;
+  margin-left: 10px;
+}
+
+.or-line-div{
+  display: flex;
+}
+
+.vr-center{
+  /* border: solid 1px black; */
+  width:210px
+  
+}
+
+.explenation-card{
+  margin: auto;
+  display: block;
+  /* background-color: aqua; */
+  width: 380px;
+}
+.intro-image{
+  width: 370px;
+  
+}
+
+.intro-image-div{
+  margin-bottom: 90px;
+  display: flex;
+  justify-content: space-around;
+
+}
+
+.intro-headers-div{
+  /* display: flex;
+  justify-content: space-around; */
+}
+
+.flex-and-center{
+  display: flex;
+  justify-content: space-around;
+}
+
+.intro-small-header-p{
+  font-family: 'NarkisBlockMF';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 140%;
+/* or 22px */
+
+text-align: center;
+letter-spacing: 0.2px;
+
+/* Greyscale / 700 */
+
+color: #616161;
+}
+
+.dot {
+  height: 6px;
+  width: 6px;
+  background-color: rgb(237, 233, 233);
+  border-radius: 50%;
+  margin-left: 6px;
+  margin-right: 6px;
+  /* display: inline-block; */
+  
+}
+
+.dot-chosen{
+    background-color: #bbb;
+
+}
+
+.dots {
+  margin-top: 20px;
+  display: flex;
+  
+}
+
+.dots-container{
+  
+  display: flex;
+  justify-content: space-around;
+}

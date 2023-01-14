@@ -41,11 +41,7 @@ import Plus from "./styles/icons/add-plus.png";
 import SongLyrics from "./SongLyrics";
 import SongInfo from "./SongInfo";
 
-// const style = {
-//   main: `flex flex-col p-[10px]`,
-//   button: `bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded`,
-//   home: `bg-purple-100 hover:bg-purple-300 text-black  py-2 px-2 rounded`,
-// };
+import songs_temp_array from "../DataTemp/DataTemp";
 
 const Chat = (props) => {
   const [displaySettings, setDisplaySettings] = useState(false);
@@ -247,72 +243,6 @@ const Chat = (props) => {
 
   return (
     <>
-      {/* <div>
-      <button onClick={() => {navigate("/")}}><img src={Logo}/></button>
-      {props.isLoading && <Loading/>}
-
-      <p>Hi, {user.displayName}</p>
-      {amIAdmin ? <p>Logged in as an Admin</p> : <p>Logged in as a User</p>}
-      {amIAdmin ? <button onClick={adminToUser}>Become a User</button> : null} 
-      <div>
-        <h1>Room Name: {roomName}</h1>
-        <p>Room Description: {roomDescription}</p>
-        {amIAdmin ? <ChangeRoomName rid={id}/> : null}
-
-        <h2>Room Number: {id}</h2>
-        <p>Participants: {users.length}/{maxParticipantsQuantity}</p>
-        
-      </div>
-
-      
-
-      {amIAdmin? <div>
-        <p>תצוגת מילים</p>
-        <Toggle toggle={showLyrics} rid={rid} dataT={{showLyrics: true}} dataF={{showLyrics: false}}/>
-        <p>הוספת שירים</p>
-        <Toggle toggle={addRequests} rid={rid} dataT={{addRequests: true}} dataF={{addRequests: false}}/>
-        <p>הצטרפות לחדר</p>
-        <Toggle toggle={isEntranceAllowed} rid={rid} dataT={{isEntranceAllowed: true}} dataF={{isEntranceAllowed: false}}/>
-        <p>חזרה על שירים</p>
-        <Toggle toggle={isRepeatAllowed} rid={rid} dataT={{isRepeatAllowed: true}} dataF={{isRepeatAllowed: false}}/>
-  
-
-
-
-       </div> : null}
-      {showLyrics ? 
-        <div>
-          <p>playing now id: {currPlayingNow}</p>
-          <p>playing now name:</p>
-          <p>playing now lyrics:</p>
-          <p>playing as test: <PlayingTest/></p>
-        </div>:
-        <p>Lyrics are currently not displayed by admin.</p>}
-
-      {messages.length > 0 && <h2>Playing Next: {messages[0].text} </h2>}
-      <h3>Asked by: {askedBy}</h3>
-      {amIAdmin && showLyrics && <button onClick={() => moveNext()} >
-        Move Next!
-      </button>}
-      <h1>רשימת הבקשות</h1>
-      <main>
-        {messages &&
-          messages.map((message) => (
-            <Message key={message.id} message={message} rid={rid} />
-          ))}
-        <button onClick={()=>{tryFunction()}}>try chat</button>
-        {addRequests ? <SendMessage isTyping={isTyping} setIsTyping={setIsTyping} messages={messages} history={history} tryHis={tryHis} rid={rid} /> : <p>Adding song requests was disabled by admin.</p>}
-      </main>
-
-      <span ref={scroll}></span>
-      <ActiveUsers users={users} setUsers={setUsers} rid={rid} amIAdmin={amIAdmin} uid={uid}/>
-      <div>
-        <CopyLink rid={rid}/>
-        <SendWhatsapp rid={rid} />
-      </div>
-      <History history={history} setHistory={setHistory} amIAdmin={amIAdmin} rid={rid}/>
-      </div>  */}
-
       {/* !!!current version!!! */}
 
       <div className="container-div">
