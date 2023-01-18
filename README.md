@@ -1,10 +1,15 @@
+Hi! Thanks for coming to see Shirly's code
+Shirly is the app that organize your friends music jam sessions from end to end.
+Soon you'll be able to use it with full Functionality.
+
 Link to current version of Shirly:
 
 **https://shirly04.netlify.app/
 **
 
 Updates:
-We are working on connecting the chords and lyrics data base to the app.
+* Omer Yahalom amazing design is fully implemented!
+* We are working on connecting the chords and lyrics data base to the app.
 it's almost here!
 
 Big thanks to **Omer Yahalom, Yuval (Biluli) Cohen, Noam Marko and Tamir Blecher.ֿ**
