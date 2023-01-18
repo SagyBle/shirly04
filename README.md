@@ -1,4 +1,6 @@
-Hi! Thanks for coming to see Shirly's code
+Hi! 
+Thanks for coming to see Shirly's code.
+
 Shirly is the app that organize your friends music jam sessions from end to end.
 Soon you'll be able to use it with full Functionality.
 
@@ -11,6 +13,8 @@ Updates:
 * Omer Yahalom amazing design is fully implemented!
 * We are working on connecting the chords and lyrics data base to the app.
 it's almost here!
+
+Please send me any thought or idea about my project :)
 
 Big thanks to **Omer Yahalom, Yuval (Biluli) Cohen, Noam Marko and Tamir Blecher.ֿ**
 
