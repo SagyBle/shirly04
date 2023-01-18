@@ -48,7 +48,6 @@ Michrosoft Azure:
 
 Netlify:
 * https://www.youtube.com/watch?v=vEFJZ9rSSNM&t=12s&ab_channel=BrianMorrison
-* 
 
 Google Firebase:
 * https://www.youtube.com/watch?v=drF8HbnW87w&t=1911s&ab_channel=CodeCommerce
