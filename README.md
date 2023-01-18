@@ -15,7 +15,9 @@ Soon you'll be able to use it with full Functionality.
 * We are working on connecting the chords and lyrics data base to the app, massive thanks for Morel, Biluli and Marko.
 it's almost here!
 
-*Please send me any thought or idea about my project*
+*Please send me any ideas or thoughts that come to your mind while using the app.*
+You can message me in my [linkedIn](https://www.linkedin.com/in/sagyblecher/) or by [emailing me](blecher.sagy@gmail.com).
+
 ## Credits:
 #### Priceless help by  Omer Yahalom, Yuval (Biluli) Cohen, Noam Marko and Tamir (Morel) Blecher.
 
