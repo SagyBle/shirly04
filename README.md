@@ -3,7 +3,7 @@
 
 [Shirly](https://shirly04.netlify.app/) is the app that organize your friends music jam sessions from end to end.
 
-Soon you'll be able to use it with full Functionality.
+Soon you'll be able to use it with full functionality.
 
 ## Link to current version of Shirly:
 
@@ -53,3 +53,4 @@ Google Firebase:
 * https://www.youtube.com/watch?v=drF8HbnW87w&t=1911s&ab_channel=CodeCommerce
 
 
+Sagy Blecher 2023 Alexis Omega
