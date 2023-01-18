@@ -17,9 +17,9 @@ it's almost here!
 
 *Please send me any thought or idea about my project*
 ## Credits:
-Priceless help by **Omer Yahalom, Yuval (Biluli) Cohen, Noam Marko and Tamir (Morel) Blecher.ֿ**
+#### Priceless help by  Omer Yahalom, Yuval (Biluli) Cohen, Noam Marko and Tamir (Morel) Blecher.
 
-**Created and implemented by Sagy Blecher.**
+#### Created and implemented by Sagy Blecher
 
 ## Tools and frameworks:
 * Desinged using: React.js, css, bootstrap-css, Python, Selenium. 
