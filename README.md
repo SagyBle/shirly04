@@ -1,7 +1,7 @@
 Link to current version of Shirly:
 
-**shirly04.netlify.app**
-
+**https://shirly04.netlify.app/
+**
 Updates:
 We are working on connecting the chords and lyrics data base to the app.
 it's almost here!
