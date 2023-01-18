@@ -5,29 +5,29 @@
 
 Soon you'll be able to use it with full Functionality.
 
-### Link to current version of Shirly:
+## Link to current version of Shirly:
 
 # https://shirly04.netlify.app/
 
-### Updates:
+## Updates:
 * Omer Yahalom's amazing design is fully implemented!
 * The design came as [Figma file](https://www.figma.com/file/otWq5OmWek2T4rst5vmcRU/shirly-demo?node-id=0%3A1), and implemented in css.
 * We are working on connecting the chords and lyrics data base to the app, massive thanks for Morel, Biluli and Marko.
 it's almost here!
 
 *Please send me any thought or idea about my project*
-### Credits:
+## Credits:
 Priceless help by **Omer Yahalom, Yuval (Biluli) Cohen, Noam Marko and Tamir (Morel) Blecher.ֿ**
 
 **Created and implemented by Sagy Blecher.**
 
-### Tools and frameworks:
+## Tools and frameworks:
 Desinged using: React.js, css, bootstrap-css, Python, Selenium.
 Servers: Michrosoft Azure, Netlify, Google Firebase.
 
 
 
-### Mainly helpful realted Youtube tutorials:
+## Mainly helpful realted Youtube tutorials:
 
 React.js:
 https://www.youtube.com/watch?v=Dorf8i6lCuk&t=443s&ab_channel=Academind
