@@ -22,8 +22,8 @@ Priceless help by **Omer Yahalom, Yuval (Biluli) Cohen, Noam Marko and Tamir (Mo
 **Created and implemented by Sagy Blecher.**
 
 ## Tools and frameworks:
-Desinged using: React.js, css, bootstrap-css, Python, Selenium.
-Servers: Michrosoft Azure, Netlify, Google Firebase.
+* Desinged using: React.js, css, bootstrap-css, Python, Selenium. 
+* Servers: Michrosoft Azure, Netlify, Google Firebase.
 
 
 
