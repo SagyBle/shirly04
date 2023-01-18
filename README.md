@@ -42,8 +42,15 @@ css:
 * https://www.youtube.com/watch?v=G3e-cpL7ofc&t=17069s&ab_channel=SuperSimpleDev
 * https://www.youtube.com/watch?v=aQ2inFyLguo&ab_channel=BeforeSemicolon
 
-Google Firebase:
-* https://www.youtube.com/watch?v=drF8HbnW87w&t=1911s&ab_channel=CodeCommerce
 
 Michrosoft Azure:
 * https://www.youtube.com/watch?v=NKEFWyqJ5XA&ab_channel=freeCodeCamp.org
+
+Netlify:
+* https://www.youtube.com/watch?v=vEFJZ9rSSNM&t=12s&ab_channel=BrianMorrison
+* 
+
+Google Firebase:
+* https://www.youtube.com/watch?v=drF8HbnW87w&t=1911s&ab_channel=CodeCommerce
+
+
