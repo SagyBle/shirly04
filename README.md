@@ -1,16 +1,19 @@
 Link to current version of Shirly:
 
-shirly04.netlify.app
+**shirly04.netlify.app**
 
 Updates:
 We are working on connecting the chords and lyrics data base to the app.
 it's almost here!
 
-Created and implemented by Sagy Blecher.
-Big thanks to Omer Yahalom, Yuval (Biluli) Cohen, Noam Marko and Tamir Blecher.ֿ
+Big thanks to **Omer Yahalom, Yuval (Biluli) Cohen, Noam Marko and Tamir Blecher.ֿ**
+
+**Created and implemented by Sagy Blecher.**
 
 Desinged using: React.js, css, bootstrap-css, Python, Selenium.
 Servers: Michrosoft Azure, Netlify, Google Firebase.
+
+
 
 Extremely helpful Youtube tutorials:
 
