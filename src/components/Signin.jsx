@@ -5,8 +5,13 @@ import { auth } from "../firebase";
 import { GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
 import "./styles/Signin.css";
 import GoogleIcon from "./styles/icons/GoogleIcon.png";
+import IDCard from "./styles/icons/id-card.png";
 import Logo from "./styles/images/Logo.png";
-import PlayingGuitar from "./styles/images/playingguitar.jpg";
+import PlayingGuitar from "./styles/images/playingguitar.webp";
+import PlayingPiano from "./styles/images/pianogirl.webp";
+import PlayingBeach from "./styles/images/PlayingAtTheBeach.webp";
+import YahalomChen from "./styles/images/YahalomChen.webp";
+import { useState } from "react";
 
 const style = {
   wrapper: `flex justify-center`,
@@ -18,13 +23,15 @@ const googleSignIn = () => {
 };
 
 const Signin = () => {
+  const [imgIndex, setImageIndex] = useState(0);
+  const images = [PlayingGuitar, PlayingPiano, PlayingBeach, YahalomChen];
   return (
     <>
       <div className="container-div">
         <div className="left-side">
           <div className="explenation-card">
             <div className="intro-image-div">
-              <img className="intro-image" src={PlayingGuitar} alt="" />
+              <img className="intro-image" src={images[imgIndex]} alt="" />
             </div>
             <div className="intro-headers-div">
               <div className="flex-and-center">
@@ -38,9 +45,22 @@ const Signin = () => {
               </div>
               <div className="dots-container">
                 <div className="dots">
-                  <span class="dot dot-chosen"></span>
-                  <span class="dot"></span>
-                  <span class="dot"></span>
+                  <span
+                    onClick={() => setImageIndex(0)}
+                    className={imgIndex === 0 ? "dot dot-chosen" : "dot"}
+                  ></span>
+                  <span
+                    onClick={() => setImageIndex(1)}
+                    className={imgIndex === 1 ? "dot dot-chosen" : "dot"}
+                  ></span>
+                  <span
+                    onClick={() => setImageIndex(2)}
+                    className={imgIndex === 2 ? "dot dot-chosen" : "dot"}
+                  ></span>
+                  <span
+                    onClick={() => setImageIndex(3)}
+                    className={imgIndex === 3 ? "dot dot-chosen" : "dot"}
+                  ></span>
                 </div>
               </div>
             </div>

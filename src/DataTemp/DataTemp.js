@@ -36,37 +36,37 @@
 //   },
 // ];
 
-songs = [
-  {
-    name: "א - אומן א",
-  },
-  {
-    name: "ב - אומן ב",
-  },
-  {
-    name: "ג - אומן ג",
-  },
-  {
-    name: "ד - אומן ד",
-  },
-  {
-    name: "ה - אומן ה",
-  },
-  {
-    name: "ו - אומן ו",
-  },
-  {
-    name: "ז - אומן ז",
-  },
-];
+// songs = [
+//   {
+//     name: "א - אומן א",
+//   },
+//   {
+//     name: "ב - אומן ב",
+//   },
+//   {
+//     name: "ג - אומן ג",
+//   },
+//   {
+//     name: "ד - אומן ד",
+//   },
+//   {
+//     name: "ה - אומן ה",
+//   },
+//   {
+//     name: "ו - אומן ו",
+//   },
+//   {
+//     name: "ז - אומן ז",
+//   },
+// ];
 
-const data = [
-  { name: "a", lyrics: "aa aa aa aa" },
-  { name: "b" },
-  { name: "c" },
-  { name: "d" },
-  { name: "e" },
-];
-let target_array = [];
-data.map((element) => target_array.push(element.name));
-console.log(target_array);
+// const data = [
+//   { name: "a", lyrics: "aa aa aa aa" },
+//   { name: "b" },
+//   { name: "c" },
+//   { name: "d" },
+//   { name: "e" },
+// ];
+// let target_array = [];
+// data.map((element) => target_array.push(element.name));
+// console.log(target_array);

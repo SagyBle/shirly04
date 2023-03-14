@@ -1,4 +1,5 @@
 .search-song-box{
+  
   width: 460px;
   height: 56px;
   display: grid;
@@ -16,6 +17,7 @@
   order: 0;
   align-self: stretch;
   flex-grow: 0;  
+
 }
 
 .search-song-box:focus{

@@ -304,7 +304,10 @@
 }
 
 .in-setting{
-align-items:flex-end;}
+  align-items:flex-end;
+  padding-left: 40px;
+  padding-bottom: 10px;
+}
 
 
 .setting-line-div{

@@ -6,23 +6,17 @@ import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import "./styles/SendMessage.css";
 import Plus from "./styles/icons/add-plus.png";
 
-import songs from "../DataTemp/DataTemp";
+import { songs, getHeaders, getSongID } from "../data/preview.jsx";
 
 export default class SendMessage extends React.Component {
   constructor(props) {
     super(props);
     // Locate here all songs' titles.
-    // this.items = [
-    //   "אהבתיה - שלמה ארצי",
-    //   "אם הייתי יכול - חנן בן ארי",
-    //   "אור הירח - אביב גפן",
-    //   "בוא - עברי לידר",
-    //   "גן סגור - הכבש השישה עשר",
-    //   "דובשנייה - שחר סיאול ונורוז",
-    //   "הינך יפה רעייתי - עידן רייכל",
-    //   "ואולי - עברי לידר",
-    // ];
-    // this.items = song;
+
+    this.items = songs;
+
+    this.items = songs.map((elem) => `${elem.song_name} - ${elem.artist}`);
+
     this.state = {
       suggestions: [],
       text: "",
@@ -30,14 +24,17 @@ export default class SendMessage extends React.Component {
       index: "",
     };
   }
+
   onTextChange = (e) => {
-    const value = e.target.value;
+    let value = e.target.value;
+    console.log("this is value:");
+    console.log(value);
     let suggestions = [];
     if (value.length > 0) {
-      const regex = new RegExp(`^${value}`, "i");
+      // const regex = new RegExp(`^${value}`, "i");
+      const regex = new RegExp(`^${value}|\\s[a-z]*${value}`, "i");
       suggestions = this.items.sort().filter((v) => regex.test(v));
     }
-
     this.setState(() => ({ suggestions, text: value, enableSend: false }));
   };
 
@@ -89,9 +86,7 @@ export default class SendMessage extends React.Component {
                   {(this.props.messages.some(
                     (message) => message.text === item
                   ) && (
-                    <p className="suggestion-was-before-p">
-                      השיר עומד להתנגן בקרוב
-                    </p>
+                    <p className="suggestion-was-before-p">עומד להתנגן בקרוב</p>
                   )) ||
                     (this.props.history &&
                       this.props.history.some((message, index) =>

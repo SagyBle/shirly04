@@ -29,26 +29,26 @@
   background-color:blueviolet;
   margin: auto;
   width: 380px;
-height: 60px;
-font-family: 'NarkisBlockMF';
-font-style: normal;
-font-weight: 500;
-font-size: 16px;
-line-height: 140%;
-/* or 22px */
+  height: 60px;
+  font-family: 'NarkisBlockMF';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 140%;
+  letter-spacing: 0.2px;
+  color: #212121;
+  background: #FFFFFF;
+  border: 1px solid #EEEEEE;
+  border-radius: 16px;
+  direction: rtl;
+  margin-top: 100px;
+  
+}
 
-letter-spacing: 0.2px;
+.login-button:hover{
+  background-color: #eceaea;
+  border: 1px solid #cac9c9;
 
-/* Greyscale / 900 */
-
-color: #212121;
-
-background: #FFFFFF;
-
-border: 1px solid #EEEEEE;
-border-radius: 16px;
-direction: rtl;
-margin-top: 100px;
 }
 
 .button-text-google{
@@ -117,14 +117,14 @@ color: #616161;
 }
 
 .dot {
-  height: 6px;
-  width: 6px;
+  height: 9px;
+  width: 9px;
   background-color: rgb(237, 233, 233);
   border-radius: 50%;
   margin-left: 6px;
   margin-right: 6px;
   /* display: inline-block; */
-  
+  cursor: pointer;
 }
 
 .dot-chosen{
@@ -142,4 +142,13 @@ color: #616161;
   
   display: flex;
   justify-content: space-around;
+}
+
+/* .logo{
+  background-color: black;
+} */
+
+.right-side{
+  padding-right: 30px;
+  padding-top: 7px;
 }

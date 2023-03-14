@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@300;400;500;600;700&display=swap');
+
 .App {
   /* text-align: center; */
 }
@@ -11,4 +13,162 @@
   justify-content: center !important;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+*{
+  font-family: 'Noto Sans Hebrew', sans-serif !important;
+}
+
+.container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+    --bs-gutter-x: 0 !important;
+}
+
+.hello-username-p {
+    margin: 0 !important;
+}
+
+.user-greetings-div {
+    height: fit-content !important;
+    align-items: center !important;
+    gap: 8px;
+}
+
+.user-greetings-div button{
+    background: none;
+    padding: 0 !important;
+    height: fit-content;
+    font-size: 12px;
+    color: #777;
+}
+
+.logo-img-div {
+    margin-left: 0 !important;
+    width: 140px !important;
+    height: auto !important;
+    margin-right: 0 !important;
+    margin-top: 0 !important;
+}
+
+.logo-arrow-div {
+    display: flex !important;
+    justify-content: space-between !important;
+    height: fit-content !important;
+    align-items: center !important;
+    flex-direction: row !important;
+    direction: rtl !important;
+}
+
+.lock-icon-div {
+    margin: 0 !important;
+}
+
+.avatar-group {
+    display: flex;
+    margin: 0 !important;
+}
+
+.room-card-top {
+    height: auto !important;
+    width: 100%;
+    align-items: center;
+    padding: 20px;
+}
+
+.lock-icon {
+    height: 20px !important;
+}
+
+.avatar{
+  margin-top: 0 !important;
+}
+
+.room-capacity {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.room-capacity-letters{
+  margin: 0 !important;
+}
+
+.pink {
+    border-radius: 30px !important;
+    font-size: 14px !important;
+    width: 100px !important;
+    height: 32px !important;
+    margin: 0 !important;
+}
+
+.room-playing-now-letters{
+  margin: 0 !important
+}
+
+.hidden-avatars{
+  margin-top: 0 !important;
+}
+.room-card .row{
+  align-items: center;
+}
+
+.break {
+    min-height: 0;
+}
+
+.break, .small-break {
+    min-height: 0 !important;
+}
+
+.left-div{
+  width: fit-content !important;
+  padding: 0 24px;
+  height: 100vh;
+}
+
+.active-rooms-header {
+    margin-right: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.list-of-rooms{
+  margin-right: 0 !important;
+  max-height: 77vh;
+}
+
+ol, ul{
+  padding-left: 0 !important;
+}
+
+.logo, .main-header, .sub-header{
+  padding-right:0 !important
+}
+
+.h5, h5 {
+    font-size: 1rem !important;
+}
+
+.container-fluid .row .col{
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 0 24px;
+}
+
+.room-headers {
+    margin-right: 0 !important;
+}
+
+.room-playing-now-letters{
+  justify-content: flex-end !important;
+}
+
+.room-headers, .room-card .row{
+  padding: 0 12px;
+}
+
+.room-capacity {
+    position: inherit;
+    left: auto;
+    top: auto;
+    transform: none;
 }

@@ -69,7 +69,7 @@ function Room(props) {
                 );
               })}
               {users.length > 3 && (
-                <div className="hidden-avatars">{users.length - 3}</div>
+                <div className="hidden-avatars">+{users.length - 3}</div>
               )}
             </div>
             <div className="lock-icon-div">

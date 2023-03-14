@@ -361,9 +361,9 @@ const Chat = (props) => {
                         </div>
                       );
                     })}
-                    {users.length > 3 && (
+                    {/* {users.length > 3 && (
                       <div className="hidden-avatars">{users.length - 3}</div>
-                    )}
+                    )} */}
                   </div>
                   <div className="room-setting-toggle-header">
                     <p className="room-setting-toggle-header-p">
@@ -374,7 +374,6 @@ const Chat = (props) => {
 
                 <div className="setting-line-div ">
                   <div className="avatar-group in-setting">
-                    {}
                     {users
                       .filter((user) => user.isAdmin)
                       .map((user) => {
@@ -384,9 +383,9 @@ const Chat = (props) => {
                           </div>
                         );
                       })}
-                    {users.length > 3 && (
+                    {/* {users.length > 3 && (
                       <div className="hidden-avatars">{users.length - 3}</div>
-                    )}
+                    )} */}
                   </div>
 
                   <div className="room-setting-toggle-header">
@@ -479,7 +478,7 @@ const Chat = (props) => {
 
           <div className="lyrics-author-song-header-div">
             {showLyrics ? (
-              <SongLyrics />
+              <SongLyrics rid={rid} />
             ) : (
               <p>הצגת מילות השיר הושהתה על ידי מנהל החדר.</p>
             )}
