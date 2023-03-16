@@ -3,9 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { db } from "../firebase";
 import {
   doc,
-  setDoc,
-  getDoc,
-  serverTimestamp,
   onSnapshot,
   query,
   collection,
@@ -17,9 +14,9 @@ import JoinRoom from "./JoinRoom";
 import "./styles/Room.css";
 import LockedIcon from "./styles/icons/locked.png";
 
-function Room(props) {
-  const rid = props.room.roomNumber;
-  const uid = props.user.uid;
+function Room({ room, user, isLoading, setIsLoading }) {
+  const rid = room.roomNumber;
+  const uid = user.uid;
 
   const [users, setUsers] = useState([]);
 
@@ -55,7 +52,7 @@ function Room(props) {
 
   return (
     <li>
-      {props.room && (
+      {room && (
         // 0start total div
         <div className="room-card">
           {/* 1start users images*/}
@@ -83,12 +80,10 @@ function Room(props) {
           {/* 1start room name and description*/}
           <div className="room-headers">
             <div className="room-name">
-              <h5 className="room-name-letters">{props.room.roomName}</h5>
+              <h5 className="room-name-letters">{room.roomName}</h5>
             </div>
             <div className="room-description">
-              <p className="room-description-letters">
-                {props.room.roomDescription}
-              </p>
+              <p className="room-description-letters">{room.roomDescription}</p>
             </div>
           </div>
           {/* 1end room name and description */}
@@ -103,18 +98,18 @@ function Room(props) {
             <div className="col-4">
               <div className="room-capacity">
                 <p className="center room-capacity-letters">
-                  {users.length} / {props.room.roomMaxParticipantsQuantity}
+                  {users.length} / {room.roomMaxParticipantsQuantity}
                 </p>
               </div>
             </div>
             <div className="col-4">
               <div className="pink center">
-                <JoinRoom setIsLoading={props.setIsLoading} room={props.room} />
+                <JoinRoom setIsLoading={setIsLoading} room={room} />
               </div>
             </div>
             <div className="col-4">
               <div className="center room-playing-now-letters">
-                {props.room.currPlayingNow}
+                {room.currPlayingNow}
               </div>
             </div>
           </div>

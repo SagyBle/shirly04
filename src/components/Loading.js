@@ -9,7 +9,7 @@ function Loading() {
         <img className="logo-img logo-loading" src={Logo} />
       </div>
       <div className="center">
-        <div class="loader"></div>
+        <div className="loader"></div>
       </div>
     </div>
   );

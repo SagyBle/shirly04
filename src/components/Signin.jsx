@@ -90,6 +90,14 @@ const Signin = () => {
                 </div>
               </button>
             </div>
+            <div className="login-div">
+              <button className="login-button" onClick={googleSignIn}>
+                <div className="block">
+                  <img className="button-image-google" src={IDCard} alt="" />
+                  <p className="button-text-google">התחברו בדרך אחרת </p>
+                </div>
+              </button>
+            </div>
           </div>
         </div>
       </div>

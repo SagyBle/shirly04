@@ -6,7 +6,6 @@ import { doc, updateDoc, onSnapshot, increment } from "firebase/firestore";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-import TrashBin from "./styles/icons/trash-bin.png";
 import Heart from "./styles/icons/heart.png";
 import RedHeart from "./styles/icons/heart-red.png";
 
@@ -24,20 +23,15 @@ const Message = ({ message }) => {
   const { id } = useParams();
   const rid = id;
 
-  const messageClass =
-    message.uid === auth.currentUser.uid
-      ? `${style.sent}`
-      : `${style.received}`;
-
   const [liked, setLiked] = useState(false);
   const [likes, setLikes] = useState("");
 
-  // Subscribe to likes
+  // Subscrive to likes
   useEffect(() => {
-    const unsubLikes = onSnapshot(
+    onSnapshot(
       doc(db, `rooms/room${rid}/messages/${message.id}`),
-      (doc) => {
-        setLikes(doc.data().likes);
+      (snapshot) => {
+        setLikes(snapshot.data().likes);
       }
     );
   }, []);

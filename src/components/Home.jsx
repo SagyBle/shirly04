@@ -1,25 +1,30 @@
-import React from 'react'
-import { useState } from 'react'
+import React from "react";
+import { useState } from "react";
 
-import {Route, Routes} from 'react-router-dom'
-import GetARoom from './GetARoom'
-
+import { Route, Routes } from "react-router-dom";
+import GetARoom from "./GetARoom";
+import Test from "./Test";
 
 function Home(props) {
-    
   return (
     <>
-        <div>
-            <Routes>
-                <Route path='/' element={<GetARoom uid={props.uid} isLoading={props.isLoading} setIsLoading={props.setIsLoading}/>}/>
-            </Routes>
-            
-            
-        </div>
+      <div>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <GetARoom
+                uid={props.uid}
+                isLoading={props.isLoading}
+                setIsLoading={props.setIsLoading}
+              />
+            }
+          />
+        </Routes>
+      </div>
     </>
-  )
+  );
 }
-
 
 // {!showChat &&
 //                 <div>
@@ -36,8 +41,7 @@ function Home(props) {
 //                             <a href={()=>createRoomURL(roomNumber)}>
 //                                 <button type='submit'>Go!</button>
 //                             </a>
-                            
-                        
+
 //                         </form>
 //                     </div>
 //                 <div>
@@ -49,7 +53,6 @@ function Home(props) {
 //                 {/* <Route element={showChat && <Chat roomNumber={roomNumber}/>} /> */}
 //                 <Route path='jam-room/:id' element={showChat && <Chat />} />
 
-                
 //             </Routes>
 
-export default Home
+export default Home;

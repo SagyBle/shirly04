@@ -8,56 +8,35 @@ import {
   orderBy,
   onSnapshot,
   doc,
-  getDoc,
   deleteDoc,
   updateDoc,
   setDoc,
-  addDoc,
-  serverTimestamp,
 } from "firebase/firestore";
-import Song from "./Song";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import ActiveUsers from "./ActiveUsers";
 import { useAuthState } from "react-firebase-hooks/auth";
-import CopyLink from "./CopyLink";
-import SendWhatsapp from "./SendWhatsapp";
-import ChangeRoomName from "./ChangeRoomName";
 import History from "./History";
-import Loading from "./Loading";
-import PlayingNow from "./PlayingNow";
-import PlayingTest from "./PlayingTest";
 import Toggle from "./Toggle";
 
 import "./styles/Chat.css";
-import Dugma from "./Dugma";
-import TrashBin from "./styles/icons/trash-bin.png";
-import Person from "./styles/images/person.jpeg";
-import RightArrow from "./styles/icons/right-arrow.png";
 import Logo from "./styles/images/Logo.png";
-import Heart from "./styles/icons/heart.png";
-import RedHeart from "./styles/icons/heart-red.png";
-import Plus from "./styles/icons/add-plus.png";
 import SongLyrics from "./SongLyrics";
-import SongInfo from "./SongInfo";
-
-import songs_temp_array from "../DataTemp/DataTemp";
 
 const Chat = (props) => {
   const [displaySettings, setDisplaySettings] = useState(false);
   const [displayNextSongs, setDisplayNextSongs] = useState(true);
-  const [displayRoomHistory, displayShowRoomHistory] = useState(false);
 
   const [messages, setMessages] = useState([]);
   const [users, setUsers] = useState([]);
   const [history, setHistory] = useState([]);
 
-  const [currPlayingNow, setCurrPlayingNow] = useState("");
+  // const [currPlayingNow, setCurrPlayingNow] = useState("");
 
   const [askedBy, setAskedBy] = useState("");
 
   const [amIAdmin, setAmIAdmin] = useState(false);
-  const [amIOriginallyAdmin, setAmIOriginallyAdmin] = useState(false);
+  // const [amIOriginallyAdmin, setAmIOriginallyAdmin] = useState(false);
 
   const [roomName, setRoomName] = useState("");
   const [roomDescription, setRoomDescription] = useState("");
@@ -118,39 +97,39 @@ const Chat = (props) => {
     }
   );
 
-  // Update isAdmin field
-  const beAdminAgain = () => {
-    updateDoc(doc(db, `rooms/room${rid}/users/${uid}`), { isAdmin: true });
-  };
+  // // Update isAdmin field
+  // const beAdminAgain = () => {
+  //   updateDoc(doc(db, `rooms/room${rid}/users/${uid}`), { isAdmin: true });
+  // };
 
-  // toggle up addRequests field
-  const toggleUpAddRequests = () => {
-    updateDoc(doc(db, `rooms/room${rid}`), { addRequests: true });
-  };
+  // // toggle up addRequests field
+  // const toggleUpAddRequests = () => {
+  //   updateDoc(doc(db, `rooms/room${rid}`), { addRequests: true });
+  // };
 
-  // toggle down addRequests field
-  const toggleDownAddRequests = () => {
-    updateDoc(doc(db, `rooms/room${rid}`), { addRequests: false });
-  };
+  // // toggle down addRequests field
+  // const toggleDownAddRequests = () => {
+  //   updateDoc(doc(db, `rooms/room${rid}`), { addRequests: false });
+  // };
 
-  // toggle up isRepeatAllowed field
-  const toggleUpIsRepeatAllowed = () => {
-    updateDoc(doc(db, `rooms/room${rid}`), { isRepeatAllowed: true });
-  };
+  // // toggle up isRepeatAllowed field
+  // const toggleUpIsRepeatAllowed = () => {
+  //   updateDoc(doc(db, `rooms/room${rid}`), { isRepeatAllowed: true });
+  // };
 
-  // toggle down isRepeatAllowed field
-  const toggleDownIsRepeatAllowed = () => {
-    updateDoc(doc(db, `rooms/room${rid}`), { isRepeatAllowed: false });
-  };
+  // // toggle down isRepeatAllowed field
+  // const toggleDownIsRepeatAllowed = () => {
+  //   updateDoc(doc(db, `rooms/room${rid}`), { isRepeatAllowed: false });
+  // };
 
-  // Get amIOriginalAdmin from firestore
-  const unsubOriginal = onSnapshot(
-    doc(db, `rooms/room${rid}/users`, uid),
-    (doc) => {
-      console.log("Current data amIOriginalAdmin?: ", doc.data().originalAdmin);
-      setAmIOriginallyAdmin(doc.data().originalAdmin);
-    }
-  );
+  // // Get amIOriginalAdmin from firestore
+  // const unsubOriginal = onSnapshot(
+  //   doc(db, `rooms/room${rid}/users`, uid),
+  //   (doc) => {
+  //     console.log("Current data amIOriginalAdmin?: ", doc.data().originalAdmin);
+  //     setAmIOriginallyAdmin(doc.data().originalAdmin);
+  //   }
+  // );
 
   // Get room name, show lyrics, add requests and enter users.
   const unsubRoomName = onSnapshot(doc(db, `rooms/room${rid}`), (doc) => {
@@ -160,8 +139,12 @@ const Chat = (props) => {
     setAddRequests(doc.data().addRequests);
     setIsEntranceAllowed(doc.data().isEntranceAllowed);
     setIsRepeatAllowed(doc.data().isRepeatAllowed);
-    setCurrPlayingNow(doc.data().currPlayingNow);
+    // setCurrPlayingNow(doc.data().currPlayingNow);
   });
+
+  useEffect(() => {
+    onSnapshot(doc(db, `rooms/room${rid}`));
+  }, []);
 
   // set messages
   useEffect(() => {
@@ -212,34 +195,34 @@ const Chat = (props) => {
     }
   };
 
-  const adminToUser = async () => {
-    const data = { isAdmin: false };
-    const docRef = doc(db, `rooms/room${rid}/users/${uid}`);
-    await updateDoc(docRef, data);
-  };
+  // const adminToUser = async () => {
+  //   const data = { isAdmin: false };
+  //   const docRef = doc(db, `rooms/room${rid}/users/${uid}`);
+  //   await updateDoc(docRef, data);
+  // };
 
-  const tryFunction = () => {
-    console.log("start printing messages[0]:");
-    console.log(messages[0]);
-    console.log("end printing messages[0]:");
-  };
+  // const tryFunction = () => {
+  //   console.log("start printing messages[0]:");
+  //   console.log(messages[0]);
+  //   console.log("end printing messages[0]:");
+  // };
 
-  const toggleDisplaySettings = () => {
-    setDisplaySettings(!displaySettings);
-    console.log("display setting: " + displaySettings);
-  };
+  // const toggleDisplaySettings = () => {
+  //   setDisplaySettings(!displaySettings);
+  //   console.log("display setting: " + displaySettings);
+  // };
 
-  let heart = true;
+  // let heart = true;
 
-  const getSongName = (item) => {
-    const array = item.split(" - ");
-    return array[0];
-  };
+  // const getSongName = (item) => {
+  //   const array = item.split(" - ");
+  //   return array[0];
+  // };
 
-  const getArtistName = (item) => {
-    const array = item.split(" - ");
-    return array[1];
-  };
+  // const getArtistName = (item) => {
+  //   const array = item.split(" - ");
+  //   return array[1];
+  // };
 
   return (
     <>
@@ -449,6 +432,8 @@ const Chat = (props) => {
               </div>
             </div>
           )}
+
+          {/* {amIAdmin ? <p>admin</p> : <p>not admin</p>} */}
         </div>
 
         <div className="right-side">

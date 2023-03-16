@@ -114,9 +114,6 @@ const getSongID = (songHeader) => {
 };
 
 async function getHeaders() {
-  // const docRef = doc(db, `songs/${currSong}`);
-  // const doc = await getDoc(docRef);
-  // setLyrics(doc.data());
   console.log("getHeaders() activated");
   fetch("http://18.191.165.235:9001/preview")
     .then((response) => response.json())

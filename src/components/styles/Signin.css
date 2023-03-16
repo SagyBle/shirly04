@@ -10,6 +10,7 @@
 .header-div{
   direction: rtl;
   height: 53px;
+  margin-bottom: 70px;
 }
 
 .header-h1{
@@ -25,6 +26,7 @@
   
   display: flex;
 }
+
 .login-button{
   background-color:blueviolet;
   margin: auto;
@@ -41,7 +43,8 @@
   border: 1px solid #EEEEEE;
   border-radius: 16px;
   direction: rtl;
-  margin-top: 100px;
+  /* margin-top: 100px; */
+  margin-bottom: 20px;  
   
 }
 

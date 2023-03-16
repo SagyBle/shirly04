@@ -17,7 +17,6 @@ function SongLyrics({ rid }) {
   useEffect(() => {
     onSnapshot(doc(db, `rooms/room${rid}`), (snapshot) => {
       setCurrHeader(snapshot.data().currPlayingNow);
-      // get from api the lyrics
     });
   }, []);
 
@@ -27,7 +26,8 @@ function SongLyrics({ rid }) {
       console.log(
         `get lyrics activated! with ${currHeader}, got id: ${songID}`
       );
-      fetch(`http://18.191.165.235:9001/song?id=${songID}`)
+      const api_url = "https://theminhelet.com";
+      fetch(`${api_url}/song?id=${songID}`)
         .then((response) => response.json())
         .then((data) => {
           setLyrics(data.lyrics);

@@ -10,6 +10,7 @@ import Chat from "./components/Chat";
 import Banned from "./components/Banned";
 import Button from "react-bootstrap/Button";
 import Loading from "./components/Loading";
+import Test from "./components/Test";
 
 // const style = {
 //   appContainer: `max-w-[728px] mx-auto text-center`,

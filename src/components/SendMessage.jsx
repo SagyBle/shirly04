@@ -1,19 +1,15 @@
 import React from "react";
-// import './AutoCompleteText.css'
 import { auth, db } from "../firebase";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 
 import "./styles/SendMessage.css";
 import Plus from "./styles/icons/add-plus.png";
 
-import { songs, getHeaders, getSongID } from "../data/preview.jsx";
+import { songs } from "../data/preview.jsx";
 
 export default class SendMessage extends React.Component {
   constructor(props) {
     super(props);
-    // Locate here all songs' titles.
-
-    this.items = songs;
 
     this.items = songs.map((elem) => `${elem.song_name} - ${elem.artist}`);
 
@@ -119,7 +115,6 @@ export default class SendMessage extends React.Component {
   }
 
   sendMessage = async (item) => {
-    // e.preventDefault();
     const { suggestions } = this.state;
     const { uid, displayName } = auth.currentUser;
 
@@ -159,7 +154,6 @@ export default class SendMessage extends React.Component {
           />
         )}
         {this.renderSuggestions()}
-        {/* {this.state.enableSend && <button type="submit">Send</button>} */}
       </div>
     );
   }
