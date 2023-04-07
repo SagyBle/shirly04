@@ -31,12 +31,9 @@ const Chat = (props) => {
   const [users, setUsers] = useState([]);
   const [history, setHistory] = useState([]);
 
-  // const [currPlayingNow, setCurrPlayingNow] = useState("");
-
   const [askedBy, setAskedBy] = useState("");
 
   const [amIAdmin, setAmIAdmin] = useState(false);
-  // const [amIOriginallyAdmin, setAmIOriginallyAdmin] = useState(false);
 
   const [roomName, setRoomName] = useState("");
   const [roomDescription, setRoomDescription] = useState("");

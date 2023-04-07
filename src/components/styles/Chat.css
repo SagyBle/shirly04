@@ -1,14 +1,29 @@
 .container-div{
   display: flex; 
-  min-height: 100vh;
+  height: 100vh;
 }
 
 .left-side{
-  width: 540px;
+  width: 40%;
+  padding: 40px;
   display: flex;
   flex-direction: column;
-  background-color: #FAFAFA;;
-  
+  justify-content: center;
+  align-items: center;  
+  background-color: #f9f9f9;;
+}
+
+ .right-side{
+    flex: 1 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+ }
+
+.logo{
+    width: 100%;
+    justify-content: flex-end;
 }
 
 .search-song-to-add-sector{
@@ -359,11 +374,6 @@
   outline: solid 2.5px white;
 }
 
-
-
- .right-side{
-  flex: 1;
- }
 
 
  /* .logo-arrow-div{

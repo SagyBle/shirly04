@@ -18,7 +18,7 @@ import Test from "./components/Test";
 // }
 
 function App() {
-  const [user] = useAuthState(auth);
+  // const [user] = useAuthState(auth);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {

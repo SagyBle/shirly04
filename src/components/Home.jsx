@@ -26,33 +26,4 @@ function Home(props) {
   );
 }
 
-// {!showChat &&
-//                 <div>
-//                     <div>
-//                         <form onSubmit={handleJoinRoom}>
-//                             <p>join a room</p>
-//                             <input
-//                                 onChange={handleRoomNumberChange}
-//                                 type="text"
-//                                 name="room-number"
-//                                 placeholder="Enter Room Number"
-//                                 value={roomNumber}
-//                             />
-//                             <a href={()=>createRoomURL(roomNumber)}>
-//                                 <button type='submit'>Go!</button>
-//                             </a>
-
-//                         </form>
-//                     </div>
-//                 <div>
-//                 </div>
-//                     <button onClick={()=> handleCreateNewRoom()}>Create new room</button>
-//                 </div>
-//             }
-//             <Routes>
-//                 {/* <Route element={showChat && <Chat roomNumber={roomNumber}/>} /> */}
-//                 <Route path='jam-room/:id' element={showChat && <Chat />} />
-
-//             </Routes>
-
 export default Home;

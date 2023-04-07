@@ -1,70 +1,56 @@
-# Getting Started with Create React App
+### Hi!
+## Thanks for coming to see Shirly's code.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[Shirly](https://shirly04.netlify.app/) is the app that organize your friends music jam sessions from end to end.
 
-## Available Scripts
+Soon you'll be able to use it with full functionality.
 
-In the project directory, you can run:
+## Link to current version of Shirly:
 
-### `npm start`
+# https://shirly04.netlify.app/
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Updates:
+* Omer Yahalom's amazing design is fully implemented!
+* The design came as [Figma file](https://www.figma.com/file/otWq5OmWek2T4rst5vmcRU/shirly-demo?node-id=0%3A1), and implemented in css.
+* We are working on connecting the chords and lyrics data base to the app, massive thanks for Morel, Biluli and Marko.
+it's almost here!
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Help and contact me
+*Please send me any ideas or thoughts that come to your mind while using the app.*
+You can message me in my [linkedIn](https://www.linkedin.com/in/sagyblecher/) or by [email](blecher.sagy@gmail.com).
 
-### `npm test`
+## Credits:
+#### Priceless help by  Omer Yahalom, Yuval (Biluli) Cohen, Noam Marko and Tamir (Morel) Blecher.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### Created and implemented by Sagy Blecher.
 
-### `npm run build`
+## Tools and frameworks:
+* Desinged using: React.js, css, bootstrap-css, Python, Selenium. 
+* Servers: Michrosoft Azure, Netlify, Google Firebase.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Mainly helpful realted Youtube tutorials:
 
-### `npm run eject`
+React.js:
+* https://www.youtube.com/watch?v=Dorf8i6lCuk&t=443s&ab_channel=Academind
+* https://www.youtube.com/watch?v=4UZrsTqkcW4&t=23749s&ab_channel=freeCodeCamp.org
+* https://www.youtube.com/watch?v=zQyrwxMPm88&t=241s&ab_channel=Fireship
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+css:
+* https://www.youtube.com/watch?v=OXGznpKZ_sA&t=8322s&ab_channel=freeCodeCamp.org
+* https://www.youtube.com/watch?v=G3e-cpL7ofc&t=17069s&ab_channel=SuperSimpleDev
+* https://www.youtube.com/watch?v=aQ2inFyLguo&ab_channel=BeforeSemicolon
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Michrosoft Azure:
+* https://www.youtube.com/watch?v=NKEFWyqJ5XA&ab_channel=freeCodeCamp.org
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Netlify:
+* https://www.youtube.com/watch?v=vEFJZ9rSSNM&t=12s&ab_channel=BrianMorrison
 
-## Learn More
+Google Firebase:
+* https://www.youtube.com/watch?v=drF8HbnW87w&t=1911s&ab_channel=CodeCommerce
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Sagy Blecher 2023 Alexis Omega

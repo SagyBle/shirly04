@@ -1,10 +1,11 @@
 
 .lets-start-card-div{
-  /* background-color:blue; */
-  height: 500px;
-  width: 450px;
-  margin: auto;
-  margin-top: 240px;
+  flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    width: 50%;
 }
 
 .header-div{
@@ -28,7 +29,28 @@
 }
 
 .login-button{
-  background-color:blueviolet;
+    width: 100%;
+    height: 60px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    color: #212121;
+    border: 1px solid #EEEEEE;
+    border-radius: 16px;
+        display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row-reverse;
+    gap: 10px;
+}
+
+.login-button:hover{
+  background-color: #eceaea;
+  border: 1px solid #cac9c9;
+
+}
+
+.login-button-marked{
   margin: auto;
   width: 380px;
   height: 60px;
@@ -43,16 +65,9 @@
   border: 1px solid #EEEEEE;
   border-radius: 16px;
   direction: rtl;
-  /* margin-top: 100px; */
-  margin-bottom: 20px;  
-  
 }
 
-.login-button:hover{
-  background-color: #eceaea;
-  border: 1px solid #cac9c9;
 
-}
 
 .button-text-google{
   display: inline;
@@ -62,40 +77,32 @@
 .button-image-google{
   display: inline;
   width: 25px;
-  margin-left: 10px;
 }
 
 .or-line-div{
   display: flex;
 }
 
-.vr-center{
-  /* border: solid 1px black; */
-  width:210px
-  
+.intro-image{
+    border-radius: 20px;
+    height: 200px;
+    width: auto;
 }
 
 .explenation-card{
-  margin: auto;
-  display: block;
-  /* background-color: aqua; */
-  width: 380px;
-}
-.intro-image{
-  width: 370px;
-  
-}
-
-.intro-image-div{
-  margin-bottom: 90px;
+  width: 80%;
   display: flex;
-  justify-content: space-around;
-
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
 }
 
 .intro-headers-div{
-  /* display: flex;
-  justify-content: space-around; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .flex-and-center{
@@ -104,18 +111,12 @@
 }
 
 .intro-small-header-p{
-  font-family: 'NarkisBlockMF';
 font-style: normal;
 font-weight: 400;
 font-size: 16px;
 line-height: 140%;
-/* or 22px */
-
 text-align: center;
 letter-spacing: 0.2px;
-
-/* Greyscale / 700 */
-
 color: #616161;
 }
 
@@ -155,3 +156,43 @@ color: #616161;
   padding-right: 30px;
   padding-top: 7px;
 }
+
+.email-input{
+  outline: solid;
+  background-color:blueviolet;
+  margin: auto;
+  width: 380px;
+  height: 60px;
+  font-family: 'NarkisBlockMF';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 140%;
+  letter-spacing: 0.2px;
+  color: #212121;
+  background: #FFFFFF;
+  border: 1px solid #EEEEEE;
+  border-radius: 16px;
+  /* margin-top: 100px; */
+  margin-bottom: 20px; 
+  padding-left: 10px;
+  outline: #616161;
+
+}
+
+.email-input:focus{
+  background-color: rgba(211, 204, 204, 0.326);
+  border: solid gray 1.5px;
+}
+
+.email-input-div{
+  display: flex;
+  /* background-color: yellowgreen; */
+  margin-bottom: 0px;
+  height: 50px
+}
+
+.login-button-small{
+  width: 200px;
+}
+
