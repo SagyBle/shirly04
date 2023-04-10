@@ -1,6 +1,6 @@
 
 *{
-  transition: all 0.2s;
+  /* transition: all 0.2s; */
   font-family: 'NarkisBlockMF';
   font-style: normal;
   font-weight: 700;
@@ -18,63 +18,79 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-.left-div{
-  background-color: #EEEEEE;
-  align-items: center;
-  width: 540px;
-  padding-bottom: 10px;
-  padding-left: 0;
 
-;}
+.search-room{
+  
+}
+
+
+.left-side-get-a-room{
+  width: 40%;
+  min-width: 390px;
+  max-width: 800px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  
+  align-items: center;  
+  background-color: #f9f9f9;;
+  padding: 0px 0px;
+  
+  
+}
+
+
+
+ .right-side-get-a-room{
+    flex: 1 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+ }
 
 .active-rooms-header{
     font-weight: 700;
     font-size: 24px;
-    line-height: 120%;
-
-    /* display: flex; */
-    align-items: center;
+    line-height: 120%;    
+    margin-top: 20px;
+    width: 88%;
     text-align: right;
-
-    margin-top: 30px;
-    margin-right: 40px;
-    margin-bottom: 30px;
- 
 }
 
-.list-of-rooms{
+.list-of-rooms-div{
+  margin-top: 30px;
   padding-top: 20px;
-margin-right: -8px;
-  max-height: 700px;
+  width: 88%;
   overflow: auto;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
 }
 
-.search-room-div{
-  /* background-color: #1f5fe0; */
-  width: fit-content;
-}
 
-.search-room-box{
+.search-room-input{
   background-color: #F5F5F5;
   direction: rtl;
-  
-  flex-direction: row;
-  align-items: center;
-  padding: 0px 20px;
-  gap: 12px;
+  padding: 0px 25px;
   font-weight: 400;
   font-size: 14px;
   line-height: 140%;
   border-radius: 12px;
   margin-top: 40px;
-  height: 56px;
-  width: 460px; 
+  min-height: 2.5rem;
+  width: 88%;
+  transition: 0.3s;
 }
 
+.search-room-input:focus{
+  background-color:rgba(227, 235, 237, 0.729);
+  outline: none;
+  border: 2px solid rgb(154, 152, 152);
+  /* height: 100px; */
+  transition: 0.3s;
+}
 
-
-
-/* non found rooms */
 
 .outside-box{
   margin-top: 40px;
@@ -91,58 +107,30 @@ margin-right: -8px;
   margin: auto;
 }
 
-.not-found-room-div-div{
-  display: flex;
-}
-
-.not-found-room-div{
-  display: flex;
-  flex-direction: column;
-}
 
 
 .not-found-room{
-  font-weight: 700;
+  /* font-weight: 700;
   font-size: 24px;
   line-height: 120%;
   font: #212121;
   margin: auto;
   margin-top: 60px;
-  margin-bottom: 27px;
+  margin-bottom: 27px; */
+  
+  width: 100%;
+  direction: rtl;
+  text-align: center;
+  display: block;
+  
 }
 
 .headers{
-  height: 106px;
-  
-  
-}
-
-.main-header {
-  line-height: 110%;
-  text-align: right;
-  direction: rtl;
-  padding-right: 30px;
-}
-
-.sub-header{
-  
-  font-weight: 400;
-  font-size: 18px;
-  /* line-height: 140%; */
-
-  text-align: right;
-  letter-spacing: 0.2px;
-  direction: rtl;
-  padding-right: 30px;
-
+  height: 106px; 
 }
 
 .enter-room{
   padding-right: 15px;
-}
-
-.pin-input{
-  background: #616161;
 }
 
 .create-room-button-index{
@@ -316,15 +304,124 @@ margin-right: -8px;
     padding-right: 40px;
 }
 
-.purple{
-  background-color: purple;
-}
-.break {
-  min-height: 150px;
+
+.enter-room-div{
+    
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    width: 70%;
+    margin-top: 6rem;
 }
 
-.small-break {
-  min-height: 100px;
+.room-enter-code-div{
+  display: flex;
+  flex-direction: column;
+  margin-top: 4rem;
+  
+}
+
+.room-enter-input-buttons-div{
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  width: 100%;
+  margin-top: 1.5rem;
+
+}
+
+.pin-input{
+  
+}
+
+.main-header {
+  line-height: 110%;
+  text-align: right;
+  direction: rtl;
+  margin-bottom: 2rem;
+}
+
+.sub-header{
+  
+  font-weight: 400;
+  font-size: 18px;
+  text-align: right;
+  direction: rtl;
+  letter-spacing: 0.2px;
+}
+
+.or-div{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.horizontal-line{
+  border-bottom: 1px solid #EEEEEE;
+  
+  height: 1px;
+  min-width: 23%;
+  margin: 0px 20px;
+}
+
+.logo-div{
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+}
+
+
+.user-greetings-div{
+  width: fit-content;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  margin-left: 20px;
+  gap: 10px;
+}
+
+.hello-username{
+  font-family: 'NarkisBlockMF';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.8rem;
+  line-height: 140%;
+
+  display: flex;
+  align-items: center;
+  text-align: right;
+  letter-spacing: 0.2px;
+  color: #9E9E9E;
+  padding-top: 15px;
+  padding-right: 10px;
+}
+
+.logout-button{
+  color:#a7bbe5 ;
+  
+}
+.mobile-menu{
+  background-color: blue;
+  display: none;}
+
+
+@media (max-width: 875px){
+  .container-div {
+    display: flex;
+    flex-direction: column;
+  }
+  .mobile-menu{
+    display: flex;
+
+  }
+  .left-side-get-a-room{
+    width: 100%;
+  }
 }
 
 

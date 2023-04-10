@@ -23,31 +23,9 @@
     --bs-gutter-x: 0 !important;
 }
 
-.hello-username-p {
-    margin: 0 !important;
-}
 
-.user-greetings-div {
-    height: fit-content !important;
-    align-items: center !important;
-    gap: 8px;
-}
 
-.user-greetings-div button{
-    background: none;
-    padding: 0 !important;
-    height: fit-content;
-    font-size: 12px;
-    color: #777;
-}
 
-.logo-img-div {
-    margin-left: 0 !important;
-    width: 140px !important;
-    height: auto !important;
-    margin-right: 0 !important;
-    margin-top: 0 !important;
-}
 
 .logo-arrow-div {
     display: flex !important;
@@ -62,17 +40,8 @@
     margin: 0 !important;
 }
 
-.avatar-group {
-    display: flex;
-    margin: 0 !important;
-}
 
-.room-card-top {
-    height: auto !important;
-    width: 100%;
-    align-items: center;
-    padding: 20px;
-}
+
 
 .lock-icon {
     height: 20px !important;

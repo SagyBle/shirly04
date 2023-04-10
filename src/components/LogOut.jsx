@@ -5,7 +5,14 @@ const LogOut = () => {
   const signOut = () => {
     signOut(auth);
   };
-  return <button onClick={() => auth.signOut()}>Logout</button>;
+  return (
+    <button
+      className="hello-username logout-button"
+      onClick={() => auth.signOut()}
+    >
+      Logout
+    </button>
+  );
 };
 
 export default LogOut;

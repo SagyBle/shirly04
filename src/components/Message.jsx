@@ -6,8 +6,8 @@ import { doc, updateDoc, onSnapshot, increment } from "firebase/firestore";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-import Heart from "./styles/icons/heart.png";
-import RedHeart from "./styles/icons/heart-red.png";
+import Heart from "../components/styles/icons/Heart.svg";
+import HeartBold from "../components/styles/icons/HeartBold.svg";
 
 const style = {
   message: `flex items-center shadow-xl m-4 py-2 rounded-tl-full rounded-tr-full`,
@@ -49,52 +49,39 @@ const Message = ({ message }) => {
   };
 
   return (
-    <div className="history-song-div">
-      <div>
+    <li className="message-card">
+      <div className="message-icons-div">
         {message.uid === auth.currentUser.uid && (
           <DeleteMessage message={message} />
         )}
         {message.uid !== auth.currentUser.uid && !liked && (
-          <div className="trash-bin-icon-div">
-            <img
-              onClick={() => likeMessage(1)}
-              className="trash-bin-icon"
-              src={Heart}
-              alt=""
-            />
-          </div>
+          <img
+            onClick={() => likeMessage(1)}
+            className="trash-bin-icon"
+            src={Heart}
+            alt=""
+          />
         )}
 
         {message.uid !== auth.currentUser.uid && liked && (
-          <div className="trash-bin-icon-div">
-            <img
-              onClick={() => likeMessage(-1)}
-              className="trash-bin-icon"
-              src={RedHeart}
-              alt=""
-            />
-          </div>
+          <img
+            onClick={() => likeMessage(-1)}
+            className="trash-bin-icon"
+            src={HeartBold}
+            alt=""
+          />
         )}
 
-        {likes > 0 && (
-          <div className="trash-bin-icon-div number-of-likes">
-            <p className="number-of-likes-p">{likes} likes</p>
-          </div>
-        )}
+        {likes > 0 && <span className="number-of-likes">{likes} likes</span>}
       </div>
 
       <div className="history-song-info-div">
-        <div className="history-song-header-div">
-          <p className="song-header-p"></p>
-          {splitSongArtist(message.text).songName}
-        </div>
-        <div className="history-song-author-div">
-          <p className="song-author-p">
-            {splitSongArtist(message.text).artistName}
-          </p>
-        </div>
+        <span>{splitSongArtist(message.text).songName}</span>
+        <span className="song-author-p">
+          {splitSongArtist(message.text).artistName}
+        </span>
       </div>
-    </div>
+    </li>
   );
 };
 

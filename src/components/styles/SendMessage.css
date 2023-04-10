@@ -1,29 +1,3 @@
-.search-song-box{
-  
-  width: 460px;
-  height: 56px;
-  display: grid;
-  justify-content: center;
-  direction: rtl;
-  padding-right: 40px;
-  font-family: 'NarkisBlockMF';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 140%;
-  background: #F5F5F5;
-  border-radius: 12px;
-  flex: none;
-  order: 0;
-  align-self: stretch;
-  flex-grow: 0;  
-
-}
-
-.search-song-box:focus{
-  background: rgba(36, 107, 253, 0.08);
-  border: 1px solid #246BFD;
-}
 
 .song-suggestions-container{
   
@@ -34,10 +8,7 @@
   justify-content: space-between;
 }
 
-.search-song-form{
-  position: relative;
-  z-index: 1;
-}
+
 
 .suggestion-hide-everything{
     min-height: 500px;

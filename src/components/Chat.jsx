@@ -1,6 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
-import Message from "./Message";
-import SendMessage from "./SendMessage";
+import React, { useState, useEffect } from "react";
 import { db, auth } from "../firebase";
 import {
   query,
@@ -8,47 +6,38 @@ import {
   orderBy,
   onSnapshot,
   doc,
+  setDoc,
   deleteDoc,
   updateDoc,
-  setDoc,
 } from "firebase/firestore";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import ActiveUsers from "./ActiveUsers";
 import { useAuthState } from "react-firebase-hooks/auth";
-import History from "./History";
-import Toggle from "./Toggle";
 
 import "./styles/Chat.css";
-import Logo from "./styles/images/Logo.png";
+import LogoShirly from "./styles/images/LogoShirly.png";
 import SongLyrics from "./SongLyrics";
+import LogOut from "./LogOut";
+import SognsFeed from "./SognsFeed";
 
 const Chat = (props) => {
-  const [displaySettings, setDisplaySettings] = useState(false);
-  const [displayNextSongs, setDisplayNextSongs] = useState(true);
-
-  const [messages, setMessages] = useState([]);
-  const [users, setUsers] = useState([]);
-  const [history, setHistory] = useState([]);
-
-  const [askedBy, setAskedBy] = useState("");
-
-  const [amIAdmin, setAmIAdmin] = useState(false);
-
   const [roomName, setRoomName] = useState("");
+  const [messages, setMessages] = useState([]);
+  const [displayNextSongs, setDisplayNextSongs] = useState(true);
+  const [history, setHistory] = useState([]);
   const [roomDescription, setRoomDescription] = useState("");
+  const [displaySettings, setDisplaySettings] = useState(false);
+
+  const [users, setUsers] = useState([]);
+  const [amIAdmin, setAmIAdmin] = useState(false);
   const [showLyrics, setShowLyrics] = useState("");
   const [addRequests, setAddRequests] = useState(true);
   const [isEntranceAllowed, setIsEntranceAllowed] = useState(true);
   const [isRepeatAllowed, setIsRepeatAllowed] = useState(false);
+  const [setCurrPlayingNow, currPlayingNow] = useState("");
 
   const [maxParticipantsQuantity, setMaxParticipantsQuantity] = useState(null);
-
-  const tryHis = [
-    "אהבתיה - שלמה ארצי",
-    "בוא - עברי לידר",
-    "גן סגור - הכבש השישה עשר",
-  ];
 
   const { id } = useParams();
   const rid = id;
@@ -56,10 +45,19 @@ const Chat = (props) => {
   const [user] = useAuthState(auth);
   const uid = user.uid;
 
-  const scroll = useRef();
-  const [isTyping, setIsTyping] = useState(false);
-
   const navigate = useNavigate();
+
+  // set listeners to rooms meta
+  const unsubRoomData = onSnapshot(doc(db, `rooms/room${rid}`), (doc) => {
+    setRoomName(doc.data().roomName);
+    setRoomDescription(doc.data().roomDescription);
+    setShowLyrics(doc.data().showLyrics);
+    setAddRequests(doc.data().addRequests);
+    setIsEntranceAllowed(doc.data().isEntranceAllowed);
+    setIsRepeatAllowed(doc.data().isRepeatAllowed);
+    setCurrPlayingNow(doc.data().currPlayingNow);
+    setMaxParticipantsQuantity(doc.data().roomMaxParticipantsQuantity);
+  });
 
   // get amIAdmin field from firestore
   const unsubAdmin = onSnapshot(
@@ -69,75 +67,6 @@ const Chat = (props) => {
       setAmIAdmin(doc.data().isAdmin);
     }
   );
-
-  useEffect(() => {
-    const q = query(
-      collection(db, `rooms/room${rid}/users`),
-      orderBy("timestamp")
-    );
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      let users = [];
-      querySnapshot.forEach((doc) => {
-        users.push({ ...doc.data(), id: doc.id });
-      });
-      setUsers(users);
-    });
-    return () => unsubscribe();
-  }, []);
-
-  // contin here
-  // get amIAdmin field from firestore
-  const unsubMaxParticipantsQuantity = onSnapshot(
-    doc(db, `rooms/room${rid}`),
-    (doc) => {
-      setMaxParticipantsQuantity(doc.data().roomMaxParticipantsQuantity);
-    }
-  );
-
-  // // Update isAdmin field
-  // const beAdminAgain = () => {
-  //   updateDoc(doc(db, `rooms/room${rid}/users/${uid}`), { isAdmin: true });
-  // };
-
-  // // toggle up addRequests field
-  // const toggleUpAddRequests = () => {
-  //   updateDoc(doc(db, `rooms/room${rid}`), { addRequests: true });
-  // };
-
-  // // toggle down addRequests field
-  // const toggleDownAddRequests = () => {
-  //   updateDoc(doc(db, `rooms/room${rid}`), { addRequests: false });
-  // };
-
-  // // toggle up isRepeatAllowed field
-  // const toggleUpIsRepeatAllowed = () => {
-  //   updateDoc(doc(db, `rooms/room${rid}`), { isRepeatAllowed: true });
-  // };
-
-  // // toggle down isRepeatAllowed field
-  // const toggleDownIsRepeatAllowed = () => {
-  //   updateDoc(doc(db, `rooms/room${rid}`), { isRepeatAllowed: false });
-  // };
-
-  // // Get amIOriginalAdmin from firestore
-  // const unsubOriginal = onSnapshot(
-  //   doc(db, `rooms/room${rid}/users`, uid),
-  //   (doc) => {
-  //     console.log("Current data amIOriginalAdmin?: ", doc.data().originalAdmin);
-  //     setAmIOriginallyAdmin(doc.data().originalAdmin);
-  //   }
-  // );
-
-  // Get room name, show lyrics, add requests and enter users.
-  const unsubRoomName = onSnapshot(doc(db, `rooms/room${rid}`), (doc) => {
-    setRoomName(doc.data().roomName);
-    setRoomDescription(doc.data().roomDescription);
-    setShowLyrics(doc.data().showLyrics);
-    setAddRequests(doc.data().addRequests);
-    setIsEntranceAllowed(doc.data().isEntranceAllowed);
-    setIsRepeatAllowed(doc.data().isRepeatAllowed);
-    // setCurrPlayingNow(doc.data().currPlayingNow);
-  });
 
   useEffect(() => {
     onSnapshot(doc(db, `rooms/room${rid}`));
@@ -155,6 +84,21 @@ const Chat = (props) => {
         messages.push({ ...doc.data(), id: doc.id });
       });
       setMessages(messages);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    const q = query(
+      collection(db, `rooms/room${rid}/users`),
+      orderBy("timestamp")
+    );
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      let users = [];
+      querySnapshot.forEach((doc) => {
+        users.push({ ...doc.data(), id: doc.id });
+      });
+      setUsers(users);
     });
     return () => unsubscribe();
   }, []);
@@ -192,327 +136,61 @@ const Chat = (props) => {
     }
   };
 
-  // const adminToUser = async () => {
-  //   const data = { isAdmin: false };
-  //   const docRef = doc(db, `rooms/room${rid}/users/${uid}`);
-  //   await updateDoc(docRef, data);
-  // };
-
-  // const tryFunction = () => {
-  //   console.log("start printing messages[0]:");
-  //   console.log(messages[0]);
-  //   console.log("end printing messages[0]:");
-  // };
-
-  // const toggleDisplaySettings = () => {
-  //   setDisplaySettings(!displaySettings);
-  //   console.log("display setting: " + displaySettings);
-  // };
-
-  // let heart = true;
-
-  // const getSongName = (item) => {
-  //   const array = item.split(" - ");
-  //   return array[0];
-  // };
-
-  // const getArtistName = (item) => {
-  //   const array = item.split(" - ");
-  //   return array[1];
-  // };
-
   return (
-    <>
-      {/* !!!current version!!! */}
-
-      <div className="container-div">
-        <div className="left-side">
-          <div className="search-song-to-add-sector">
-            <div className="search-song-div">
-              <SendMessage
-                messages={messages}
-                history={history}
-                tryHis={tryHis}
-                rid={rid}
-                addRequests={addRequests}
-              />
-              {/* {isTyping? <div> typing...</div> : null} */}
-              <div className="drop-down"></div>
-            </div>
+    <div className="container-div">
+      <SognsFeed
+        uid={uid}
+        rid={rid}
+        messages={messages}
+        setMessages={setMessages}
+        addRequests={addRequests}
+        setAddRequests={setAddRequests}
+        setDisplayNextSongs={setDisplayNextSongs}
+        displayNextSongs={displayNextSongs}
+        setAmIAdmin={setAmIAdmin}
+        amIAdmin={amIAdmin}
+        showLyrics={showLyrics}
+        moveNext={moveNext}
+        history={history}
+        setHistory={setHistory}
+        users={users}
+        setUsers={setUsers}
+        roomDescription={roomDescription}
+        displaySettings={displaySettings}
+        setDisplaySettings={setDisplaySettings}
+        roomName={roomName}
+        maxParticipantsQuantity={maxParticipantsQuantity}
+        isEntranceAllowed={isEntranceAllowed}
+      />
+      <div className="right-side">
+        <div className="logo-arrow-div">
+          <div className="logo-img-div">
+            <button
+              onClick={() => {
+                navigate("/");
+              }}
+            >
+              <img className="logo-img" src={LogoShirly} />
+            </button>
           </div>
-          {/* strart */}
-          {!isTyping ? (
-            <div>
-              <div className="choose-songs-or-history-div">
-                <div className="choose-songs-or-history-buttons">
-                  <button
-                    onClick={() => setDisplayNextSongs(false)}
-                    className={
-                      displayNextSongs
-                        ? "button-history"
-                        : "button-history-active"
-                    }
-                  >
-                    היסטוריית החדר
-                  </button>
-                  <button
-                    onClick={() => setDisplayNextSongs(true)}
-                    className={
-                      displayNextSongs
-                        ? "button-history-active"
-                        : "button-history"
-                    }
-                  >
-                    השירים הבאים
-                  </button>
-                </div>
-              </div>
-              {amIAdmin && (
-                <div className="move-next-div">
-                  {amIAdmin && showLyrics && (
-                    <button
-                      className="move-next-button"
-                      onClick={() => moveNext()}
-                    >
-                      עבור לשיר הבא
-                    </button>
-                  )}
-                </div>
-              )}
-              <div className="main-left-side">
-                {displayNextSongs ? (
-                  // next songs div
-                  <div className="room-history-div">
-                    {/* {messages &&
-                  messages.map((message) => ) */}
-
-                    {messages &&
-                      messages.map((message) => (
-                        <Message key={message.id} message={message} rid={rid} />
-                      ))}
-                  </div>
-                ) : (
-                  // history div
-                  <div className="room-history-div">
-                    <History
-                      history={history}
-                      setHistory={setHistory}
-                      amIAdmin={amIAdmin}
-                      rid={rid}
-                    />
-                  </div>
-                )}
-              </div>
-            </div>
-          ) : null}
-          {/* end */}
-
-          {/* start2 */}
-          <div className="serach-songs-suggestions-div"></div>
-          {/* end2 */}
-
-          {displaySettings ? (
-            <div className="room-setting-div-open">
-              <div className="setting-info-header-open">
-                <div className="room-header-open-div">
-                  <div className="open-setting-div">
-                    <button
-                      onClick={() => setDisplaySettings(!displaySettings)}
-                      className="open-setting-button"
-                    >
-                      סגור
-                    </button>
-                  </div>
-                  <div className="room-header-div">
-                    <h4 className="room-header-h4">{roomName}</h4>
-                  </div>
-                </div>
-                <div className="room-desc-open-div">
-                  <div className="order-the-right-side"></div>
-                  <p className="room-desc-open-p">{roomDescription}</p>
-                </div>
-
-                <div className="setting-line-div ">
-                  <div className="avatar-group in-setting">
-                    {users.map((user) => {
-                      return (
-                        <div className="avatar">
-                          <img src={user.photoURL} alt="" />
-                        </div>
-                      );
-                    })}
-                    {/* {users.length > 3 && (
-                      <div className="hidden-avatars">{users.length - 3}</div>
-                    )} */}
-                  </div>
-                  <div className="room-setting-toggle-header">
-                    <p className="room-setting-toggle-header-p">
-                      {users.length}/{maxParticipantsQuantity} משתמשים בחדר
-                    </p>
-                  </div>
-                </div>
-
-                <div className="setting-line-div ">
-                  <div className="avatar-group in-setting">
-                    {users
-                      .filter((user) => user.isAdmin)
-                      .map((user) => {
-                        return (
-                          <div className="avatar">
-                            <img src={user.photoURL} alt="" />
-                          </div>
-                        );
-                      })}
-                    {/* {users.length > 3 && (
-                      <div className="hidden-avatars">{users.length - 3}</div>
-                    )} */}
-                  </div>
-
-                  <div className="room-setting-toggle-header">
-                    <p className="room-setting-toggle-header-p">מנהל החדר</p>
-                  </div>
-                </div>
-
-                <div className="setting-line-div ">
-                  <div className="room-setting-toggle-div">
-                    <Toggle
-                      toggle={showLyrics}
-                      rid={rid}
-                      dataT={{ showLyrics: true }}
-                      dataF={{ showLyrics: false }}
-                    />
-                  </div>
-                  <div className="room-setting-toggle-header">
-                    <p className="room-setting-toggle-header-p">תצוגת מילים</p>
-                  </div>
-                </div>
-                <div className="setting-line-div">
-                  <div className="room-setting-toggle-div">
-                    <Toggle
-                      toggle={addRequests}
-                      rid={rid}
-                      dataT={{ addRequests: true }}
-                      dataF={{ addRequests: false }}
-                    />
-                  </div>
-                  <div className="room-setting-toggle-header">
-                    <p className="room-setting-toggle-header-p">הוספת שירים</p>
-                  </div>
-                </div>
-                <div className="setting-line-div">
-                  <div className="room-setting-toggle-div">
-                    <Toggle
-                      toggle={isEntranceAllowed}
-                      rid={rid}
-                      dataT={{ isEntranceAllowed: true }}
-                      dataF={{ isEntranceAllowed: false }}
-                    />
-                  </div>
-                  <div className="room-setting-toggle-header">
-                    <p className="room-setting-toggle-header-p">הצטרפות לחדר</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ) : (
-            <div className="room-setting-div">
-              <div className="open-setting-div">
-                <button
-                  onClick={() => setDisplaySettings(!displaySettings)}
-                  className="open-setting-button"
-                >
-                  פתח הגדרות
-                </button>
-              </div>
-              <div className="room-header-div">
-                <h4 className="room-header-h4">{roomName}</h4>
-              </div>
-            </div>
-          )}
-
-          {/* {amIAdmin ? <p>admin</p> : <p>not admin</p>} */}
+          <div className="user-greetings-div">
+            <LogOut />
+            <span className="hello-username">{`שלום ${user.displayName}, ${
+              amIAdmin ? "אתה מחובר כאדמין" : "אתה מחובר כמשתמש"
+            }`}</span>
+          </div>
         </div>
 
-        <div className="right-side">
-          <div className="logo-arrow-div">
-            <div className="logo-img-div">
-              <button
-                onClick={() => {
-                  navigate("/");
-                }}
-              >
-                <img className="logo-img" src={Logo} />
-              </button>
-            </div>
-            <div className="user-greetings-div">
-              <p className="hello-username-p">שלום {user.displayName} ,</p>
-              {amIAdmin ? (
-                <p className="hello-username-p admin-notadmin-p">
-                  אתה מחובר כאדמין.
-                </p>
-              ) : (
-                <p className="hello-username-p admin-notadmin-p">
-                  אתה מחובר כמשתמש
-                </p>
-              )}
-            </div>
-          </div>
-
-          <div className="lyrics-author-song-header-div">
-            {showLyrics ? (
-              <SongLyrics rid={rid} />
-            ) : (
-              <p>הצגת מילות השיר הושהתה על ידי מנהל החדר.</p>
-            )}
-          </div>
+        <div className="lyrics-author-song-header-div">
+          {showLyrics ? (
+            <SongLyrics rid={rid} />
+          ) : (
+            <p>הצגת מילות השיר הושהתה על ידי מנהל החדר.</p>
+          )}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
 export default Chat;
-
-// {displaySettings ? <div className="setting-div-open">
-//   <div className="setting-div-open-setting-div-open"><p onClick={toggleDisplaySettings} className="setting-div-open-setting-p">סגור</p></div>
-//   <div><h4 className="setting-div-room-header-p-open">החדר של שגיא</h4></div>
-// </div>
-// :
-// <div className="setting-div-closed">
-//   <div className="setting-div-open-setting-div"><p onClick={toggleDisplaySettings} className="setting-div-open-setting-p-open">פתח הגדרות</p></div>
-//   <div><h4 className="setting-div-room-header-p">החדר של שגיא</h4></div>
-// </div>}
-
-// <div className="container-fluid">
-//   <div className="row g-0 px-0">
-//     <div className="col-4 ">
-//       <div>
-//           <div className="serch-song-div">
-//            {addRequests ? <SendMessage messages={messages} history={history} tryHis={tryHis} rid={rid} /> : <p>Adding song requests was disabled by admin.</p>}
-//            <Dugma></Dugma>
-//           </div>
-//       </div>
-
-//     </div>
-//     <div className="col">
-//       <div className="red"></div>
-//     </div>
-
-//   </div>
-// </div>
-
-{
-  /* const [enterUsers, setEnterUsers] = useState(true);
-        const [isRepeatAllowed, setIsRepeatAllowed] = useState(false); */
-}
-{
-  /* {enterUsers ?
-        <button onClick={toggleDownEnterUsers}>Disable Users In</button>:
-        <button onClick={toggleUpEnterUsers}>Allow Users In</button>
-        }
-        {isRepeatAllowed ?
-        <button onClick={toggleDownIsRepeatAllowed}>Disable Song Repeat</button>:
-        <button onClick={toggleUpIsRepeatAllowed}>Allow Song Repeat</button>
-        }
-         */
-}

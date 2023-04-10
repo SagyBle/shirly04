@@ -137,10 +137,10 @@ export default class SendMessage extends React.Component {
   render() {
     const { text } = this.state;
     return (
-      <div className="search-song-form">
+      <div>
         {this.props.addRequests ? (
           <input
-            className="search-song-box"
+            className="search-song-input"
             placeholder="הקלידו ובחרו מהשירים הקיימים"
             value={text}
             onChange={this.onTextChange}
@@ -148,7 +148,7 @@ export default class SendMessage extends React.Component {
           />
         ) : (
           <input
-            className="search-song-box"
+            className="search-room-input"
             placeholder="הוספת שירים כרגע מושהת ע״י מנהלי החדר"
             value=""
           />

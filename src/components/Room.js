@@ -51,73 +51,42 @@ function Room({ room, user, isLoading, setIsLoading }) {
   };
 
   return (
-    <li>
-      {room && (
-        // 0start total div
-        <div className="room-card">
-          {/* 1start users images*/}
-          <div className="room-card-top">
-            <div className="avatar-group">
-              {users.map((user) => {
-                return (
-                  <div className="avatar">
-                    <img src={user.photoURL} alt="" />
-                  </div>
-                );
-              })}
-              {users.length > 3 && (
-                <div className="hidden-avatars">+{users.length - 3}</div>
-              )}
-            </div>
-            <div className="lock-icon-div">
-              {!isEntranceAllowed && (
-                <img className="lock-icon" src={LockedIcon} alt="" />
-              )}
-            </div>
-          </div>
-          {/* 1end users images */}
-
-          {/* 1start room name and description*/}
-          <div className="room-headers">
-            <div className="room-name">
-              <h5 className="room-name-letters">{room.roomName}</h5>
-            </div>
-            <div className="room-description">
-              <p className="room-description-letters">{room.roomDescription}</p>
-            </div>
-          </div>
-          {/* 1end room name and description */}
-
-          {/* 1start room time */}
-          <div></div>
-          {/* 1end room time */}
-
-          {/* try 1start capacity */}
-
-          <div className="row g-0">
-            <div className="col-4">
-              <div className="room-capacity">
-                <p className="center room-capacity-letters">
-                  {users.length} / {room.roomMaxParticipantsQuantity}
-                </p>
+    <li className="room-card">
+      <div className="room-card-top">
+        <div className="avatar-group">
+          {users.map((user) => {
+            return (
+              <div className="avatar">
+                <img src={user.photoURL} alt="" />
               </div>
-            </div>
-            <div className="col-4">
-              <div className="pink center">
-                <JoinRoom setIsLoading={setIsLoading} room={room} />
-              </div>
-            </div>
-            <div className="col-4">
-              <div className="center room-playing-now-letters">
-                {room.currPlayingNow}
-              </div>
-            </div>
-          </div>
-
-          {/* try 1end capcity */}
+            );
+          })}
+          {users.length > 3 && (
+            <div className="hidden-avatars">+{users.length - 3}</div>
+          )}
         </div>
-      )}
-      {/* 0end total div */}
+
+        {!isEntranceAllowed && (
+          <img className="lock-icon" src={LockedIcon} alt="" />
+        )}
+      </div>
+
+      <div className="room-card-bottom">
+        <div className="room-headers-div">
+          <h5 className="room-name">{room.roomName}</h5>
+          <span className="room-description">{room.roomDescription}</span>
+        </div>
+
+        <div className="room-details-div">
+          <span className="room-users-capacity">
+            {users.length} / {room.roomMaxParticipantsQuantity}
+          </span>
+
+          <JoinRoom setIsLoading={setIsLoading} room={room} />
+
+          <span className="playing-now-span">{room.currPlayingNow}</span>
+        </div>
+      </div>
     </li>
   );
 }

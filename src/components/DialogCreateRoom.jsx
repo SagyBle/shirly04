@@ -1,14 +1,6 @@
-import React from 'react'
-import ToggleBoolean from './ToggleBoolean'
-
-import './styles/DialogCreateRoom.css'
-
-// roomName, roomDescription, roomMaxParticipantsQuantity
-// isLockedWithPassword, setIsLockedWithPassword
-// roomPassword
-// setRoomName, setRoomMaxParticipantsQuantity, setRoomDescription, setRoomPassword
-
-
+import React from "react";
+import ToggleBoolean from "./ToggleBoolean";
+import "./styles/DialogCreateRoom.css";
 
 function DialogCreateRoom(props) {
   const setRoomName = props.setRoomName;
@@ -25,99 +17,87 @@ function DialogCreateRoom(props) {
   const setIsLockedWithPassword = props.setIsLockedWithPassword;
 
   const createNewRoomURLAndGetInside = props.createNewRoomURLAndGetInside;
-  const setShowCreateDialog= props.setShowCreateDialog;
-
+  const setShowCreateDialog = props.setShowCreateDialog;
 
   const handleRoomNameChange = (e) => {
     setRoomName(e.target.value);
-    // setShowShortName(false);
   };
 
   const handleMaxParticipantsQuantity = (e) => {
     setRoomMaxParticipantsQuantity(e.target.value);
-  }
+  };
 
   const handleRoomDescriptionChange = (e) => {
     setRoomDescription(e.target.value);
-  }
+  };
 
   const handlePasswordChange = (e) => {
     setRoomPassword(e.target.value);
-  }
-
-
-
+  };
 
   return (
-    
-      <div onClick={()=>setShowCreateDialog(false)} className='overlay'>
+    <div onClick={() => setShowCreateDialog(false)} className="overlay">
       {/* 4 room creation format */}
-        <div onClick={(e)=> e.stopPropagation()} className="dialog-create-room">
+      <div onClick={(e) => e.stopPropagation()} className="dialog-create-room">
+        <h3 className="dialog-headline">יצירת חדר חדש</h3>
+        <input
+          className="input-create-room"
+          onChange={handleRoomNameChange}
+          type="text"
+          placeholder="שם החדר"
+          value={roomName}
+        ></input>
 
-          {/* <form className="form-create-room"> */}
-            <div>
-            <h3 className="dialog-headline">יצירת חדר חדש</h3>
-            <input
-            className="input-create-room"
-              onChange={handleRoomNameChange}
-              type="text"
-              placeholder="שם החדר"
-              value={roomName}
-            > 
-            </input>
-            </div>
-            <div>
-            <input
-            className="input-create-room"
-              onChange={handleRoomDescriptionChange}
-              type="text"
-              placeholder="תיאור החדר"
-              value={roomDescription}
-            > 
-            </input>
-            </div>
-            <div>
-            <input
-            className="input-create-room"
-              onChange={handleMaxParticipantsQuantity}
-              type="number"
-              placeholder="כמות המשתתפים"
-              value={roomMaxParticipantsQuantity}
-            > 
-            </input>
-            </div>
+        <input
+          className="input-create-room"
+          onChange={handleRoomDescriptionChange}
+          type="text"
+          placeholder="תיאור החדר"
+          value={roomDescription}
+        ></input>
 
-            <div>
-              <div>
-                <p className="password-headline">נעל חדר בסיסמה</p>
-                <ToggleBoolean toggle={isLockedWithPassword} setToggle={setIsLockedWithPassword}/>
-              </div>
-              {isLockedWithPassword && 
-                <div>
-                  <input
-                  className="input-create-room"
-                  onChange={handlePasswordChange}
-                  type="password"
-                  placeholder="הכנס סיסמה"
-                  value={roomPassword}> 
-                </input>
-              </div>}
+        <input
+          className="input-create-room"
+          onChange={handleMaxParticipantsQuantity}
+          type="number"
+          placeholder="כמות המשתתפים"
+          value={roomMaxParticipantsQuantity}
+        ></input>
 
-              <div>
-                {/* button bellow to actually run room creation (url...) */}
-                <button onClick={createNewRoomURLAndGetInside} className="create-room-dialog-button">צור חדר</button>
-                <button onClick={()=>setShowCreateDialog(false)} className="cancel-dialog-button">ביטול</button>
-
-              </div>
-
-
-            </div>
-            
-          {/* </form> */}
+        <div className="lock-room-password-div">
+          <span className="password-headline">נעל חדר בסיסמה</span>
+          <ToggleBoolean
+            toggle={isLockedWithPassword}
+            setToggle={setIsLockedWithPassword}
+          />
         </div>
-      {/* 4 room creation format */}
+        {isLockedWithPassword && (
+          <input
+            className="input-create-room"
+            onChange={handlePasswordChange}
+            type="password"
+            placeholder="הכנס סיסמה"
+            value={roomPassword}
+          ></input>
+        )}
+
+        <div className="dialog-buttons-div">
+          <button
+            onClick={createNewRoomURLAndGetInside}
+            className="room-dialog-button"
+          >
+            צור חדר
+          </button>
+          <button
+            onClick={() => setShowCreateDialog(false)}
+            className="room-dialog-button gray"
+          >
+            ביטול
+          </button>
+        </div>
       </div>
-  )
+    </div>
+  );
 }
 
-export default DialogCreateRoom
+export default DialogCreateRoom;
