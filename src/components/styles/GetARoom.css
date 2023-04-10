@@ -424,4 +424,72 @@ input::-webkit-inner-spin-button {
   }
 }
 
+@media (max-width: 530px){
+  .container-div{
+
+  }
+  .left-side-get-a-room{
+    
+  }
+  .right-side-get-a-room{
+    padding: 10px;
+  }
+
+  .list-of-rooms-div{
+    margin-top: 0px;
+  }
+
+  .active-rooms-header{
+    background-color: pink;
+    text-align: center;
+  }
+
+  .room-card{
+    
+  }
+  .search-room-input{
+    width: 300px;
+  }
+  .enter-room-div{
+    margin-top: 70px;
+  }
+
+  .main-header{
+    font-size: 1.8rem;
+    text-align: center;
+    margin: 0px;
+    margin-bottom: 150px;
+    padding: 0px;
+  }
+  .sub-header{
+    background-color: #616161;
+    text-align: center;
+    
+  }
+
+  .more-info-header{
+    display: none;
+  }
+
+  .enter-code-header{
+    background-color: #a7bbe5;
+  }
+  .room-enter-code-div{
+    margin: 0px;
+  }
+  .create-room-button-index{
+    width: 290px;
+  }
+  .room-enter-input-buttons-div{
+    margin: 0;
+    gap: 20px;
+  }
+
+  .or-div{
+    display: none;
+  }
+
+  
+}
+
 

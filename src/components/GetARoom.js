@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { db, auth } from "../firebase";
@@ -14,6 +14,7 @@ import EnterRoomIntro from "./EnterRoomIntro";
 import "./styles/GetARoom.css";
 
 function GetARoom({ uid, isLoading, setIsLoading }) {
+  const myRef = useRef(null);
   const [user] = useAuthState(auth);
   const [values, setValues] = useState(["", "", "", "", "", ""]);
   const [roomNumber, setRoomNumber] = useState("");
@@ -27,6 +28,7 @@ function GetARoom({ uid, isLoading, setIsLoading }) {
 
   const [showCreateDialog, setShowCreateDialog] = useState(false);
   const [showRooms, setShowRooms] = useState(false);
+  const [mobileView, setMobileView] = useState(false);
 
   const navigate = useNavigate();
 
@@ -181,8 +183,25 @@ function GetARoom({ uid, isLoading, setIsLoading }) {
     joinRoom();
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 500) {
+        setMobileView(true);
+      } else {
+        setMobileView(false);
+      }
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <div className="container-div">
+      {mobileView && <div>mobile view activated!</div>}
       <div className="mobile-menu">
         <button onClick={() => setShowRooms(true)}>show rooms</button>
         <button onClick={() => setShowRooms(false)}>enter by code</button>
@@ -207,6 +226,7 @@ function GetARoom({ uid, isLoading, setIsLoading }) {
 
       <ListOfRooms
         // rooms={rooms}
+        myRef={myRef}
         setQueryRoomName={setQueryRoomName}
         queryRoomName={queryRoomName}
         user={user}
@@ -217,6 +237,8 @@ function GetARoom({ uid, isLoading, setIsLoading }) {
       <div className="right-side-get-a-room">
         <Logo userDisplayName={user.displayName} />
         <EnterRoomIntro
+          myRef={myRef}
+          mobileView={mobileView}
           values={values}
           setValues={setValues}
           enterRoomFromPin={enterRoomFromPin}

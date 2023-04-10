@@ -10,6 +10,7 @@ function ListOfRooms({
   user,
   isLoading,
   setIsLoading,
+  myRef,
 }) {
   const [rooms, setRooms] = useState([]);
 
@@ -26,7 +27,7 @@ function ListOfRooms({
     return () => unsubscribe();
   }, []);
   return (
-    <div className={`left-side-get-a-room search-room`}>
+    <div className={`left-side-get-a-room search-room`} ref={myRef}>
       <input
         type="text"
         className="search-room-input"

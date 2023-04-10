@@ -76,7 +76,7 @@
     background-color: #E0E0E0;
     height: auto;
     width: 100%;
-    min-width: 390px;
+    min-width: 100%;
     align-items: center;
     padding: 20px 28px;
   }
@@ -86,6 +86,7 @@
   .room-card-bottom{
     display: flex;
     flex-direction: column;
+    width: 100%;
     padding-bottom: 25px;
   }
 
@@ -109,4 +110,21 @@
 
  
 
-
+@media (max-width: 530px){
+  .room-users-capacity{
+    display: none;
+  }
+  .playing-now-span{
+    display: none;
+  }
+  .room-headers-div{
+    display: flex;
+    text-align: center;
+    margin-right: 0px;
+  }
+  .room-details-div{
+    margin: auto;
+    display: flex;
+    margin-top: 20px;
+  }
+}
