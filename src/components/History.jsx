@@ -95,7 +95,7 @@ function History({ history, setHistory, rid }) {
             />
           </div>
           <div className="history-song-info-div">
-            <span>{getSongName(message.text)}</span>
+            <span className="song-name-p">{getSongName(message.text)}</span>
             <span className="song-author-p">{getArtistName(message.text)}</span>
           </div>
         </li>

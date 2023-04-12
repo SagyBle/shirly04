@@ -1,12 +1,36 @@
 
 .lets-start-card-div{
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  width: 50%;
+  padding-bottom: 15vh;
+
+}
+
+.left-side-sign-in{
+  width: 40%;
+  min-width: 390px;
+  max-width: 800px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f9f9f9;
+  padding: 0px 0px;
+  justify-content: center;
+}
+
+.right-side-sign-in {
+    flex: 1 1;
+    padding: 40px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    gap: 20px;
-    width: 50%;
+    align-items: center;
 }
+
 
 .header-div{
   direction: rtl;
@@ -196,3 +220,33 @@ color: #616161;
   width: 200px;
 }
 
+@media (max-width: 875px){
+  .left-side-sign-in{
+    display: none;
+  }
+  .right-side-sign-in{    
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+
+  .lets-start-card-div{
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 160px;
+    width: 90%;
+    max-width: 400px;
+    padding-bottom: 9vh;
+    background-color: #f9f9f9;
+    border-radius: 20px;
+
+  }
+
+  .login-button{
+    width: 85%;
+  }
+
+}

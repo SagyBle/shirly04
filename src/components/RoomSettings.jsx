@@ -30,7 +30,7 @@ function RoomSettings({
         <div className="setting-line-div">
           <div className="avatars-button-div">
             <button className="invite-button">הזמן</button>
-            <div className="avatar-group">
+            <div className="avatar-group room-setting-avatar-group">
               {users.map((user) => {
                 return (
                   <div key={user.uid} className="avatar">

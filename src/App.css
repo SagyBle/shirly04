@@ -28,12 +28,12 @@
 
 
 .logo-arrow-div {
-    display: flex !important;
-    justify-content: space-between !important;
-    height: fit-content !important;
-    align-items: center !important;
-    flex-direction: row !important;
-    direction: rtl !important;
+    display: flex;
+    justify-content: space-between ;
+    height: fit-content ;
+    align-items: center ;
+    flex-direction: row ;
+    direction: rtl ;
 }
 
 .lock-icon-div {

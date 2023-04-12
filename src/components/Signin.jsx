@@ -20,54 +20,52 @@ const Signin = () => {
   const images = [PlayingGuitar, PlayingPiano, PlayingBeach, YahalomChen];
 
   return (
-    <>
-      <div className="container-div">
-        <div className="left-side">
-          <div className="explenation-card">
-            <img className="intro-image" src={images[imgIndex]} alt="" />
-            <div className="intro-headers-div">
-              <h5>לנגן עם חברים בקלות</h5>
+    <div className="container-div-chat">
+      <div className="left-side-sign-in">
+        <div className="explenation-card">
+          <img className="intro-image" src={images[imgIndex]} alt="" />
+          <div className="intro-headers-div">
+            <h5>לנגן עם חברים בקלות</h5>
 
-              <p className="intro-small-header-p">
-                ברוכים הבאים לשירלי, האפליקציה שתשדרג לכם כל ישיבה עם חברים, תקל
-                על הנגנים ותשפר את החוויה
-              </p>
+            <p className="intro-small-header-p">
+              ברוכים הבאים לשירלי, האפליקציה שתשדרג לכם כל ישיבה עם חברים, תקל
+              על הנגנים ותשפר את החוויה
+            </p>
 
-              <div className="dots">
-                <span
-                  onClick={() => setImageIndex(0)}
-                  className={imgIndex === 0 ? "dot dot-chosen" : "dot"}
-                ></span>
-                <span
-                  onClick={() => setImageIndex(1)}
-                  className={imgIndex === 1 ? "dot dot-chosen" : "dot"}
-                ></span>
-                <span
-                  onClick={() => setImageIndex(2)}
-                  className={imgIndex === 2 ? "dot dot-chosen" : "dot"}
-                ></span>
-                <span
-                  onClick={() => setImageIndex(3)}
-                  className={imgIndex === 3 ? "dot dot-chosen" : "dot"}
-                ></span>
-              </div>
+            <div className="dots">
+              <span
+                onClick={() => setImageIndex(0)}
+                className={imgIndex === 0 ? "dot dot-chosen" : "dot"}
+              ></span>
+              <span
+                onClick={() => setImageIndex(1)}
+                className={imgIndex === 1 ? "dot dot-chosen" : "dot"}
+              ></span>
+              <span
+                onClick={() => setImageIndex(2)}
+                className={imgIndex === 2 ? "dot dot-chosen" : "dot"}
+              ></span>
+              <span
+                onClick={() => setImageIndex(3)}
+                className={imgIndex === 3 ? "dot dot-chosen" : "dot"}
+              ></span>
             </div>
           </div>
         </div>
+      </div>
 
-        <div className="right-side">
-          <div className="lets-start-card-div">
-            <h1 className="header-h1">בואו נתחיל</h1>
+      <div className="right-side-sign-in">
+        <div className="lets-start-card-div">
+          <h1 className="header-h1">בואו נתחיל</h1>
 
-            <button className="login-button" onClick={googleSignIn}>
-              <img className="button-image-google" src={GoogleIcon} alt="" />
-              <span className="button-text-google">התחברו באמצעות גוגל </span>
-            </button>
-            <SigninEmail />
-          </div>
+          <button className="login-button" onClick={googleSignIn}>
+            <img className="button-image-google" src={GoogleIcon} alt="" />
+            <span className="button-text-google">התחברו באמצעות גוגל </span>
+          </button>
+          {/* <SigninEmail /> */}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

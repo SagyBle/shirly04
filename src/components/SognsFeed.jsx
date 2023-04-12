@@ -22,17 +22,19 @@ function SognsFeed({
   roomName,
   maxParticipantsQuantity,
   isEntranceAllowed,
+  RoomSongsRef,
+  currSongRef,
+  currPlayingNow,
 }) {
   return (
-    <div className="left-side">
-      <SendMessage
-        messages={messages}
-        history={history}
-        rid={rid}
-        addRequests={addRequests}
-      />
-
+    <div ref={RoomSongsRef} className="left-side">
       <div className="main-left-side">
+        <SendMessage
+          messages={messages}
+          history={history}
+          rid={rid}
+          addRequests={addRequests}
+        />
         <div className="choose-songs-or-history-div">
           <button
             onClick={() => setDisplayNextSongs(false)}
@@ -56,7 +58,14 @@ function SognsFeed({
             עבור לשיר הבא
           </button>
         )}
-
+        <button
+          className="curr-song-button"
+          onClick={() =>
+            currSongRef.current.scrollIntoView({ behavior: "smooth" })
+          }
+        >
+          צפה בשיר הנוכחי
+        </button>
         {displayNextSongs ? (
           <div className="list-of-messages-div">
             <ul className="listtttt">

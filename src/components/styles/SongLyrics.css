@@ -3,8 +3,8 @@
   /* flex-direction: colum; */
   /* background-color: #212121; */
   margin-top: 15px;
-  margin-right: 8%;
-  padding-right: 20px;
+  /* margin-right: 8%;
+  padding-right: 20px; */
 
 }
 
@@ -28,6 +28,7 @@
   min-height: 300px;
   max-height: 670px;
   overflow: auto;
+  
 }
 
 .lyrics-text{
@@ -69,4 +70,58 @@ line-height: 140%;
 letter-spacing: 0.2px;
 color: #212121;
 margin-right: 12px;
+}
+
+.button-return-to-next-songs{
+  display: none;
+}
+
+@media(max-width: 530px){
+  .song-lyrics-div{
+    height: auto;
+    max-height: none;
+    
+  }
+  .button-return-to-next-songs{
+    background-color: red;
+    display: block;
+    color: white;
+    direction: rtl;
+    background: #246BFD;
+    padding: 18px 16px;
+    border-radius: 100px;
+    font-size: 16px;
+    line-height: 140%;
+    transition: 0.2s !important;
+    margin-top: 30px;
+    cursor: pointer;
+  }
+
+  .lyrics-author-song-header-div{
+    outline: 2px solid rgba(217, 213, 213, 0.472);
+    padding: 10px;
+    border-radius: 20px;
+    
+  }
+  .lyrics-text{
+    font-size: 16px;
+  }
+
+  .author-name-h5{
+    text-align: right;
+    direction: rtl;
+    
+  }
+  .song-name-h1{
+    text-align: right;
+    font-size: 2rem;
+  }
+  .song-header-div{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .lyrics-author-song-header-div{
+    background-color: #f9f9f9;
+  }
 }

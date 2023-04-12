@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { db, auth } from "../firebase";
 import {
   query,
@@ -20,8 +20,12 @@ import LogoShirly from "./styles/images/LogoShirly.png";
 import SongLyrics from "./SongLyrics";
 import LogOut from "./LogOut";
 import SognsFeed from "./SognsFeed";
+import HomeIcon from "./styles/icons/HomeIcon.svg";
 
 const Chat = (props) => {
+  const RoomSongsRef = useRef(null);
+  const currSongRef = useRef(null);
+
   const [roomName, setRoomName] = useState("");
   const [messages, setMessages] = useState([]);
   const [displayNextSongs, setDisplayNextSongs] = useState(true);
@@ -137,8 +141,24 @@ const Chat = (props) => {
   };
 
   return (
-    <div className="container-div">
+    <div className="container-div-chat">
+      <div className="user-greetings-div-mobile">
+        <span className="hello-username">{`שלום ${user.displayName}, ${
+          amIAdmin ? "אתה מחובר כאדמין" : "אתה מחובר כמשתמש"
+        }`}</span>
+        <div className="mobile-header-icons-div">
+          <LogOut />
+          <img
+            onClick={() => navigate("/")}
+            className="hello-username home-button"
+            src={HomeIcon}
+            alt=""
+          />
+        </div>
+      </div>
       <SognsFeed
+        RoomSongsRef={RoomSongsRef}
+        currSongRef={currSongRef}
         uid={uid}
         rid={rid}
         messages={messages}
@@ -151,6 +171,7 @@ const Chat = (props) => {
         amIAdmin={amIAdmin}
         showLyrics={showLyrics}
         moveNext={moveNext}
+        currPlayingNow={currPlayingNow}
         history={history}
         setHistory={setHistory}
         users={users}
@@ -163,7 +184,7 @@ const Chat = (props) => {
         isEntranceAllowed={isEntranceAllowed}
       />
       <div className="right-side">
-        <div className="logo-arrow-div">
+        <div className="logo-arrow-div-chat">
           <div className="logo-img-div">
             <button
               onClick={() => {
@@ -181,13 +202,21 @@ const Chat = (props) => {
           </div>
         </div>
 
-        <div className="lyrics-author-song-header-div">
+        <div ref={currSongRef} className="lyrics-author-song-header-div">
           {showLyrics ? (
-            <SongLyrics rid={rid} />
+            <SongLyrics currSongRef={currSongRef} rid={rid} />
           ) : (
             <p>הצגת מילות השיר הושהתה על ידי מנהל החדר.</p>
           )}
         </div>
+        <button
+          onClick={() =>
+            RoomSongsRef.current.scrollIntoView({ behavior: "smooth" })
+          }
+          className="curr-song-button"
+        >
+          חזור לרשימת השירים
+        </button>
       </div>
     </div>
   );

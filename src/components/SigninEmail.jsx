@@ -89,8 +89,8 @@ function SigninEmail() {
         <div className="login-div">
           <button className="login-button" onClick={() => setShowForm(true)}>
             <div className="block">
-              <img className="button-image-google" src={IDCard} alt="" />
               <p className="button-text-google">התחברו בדרך אחרת </p>
+              <img className="button-image-google" src={IDCard} alt="" />
             </div>
           </button>
         </div>

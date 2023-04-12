@@ -137,7 +137,7 @@ export default class SendMessage extends React.Component {
   render() {
     const { text } = this.state;
     return (
-      <div>
+      <div className="wi-100">
         {this.props.addRequests ? (
           <input
             className="search-song-input"

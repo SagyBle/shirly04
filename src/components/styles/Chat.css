@@ -1,4 +1,4 @@
-.container-div{
+.container-div-chat{
   display: flex; 
   height: 100vh;
 }
@@ -25,8 +25,10 @@
     padding: 40px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    /* align-items: center; */
  }
+
+ 
 
 .logo{
     width: 100%;
@@ -45,7 +47,11 @@
   margin-top: 40px;
   min-height: 2.5rem;
   width: 88%;
+  /* min-width: 315px; */
   transition: 0.3s;
+  
+  
+  
   
 }
 
@@ -61,15 +67,19 @@
 .search-song-to-add-sector{
   height: 100px;
   display: flex;
-  background-color: red;
 }
 
 .search-song-div{
   margin: auto;
 }
 
-.search-song-input{
-  width: 460px;
+.chat-mobile-header{
+  background-color: red;
+  
+}
+
+/* .search-song-input{
+  
   height: 56px;
   background: #F5F5F5;
   border-radius: 12px;
@@ -79,7 +89,7 @@
   font-weight: lighter;
   padding-right: 30px;
   
-}
+} */
 
 .search-song-input::placeholder{
 }
@@ -127,6 +137,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  
   
 }
 
@@ -259,6 +270,9 @@
   background: #EEEEEE;
   border-radius: 20px;
   width: 90%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .room-setting-div-open{
@@ -386,6 +400,7 @@
 .room-header-h4{
   font-weight: 700;
   font-size: 24px;
+  margin: 0;
 }
 
 
@@ -462,7 +477,7 @@
 }
 
 
-.logo-arrow-div{
+.logo-arrow-div-chat{
   display: flex;
   justify-content: space-between;
   height: 125px;
@@ -594,6 +609,23 @@
   color: #212121;
 }
 
+.logout-button{
+  width: 45px;
+  height: auto;
+  cursor: pointer;
+}
+
+.home-button{
+  width: 48px;
+  height: auto;
+  cursor: pointer;
+}
+
+.mobile-header-icons-div{
+  display: flex;
+  align-items: center;
+}
+
 .suggestion-author-name-div{
   width: fit-content;
   align-self: flex-end;
@@ -611,10 +643,117 @@
 }
 
 
-
-.w-100{
-  align-self: center;
-  display: flex;
-  justify-content: center;
+.wi-100{
+  width:100%;
+  /* display: flex;
+  flex-direction: column; */
+  
+}
+.curr-song-button{
+  display: none;
 }
 
+.user-greetings-div-mobile{
+  display: none;
+}
+
+@media (max-width: 530px){
+  .container-div-chat{
+    display: flex;
+    flex-direction: column;
+  }
+  .user-greetings-div-mobile{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(221, 218, 218) ;
+    background-color: #f9f9f9;
+  }
+  .hello-username{
+    direction: rtl;
+    font-size: 0.6rem;
+  }
+  .room-setting-avatar-group{
+    display: none;
+  }
+
+  .room-header-h4{
+    font-size: 1rem;
+  }
+  .room-desc{
+    width: 100%;
+    text-align: right;
+    font-size: 0.7rem;
+    color: rgb(56, 54, 54);
+  }
+  .room-setting-div-open{
+    padding: 12px 14pxs;
+  }
+  .settings-div{
+    width: 100%;
+  }
+  .setting-line-div{
+    width: 100%;
+  }
+
+  .list-of-messages-div{
+
+    margin-top: 0;
+  }
+
+  .history-song-info-div{
+  }
+  .song-name-p{
+    font-size: 0.8rem;
+  }
+  .song-author-p{
+    font-size: 0.6rem;
+  }
+  .trash-bin-icon{
+    width: 20px;
+  }
+  .number-of-likes{
+    font-size: 0.6rem;
+  }
+  .message-card{
+    height: 70px;
+  }
+  .button-history{
+    font-size: 0.8rem;
+  }
+  .button-history-active{
+    font-size: 0.8rem;
+
+  }
+
+  .logo-arrow-div-chat{
+    display: none;
+    
+  }
+
+  .move-next-button{
+    width: 275px;
+    height: 60px;
+    font-size: 0.8rem;
+    
+}
+
+.curr-song-button{
+  display: block;
+    align-self: center;
+    margin: auto;
+     width: 275px;
+    height: 60px;
+    font-size: 0.8rem;
+    border-radius: 20px;
+    color: #424242;
+    background-color: rgba(24, 181, 224, 0.312);
+    transition:0.3s;
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+.curr-song-button:hover{
+  background-color: rgba(24, 181, 224, 0.612);
+}
+ 
+}

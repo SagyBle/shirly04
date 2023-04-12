@@ -76,7 +76,9 @@ const Message = ({ message }) => {
       </div>
 
       <div className="history-song-info-div">
-        <span>{splitSongArtist(message.text).songName}</span>
+        <span className="song-name-p">
+          {splitSongArtist(message.text).songName}
+        </span>
         <span className="song-author-p">
           {splitSongArtist(message.text).artistName}
         </span>

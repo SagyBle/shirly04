@@ -4,13 +4,9 @@ import LogoShirly from "./styles/images/LogoShirly.png";
 
 function Loading() {
   return (
-    <div className="loader-container">
-      <div className="center">
-        <img className="logo-img logo-loading" src={LogoShirly} />
-      </div>
-      <div className="center">
-        <div className="loader"></div>
-      </div>
+    <div className="loading-container">
+      <img className="logo-loading" src={LogoShirly} alt="Logo" />
+      <div className="spinner"></div>
     </div>
   );
 }

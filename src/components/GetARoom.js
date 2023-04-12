@@ -10,6 +10,8 @@ import Swal from "sweetalert2";
 import Logo from "./Logo";
 import ListOfRooms from "./ListOfRooms";
 import EnterRoomIntro from "./EnterRoomIntro";
+import Header from "./Header.jsx";
+import LogOut from "./LogOut";
 
 import "./styles/GetARoom.css";
 
@@ -200,11 +202,10 @@ function GetARoom({ uid, isLoading, setIsLoading }) {
   }, []);
 
   return (
-    <div className="container-div">
-      {mobileView && <div>mobile view activated!</div>}
-      <div className="mobile-menu">
-        <button onClick={() => setShowRooms(true)}>show rooms</button>
-        <button onClick={() => setShowRooms(false)}>enter by code</button>
+    <div className="container-div-get-a-room">
+      <div className="user-greetings-div-mobile">
+        <span className="hello-username">{`שלום ${user.displayName}`}</span>
+        <LogOut />
       </div>
       {showCreateDialog && (
         <DialogCreateRoom

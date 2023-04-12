@@ -23,6 +23,12 @@ input::-webkit-inner-spin-button {
   
 }
 
+.container-div-get-a-room{
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+}
+
 
 .left-side-get-a-room{
   width: 40%;
@@ -176,7 +182,7 @@ input::-webkit-inner-spin-button {
   direction: "rtl" !important;
 }
 
-.dialog-create-room{
+/* .dialog-create-room{
   outline: #212121;
   background: #246BFD;
 
@@ -189,111 +195,15 @@ input::-webkit-inner-spin-button {
     padding: 36px 24px;
     gap: 24px;
     background: #FFFFFF;
-      /* Greyscale / 100 */
     
       border: 1px solid #F5F5F5;
       border-radius: 40px;
-}
+} */
+
 .form-create-room{
   background:pink;
 }
-.input-create-room {
-  font-family: 'NarkisBlockMF';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 140%;
-  background: #FAFAFA;
-  width: 380px;
-  height: 56px;
-  border-radius: 12px;
-  direction: rtl;
-  padding-right: 15px;
-  transition: 0.7s;
-  
-}
-.input-create-room::placeholder{
-    font-family: 'NarkisBlockMF';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 140%;
-    /* identical to box height, or 20px */
-  
-    display: flex;
-    align-items: center;
-    text-align: right;
-    letter-spacing: 0.2px;
-  
-    /* Greyscale / 500 */
-  
-    color: #9E9E9E;
-    
-}
 
-.dialog-headline{
-  font-family: 'NarkisBlockMF';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 120%;
-  /* identical to box height, or 29px */
-
-  display: flex;
-  align-items: center;
-  text-align: center;
-
-  /* Greyscale / 900 */
-
-  color: #212121;
-}
-
-.password-headline{
-  font-family: 'NarkisBlockMF';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 140%;  
-  color: #9E9E9E;
-}
-
-.create-room-dialog-button{
-  margin-top: 30px;
-  margin-bottom: 20px;
-  /* display: flex;
-    flex-direction: row; */
-    justify-content: center;
-    align-items: center;
-    padding: 18px 16px;
-    gap: 10px;
-  
-    width: 380px;
-    height: 58px;
-    
-    background: #246BFD;
-  
-    box-shadow: 4px 8px 24px rgba(36, 107, 253, 0.25);
-    border-radius: 100px;  
-    flex: none;
-    order: 3;
-    align-self: stretch;
-    flex-grow: 0;
-    font-family: 'NarkisBlockMF';
-      font-style: normal;
-      font-weight: 700;
-      font-size: 16px;
-      line-height: 140%;
-      /* or 22px */
-    
-      display: flex;
-      align-items: center;
-      text-align: center;
-      letter-spacing: 0.2px;
-    
-      /* Others / White */
-    
-      color: #FFFFFF;
-}
 
 .logo{
     display: flex;
@@ -384,7 +294,6 @@ input::-webkit-inner-spin-button {
   margin-left: 20px;
   gap: 10px;
 }
-
 .hello-username{
   font-family: 'NarkisBlockMF';
   font-style: normal;
@@ -398,7 +307,7 @@ input::-webkit-inner-spin-button {
   letter-spacing: 0.2px;
   color: #9E9E9E;
   padding-top: 15px;
-  padding-right: 10px;
+  padding: 10px;
 }
 
 .logout-button{
@@ -411,9 +320,10 @@ input::-webkit-inner-spin-button {
 
 
 @media (max-width: 875px){
-  .container-div {
+  .container-div-get-a-room {
     display: flex;
     flex-direction: column;
+    /* background-color: red; */
   }
   .mobile-menu{
     display: flex;
@@ -422,17 +332,22 @@ input::-webkit-inner-spin-button {
   .left-side-get-a-room{
     width: 100%;
   }
+  .right-side-get-a-room{
+    height: 100vh;
+    /* background-color: red; */
+  }
 }
 
 @media (max-width: 530px){
-  .container-div{
-
+  .container-div-get-a-room{
+    background-color: #616161;
   }
   .left-side-get-a-room{
     
   }
   .right-side-get-a-room{
-    padding: 10px;
+    /* padding: 10px; */
+    
   }
 
   .list-of-rooms-div{
@@ -440,7 +355,6 @@ input::-webkit-inner-spin-button {
   }
 
   .active-rooms-header{
-    background-color: pink;
     text-align: center;
   }
 
@@ -462,7 +376,6 @@ input::-webkit-inner-spin-button {
     padding: 0px;
   }
   .sub-header{
-    background-color: #616161;
     text-align: center;
     
   }
@@ -472,10 +385,13 @@ input::-webkit-inner-spin-button {
   }
 
   .enter-code-header{
-    background-color: #a7bbe5;
+    
   }
   .room-enter-code-div{
     margin: 0px;
+  }
+
+  .code-enter-div{
   }
   .create-room-button-index{
     width: 290px;
@@ -488,7 +404,10 @@ input::-webkit-inner-spin-button {
   .or-div{
     display: none;
   }
-
+  .logo-div{
+    /* background-color: red; */
+    display: none;
+  }
   
 }
 

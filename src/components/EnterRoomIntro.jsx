@@ -29,23 +29,27 @@ function EnterRoomIntro({
                 myRef.current.scrollIntoView({ behavior: "smooth" })
               }
             >
-              לרשימת החדרים הקיימים
+              לרשימת החדרים הפעילים
             </button>
           )}
-          {mobileView && (
-            <h3 className="sub-header enter-code-header">הכנסו באמצעות קוד</h3>
-          )}
+          <div className="code-enter-div">
+            {mobileView && (
+              <h3 className="sub-header enter-code-header">
+                הכנסו באמצעות קוד
+              </h3>
+            )}
 
-          <PinInput
-            className="pin-input"
-            values={values}
-            placeholder=""
-            onChange={(value, index, values) => setValues(values)}
-            onComplete={() => enterRoomFromPin()}
-            size={`${mobileView ? "sm" : "lg"}`}
-            borderColor="#c9c5c5"
-            focusBorderColor="#246BFD"
-          />
+            <PinInput
+              className="pin-input"
+              values={values}
+              placeholder=""
+              onChange={(value, index, values) => setValues(values)}
+              onComplete={() => enterRoomFromPin()}
+              size={`${mobileView ? "sm" : "lg"}`}
+              borderColor="#c9c5c5"
+              focusBorderColor="#246BFD"
+            />
+          </div>
 
           <div className="or-div">
             <div className="horizontal-line"></div>

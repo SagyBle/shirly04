@@ -8,7 +8,7 @@ import { getSongID } from "../data/preview";
 
 import "./styles/SongLyrics.css";
 
-function SongLyrics({ rid }) {
+function SongLyrics({ rid, currSongRef }) {
   const [currHeader, setCurrHeader] = useState("notDef");
   const [songName, setSongName] = useState("");
   const [artist, setArtist] = useState("");
@@ -43,14 +43,22 @@ function SongLyrics({ rid }) {
 
   return (
     <div className="lyrics-main-div">
-      <div className="song-header-div">
-        <div className="author-name-div">
-          <h5 className="author-name-h5">{artist} / </h5>
+      {songName ? (
+        <div className="song-header-div">
+          <div className="author-name-div">
+            <h5 className="author-name-h5">{artist} / </h5>
+          </div>
+          <div className="song-name-div">
+            <h1 className="song-name-h1">{songName}</h1>
+          </div>
         </div>
-        <div className="song-name-div">
-          <h1 className="song-name-h1">{songName}</h1>
+      ) : (
+        <div className="song-header-div">
+          <div className="song-name-div">
+            <h1 className="song-name-h1">טוען...</h1>
+          </div>
         </div>
-      </div>
+      )}
       <div className="song-lyrics-div">
         {/* <p className="lyrics-text">{lyrics}</p> */}
         {lyrics.map((line) => (
