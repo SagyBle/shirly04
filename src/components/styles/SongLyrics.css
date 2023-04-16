@@ -34,22 +34,20 @@
 .lyrics-text{
   direction: rtl;
   font-family: 'NarkisBlockMF';
-font-style: normal;
-font-weight: 400;
-font-size: 18px;
-line-height: 140%;
-  
-/* or 25px */
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 140%;
 
-display: flex;
-align-items: center;
-text-align: right;
-letter-spacing: 0.2px;
+  display: flex;
+  align-items: center;
+  text-align: right;
+  letter-spacing: 0.2px;
+  color: #212121;
+}
 
-/* Greyscale / 900 */
-
-color: #212121;
-
+.chord-element{
+  color: blue;
 }
 
 .song-name-h1{

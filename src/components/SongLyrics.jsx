@@ -33,13 +33,20 @@ function SongLyrics({ rid, currSongRef }) {
           setLyrics(data.lyrics);
           setArtist(data.artist);
           setSongName(data.song_name);
-
-          console.log(lyrics);
         })
         .catch((error) => console.error(error));
     }
     getLyrics();
   }, [currHeader]);
+
+  const isChordElement = (element) => {
+    const chordRegExp =
+      /^(?:\s*)?[A-G](?:#|b)?(?:m|maj(?:7)?|4|5|6|7|9|sus4|dim)?\s*/g;
+    const chordString = element;
+    return chordRegExp.test(chordString);
+  };
+
+  const tryFunc = () => {};
 
   return (
     <div className="lyrics-main-div">
@@ -62,7 +69,13 @@ function SongLyrics({ rid, currSongRef }) {
       <div className="song-lyrics-div">
         {/* <p className="lyrics-text">{lyrics}</p> */}
         {lyrics.map((line) => (
-          <p className="lyrics-text">{line}</p>
+          <p
+            className={`lyrics-text ${
+              isChordElement(line) ? "chord-element" : ""
+            }`}
+          >
+            {line}
+          </p>
         ))}
       </div>
     </div>
