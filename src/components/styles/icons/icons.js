@@ -83,3 +83,134 @@ export const Like = (
     />
   </svg>
 );
+
+export const Copy = (
+  <svg
+    width="20"
+    height="28"
+    viewBox="0 0 58 71"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <rect x="11.5" y="1.5" width="45" height="57" rx="3.5" fill="#D9D9D9" />
+    <rect
+      x="11.5"
+      y="1.5"
+      width="45"
+      height="57"
+      rx="3.5"
+      stroke="black"
+      stroke-width="3"
+    />
+    <rect x="1.5" y="12.5" width="45" height="57" rx="3.5" fill="#D9D9D9" />
+    <rect
+      x="1.5"
+      y="12.5"
+      width="45"
+      height="57"
+      rx="3.5"
+      stroke="black"
+      stroke-width="3"
+    />
+  </svg>
+);
+
+export const Share = (
+  <svg
+    width="20"
+    height="26"
+    viewBox="0 0 64 72"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <circle
+      cx="52.5"
+      cy="60.5"
+      r="10"
+      fill="#D9D9D9"
+      stroke="black"
+      stroke-width="3"
+    />
+    <circle
+      cx="52.5"
+      cy="11.5"
+      r="10"
+      fill="#D9D9D9"
+      stroke="black"
+      stroke-width="3"
+    />
+    <circle
+      cx="11.5"
+      cy="36.5"
+      r="10"
+      fill="#D9D9D9"
+      stroke="black"
+      stroke-width="3"
+    />
+    <line
+      x1="20.1947"
+      y1="29.7345"
+      x2="42.1947"
+      y2="15.7345"
+      stroke="black"
+      stroke-width="3"
+    />
+    <line
+      x1="20.8053"
+      y1="41.7345"
+      x2="42.8056"
+      y2="55.734"
+      stroke="black"
+      stroke-width="3"
+    />
+  </svg>
+);
+
+export const Copied = (
+  <svg
+    width="18"
+    height="18"
+    viewBox="0 0 35 35"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <circle cx="17.5" cy="17.5" r="17" fill="white" stroke="black" />
+    <line x1="8.035" y1="19.6359" x2="14.5735" y2="25.7897" stroke="black" />
+    <line x1="13.8772" y1="25.8003" x2="29.2618" y2="10.4157" stroke="black" />
+  </svg>
+);
+
+export const ExitX = (
+  <svg
+    width="30"
+    height="30"
+    viewBox="0 0 95 95"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <circle
+      cx="47.5"
+      cy="47.5"
+      r="46"
+      fill="white"
+      stroke="black"
+      stroke-width="3"
+    />
+    <line
+      x1="67.0552"
+      y1="29.0673"
+      x2="30.0552"
+      y2="65.6898"
+      stroke="black"
+      stroke-width="3"
+    />
+    <line
+      x1="64.9435"
+      y1="65.6909"
+      x2="27.9459"
+      y2="29.066"
+      stroke="black"
+      stroke-width="3"
+    />
+  </svg>
+);

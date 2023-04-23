@@ -54,15 +54,15 @@ function Room({ room, user, isLoading, setIsLoading }) {
     <li className="room-card">
       <div className="room-card-top">
         <div className="avatar-group">
-          {users.map((user) => {
+          {users.slice(0, 5).map((user) => {
             return (
               <div className="avatar">
                 <img src={user.photoURL} alt="" />
               </div>
             );
           })}
-          {users.length > 3 && (
-            <div className="hidden-avatars">+{users.length - 3}</div>
+          {users.length > 5 && (
+            <div className="hidden-avatars">+{users.length - 5}</div>
           )}
         </div>
 

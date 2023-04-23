@@ -96,6 +96,7 @@
 .button-text-google{
   display: inline;
   font-weight: 400;
+  direction: rtl;
 }
 
 .button-image-google{

@@ -5,6 +5,7 @@ import Message from "./Message";
 import RoomSettings from "./RoomSettings";
 
 function SognsFeed({
+  setShowInvitePopup,
   rid,
   messages,
   addRequests,
@@ -53,11 +54,7 @@ function SognsFeed({
             השירים הבאים
           </button>
         </div>
-        {amIAdmin && amIAdmin && showLyrics && displayNextSongs && (
-          <button className="move-next-button" onClick={() => moveNext()}>
-            עבור לשיר הבא
-          </button>
-        )}
+
         <button
           className="curr-song-button"
           onClick={() =>
@@ -85,8 +82,14 @@ function SognsFeed({
             />
           </div>
         )}
+        {amIAdmin && amIAdmin && showLyrics && displayNextSongs && (
+          <button className="move-next-button" onClick={() => moveNext()}>
+            עבור לשיר הבא
+          </button>
+        )}
         {displaySettings ? (
           <RoomSettings
+            setShowInvitePopup={setShowInvitePopup}
             displaySettings={displaySettings}
             setDisplaySettings={setDisplaySettings}
             roomName={roomName}

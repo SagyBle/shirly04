@@ -20,6 +20,7 @@ import LogoShirly from "./styles/images/LogoShirly.png";
 import SongLyrics from "./SongLyrics";
 import LogOut from "./LogOut";
 import SognsFeed from "./SognsFeed";
+import PopupShare from "./PopupShare";
 import HomeIcon from "./styles/icons/HomeIcon.svg";
 
 const Chat = (props) => {
@@ -42,6 +43,7 @@ const Chat = (props) => {
   const [setCurrPlayingNow, currPlayingNow] = useState("");
 
   const [maxParticipantsQuantity, setMaxParticipantsQuantity] = useState(null);
+  const [showInvitePopup, setShowInvitePopup] = useState(false);
 
   const { id } = useParams();
   const rid = id;
@@ -142,6 +144,9 @@ const Chat = (props) => {
 
   return (
     <div className="container-div-chat">
+      {showInvitePopup && (
+        <PopupShare rid={rid} setShowInvitePopup={setShowInvitePopup} />
+      )}
       <div className="user-greetings-div-mobile">
         <span className="hello-username">{`שלום ${user.displayName}, ${
           amIAdmin ? "אתה מחובר כאדמין" : "אתה מחובר כמשתמש"
@@ -157,6 +162,7 @@ const Chat = (props) => {
         </div>
       </div>
       <SognsFeed
+        setShowInvitePopup={setShowInvitePopup}
         RoomSongsRef={RoomSongsRef}
         currSongRef={currSongRef}
         uid={uid}

@@ -1,0 +1,73 @@
+
+.invitation-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  height: 100vh;
+}
+
+.invitation-headers{
+  width: 100%;
+  text-align: center;
+  direction: rtl;
+}
+
+.invitation-buttons{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.join-now-button{
+  background-color: transparent;
+  border: green solid 1px;
+
+  direction: rtl;
+  padding: 16px;
+  border-radius: 12px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  color: #212121;
+  border: 1px solid #EEEEEE;
+}
+
+.invitation-login-button{
+  width: 100%;
+  height: 60px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  color: #FFFFFF;
+  border: 1px solid #EEEEEE;
+  border-radius: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row-reverse;
+  gap: 10px;
+  background-color: rgb(14, 103, 237);
+  
+}
+
+.invitation-login-button:hover{
+  background-color: rgb(12, 87, 198);
+  border: 1px solid #cac9c9;
+
+}
+
+.invitation-button-text{
+  color: #FFFFFF;
+}
+
+.disabled{
+  background-color: rgb(185, 199, 221);
+  cursor: not-allowed;
+}
+
+.disabled:hover{
+  background-color: rgb(185, 199, 221);
+    cursor: not-allowed;
+
+}

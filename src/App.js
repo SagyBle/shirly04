@@ -12,6 +12,8 @@ import Button from "react-bootstrap/Button";
 import Loading from "./components/Loading";
 import Test from "./components/Test";
 import Header from "./components/Header";
+import InvitationPage from "./components/InvitationPage";
+import QRGenerator from "./components/QRGenerator";
 
 // const style = {
 //   appContainer: `max-w-[728px] mx-auto text-center`,
@@ -38,6 +40,8 @@ function App() {
             </div>
           }
         />
+        <Route path="/invitation/:rid" element={<InvitationPage />} />
+        <Route path="/qrcode/:rid" element={<QRGenerator />} />
 
         <Route
           path="/jam-room/:id"

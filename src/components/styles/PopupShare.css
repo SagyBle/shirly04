@@ -1,0 +1,147 @@
+
+
+.dialog-share {
+  outline: #212121;
+  
+  width: auto;
+  height: auto;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 36px 24px;
+  gap: 24px;
+  background: #FFFFFF;
+  border: 1px solid #F5F5F5;
+  border-radius: 40px;
+  max-width: 400px;
+  position: absolute;
+  top: 10%;
+  left: 30%;
+  right: 0;
+
+  display: flex;
+  background-color: #FFFFFF;
+  box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.45);
+  gap: 16px;
+
+    
+}
+
+.share-button-x-div{
+  width: 100%;
+}
+
+.share-button-x{
+  display: flex;
+}
+
+.share-header{
+  direction: rtl;
+}
+
+.share-sub-header{
+  direction: rtl;
+  color: gray;
+}
+
+
+.share-qr-image{
+  width: 272px;
+}
+
+.share-other-ways-div{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0px 4px;
+}
+
+.share-other-ways{
+  text-align: center;
+  width: fit-content;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: rgb(160, 157, 157);
+  padding: 0px 10px;
+}
+
+
+.share-line{
+  flex: 1;
+  border-bottom: solid 1px rgb(188, 180, 180);
+  width: 10px;
+  
+}
+
+.share-url-input{
+  width: 100%;
+  padding: 4px 10px;
+  color: rgb(108, 107, 107);
+  font-size: 0.9rem;
+  font-weight: 400;
+  border: 1px solid gray;
+  border-radius: 4px;
+  transition: 0.3s;
+}
+
+.share-url-input:hover{
+  transition: 0.3s;
+}
+
+.share-url-input:focus{
+  outline: none;
+  border: 1px solid black;
+  background-color: rgba(238, 233, 233, 0.716);
+  
+}
+
+.share-url-total-div{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.share-url-div{
+  display: flex;
+  flex-direction:row;
+  width: 100%;
+  gap: 5px;
+}
+
+.share-button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width:30px;
+  height: auto;
+  
+  border: 1px solid gray;
+  padding: 5px;
+  border-radius: 4px;
+}
+
+.share-button:hover{
+  border: 1px solid black;
+  transition: 0.3s;
+    background-color: rgba(247, 247, 247, 0.716);
+
+}
+
+.share-link-copied{
+  width: 100%;
+  text-align: right;
+  font-weight: 300;
+  color: rgb(147, 143, 143);
+  font-size: 0.8rem;
+  margin-top: 12px;
+  transition: 0.6s;
+  display: flex;
+  flex-direction:row;
+  align-items: center;
+  justify-content: right;
+  gap: 5px;
+}
+
+/* .share-url-input::placeholder{
+  color: red;
+} */
