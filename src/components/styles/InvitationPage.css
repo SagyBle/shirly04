@@ -1,73 +1,69 @@
-
-.invitation-container{
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: center;
-  height: 100vh;
-}
-
-.invitation-headers{
-  width: 100%;
-  text-align: center;
+.invitation-header{
   direction: rtl;
+  margin: 0;
 }
 
-.invitation-buttons{
+.invitation-room-details-div{
   display: flex;
-  flex-direction: column;
   width: 100%;
+  justify-content: right;
+  gap: 12px;
 }
 
-.join-now-button{
-  background-color: transparent;
-  border: green solid 1px;
-
+.invitation-room-details{
   direction: rtl;
-  padding: 16px;
+  font-weight: 400;
+  color: gray;
+}
+
+.invitation-avatars{
+  margin-top: 16px;
+  width: 100%;
+  display: flex;
+  justify-content: right;
+  background-color: rgb(234, 234, 234);
+  padding: 12px 6px 12px 16px;
+  width: fit-content;
   border-radius: 12px;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  color: #212121;
-  border: 1px solid #EEEEEE;
+}
+
+.invitation-sub-header{
+  width: 100%;
+  display: flex;
+  justify-content: right;
+  direction: rtl;
+  margin: 0;
+  font-weight: 400;
+}
+
+.invitation-buttons-div{
+  margin-top: 16px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .invitation-login-button{
-  width: 100%;
-  height: 60px;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  color: #FFFFFF;
-  border: 1px solid #EEEEEE;
-  border-radius: 16px;
+  background-color: rgb(14, 176, 14);
+  width: 48%;
+  padding: 8px 0px;
+  border-radius: 12px;
+  color: white;
+  direction: rtl;
   display: flex;
-  justify-content: center;
   align-items: center;
-  flex-direction: row-reverse;
-  gap: 10px;
-  background-color: rgb(14, 103, 237);
-  
-}
-
-.invitation-login-button:hover{
-  background-color: rgb(12, 87, 198);
-  border: 1px solid #cac9c9;
+  justify-content: center;
+  gap: 12px;
+  font-weight: 300;
 
 }
 
 .invitation-button-text{
-  color: #FFFFFF;
+  color: white;
+  font-weight: 300;
 }
 
-.disabled{
-  background-color: rgb(185, 199, 221);
-  cursor: not-allowed;
-}
-
-.disabled:hover{
-  background-color: rgb(185, 199, 221);
-    cursor: not-allowed;
-
+.disabled-button{
+  background-color:rgba(177, 167, 167, 0.566);
 }

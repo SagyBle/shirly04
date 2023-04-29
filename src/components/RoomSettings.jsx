@@ -39,13 +39,16 @@ function RoomSettings({
                 הזמן
               </button>
               <div className="avatar-group room-setting-avatar-group">
-                {users.map((user) => {
+                {users.slice(0, 5).map((user) => {
                   return (
                     <div key={user.uid} className="avatar">
                       <img src={user.photoURL} alt="" />
                     </div>
                   );
                 })}
+                {users.length > 5 && (
+                  <div className="hidden-avatars">+{users.length - 5}</div>
+                )}
               </div>
             </div>
             <span className="room-setting-toggle-header-p">

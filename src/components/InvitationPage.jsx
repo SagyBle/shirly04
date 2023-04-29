@@ -1,12 +1,17 @@
 import React, { useDebugValue, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { getDoc, doc } from "firebase/firestore";
+import {
+  getDoc,
+  doc,
+  onSnapshot,
+  query,
+  collection,
+  orderBy,
+} from "firebase/firestore";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import GoogleIcon from "./styles/icons/GoogleIcon.png";
 import { db, auth } from "../firebase";
-import QRGenerator from "./QRGenerator";
-
 import "./styles/InvitationPage.css";
 
 function InvitationPage() {
@@ -14,16 +19,36 @@ function InvitationPage() {
   const [roomName, setRoomName] = useState("");
   const [user] = useAuthState(auth);
 
+  const [users, setUsers] = useState([]);
+  const [playingNow, setPlayingNow] = useState("");
+
+  const navigate = useNavigate();
+
   const getRoomName = async () => {
     const roomRef = doc(db, `rooms/room${rid}`);
     getDoc(roomRef).then((docSnap) => {
-      console.log(docSnap.data().roomNumber);
       setRoomName(docSnap.data().roomName);
+      setPlayingNow(docSnap.data().currPlayingNow);
     });
   };
 
   useEffect(() => {
     getRoomName();
+  }, []);
+
+  useEffect(() => {
+    const q = query(
+      collection(db, `rooms/room${rid}/users`),
+      orderBy("timestamp")
+    );
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      let users = [];
+      querySnapshot.forEach((doc) => {
+        users.push({ ...doc.data(), id: doc.id });
+      });
+      setUsers(users);
+    });
+    return () => unsubscribe();
   }, []);
 
   const googleSignIn = () => {
@@ -32,30 +57,66 @@ function InvitationPage() {
   };
 
   const joinRoom = () => {
-    console.log(`join room ${rid} if exists`);
+    if (user) {
+      navigate(`/jam-room/${rid}`);
+    }
   };
 
   return (
-    <div className="invitation-container">
-      <div className="invitation-headers">
-        <h1>ברוכים הבאים!</h1>
-        <h4>הוזמנתם לחדר: {roomName}</h4>
-      </div>
-
-      <div className="invitation-buttons">
-        {!user && (
-          <button className="invitation-login-button" onClick={googleSignIn}>
-            <img className="button-image-google" src={GoogleIcon} alt="" />
-            <span className="invitation-button-text">התחברו באמצעות גוגל </span>
+    <div className="overlay">
+      <div className="dialog-share">
+        <h1 className="invitation-header">הוזמנתם לג׳מג׳ם!</h1>
+        <h4 className="invitation-sub-header">{roomName}</h4>
+        <div className="invitation-room-details-div">
+          <span className="invitation-room-details">
+            {users.length} משתתפים
+          </span>
+          <span className="invitation-room-details">&#8226;</span>
+          <span className="invitation-room-details">{playingNow}</span>
+        </div>
+        <div className="avatar-group invitation-avatars">
+          {users.length > 10 && (
+            <div className="hidden-avatars">+{users.length - 10}</div>
+          )}
+          {users.slice(0, 10).map((user) => {
+            return (
+              <div key={user.uid} className="avatar">
+                <img src={user.photoURL} alt="" />
+              </div>
+            );
+          })}
+        </div>
+        <div className="invitation-buttons-div">
+          <button
+            onClick={() => joinRoom()}
+            className={`invitation-login-button ${!user && "disabled-button"}`}
+          >
+            הצטרפו עכשיו
           </button>
-        )}
 
-        <button
-          onClick={() => joinRoom()}
-          className={`invitation-login-button ${!user && "disabled"}`}
-        >
-          הצטרפו כעת
-        </button>
+          {user ? (
+            <button
+              className={`invitation-login-button ${user && "disabled-button"}`}
+              onClick={() => auth.signOut()}
+            >
+              <span className="invitation-button-text">
+                היי {user.displayName.split(" ")[0]}
+              </span>
+            </button>
+          ) : (
+            <button
+              onClick={() => {
+                googleSignIn();
+              }}
+              className={`invitation-login-button ${user && "disabled-button"}`}
+            >
+              <>
+                <img className="button-image-google" src={GoogleIcon} alt="" />
+                <span className="invitation-button-text">התחברו </span>
+              </>
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );
