@@ -24,7 +24,7 @@ function PopupShare({ rid, setShowInvitePopup }) {
   }, []);
 
   return (
-    <div className="overlay">
+    <div className="overlay-share">
       {/* <div className="overlay" onClick={() => setShowInvitePopup(false)}> */}
       <div className="dialog-share">
         <div className="share-button-x-div">

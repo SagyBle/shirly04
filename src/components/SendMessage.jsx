@@ -70,12 +70,12 @@ export default class SendMessage extends React.Component {
       <div>
         {suggestions.map((item) => (
           <div>
-            <div className="suggestion-line-div">
+            <div
+              className="suggestion-line-div"
+              onClick={() => this.sendMessage(item)}
+            >
               <div className="suggestion-add-song-div">
-                <button
-                  onClick={() => this.sendMessage(item)}
-                  className="suggestion-add-song-button"
-                >
+                <button className="suggestion-add-song-button">
                   <img className="suggestion-add-song-icon" src={Plus} alt="" />
                 </button>
                 <div className="suggestion-was-before-div">

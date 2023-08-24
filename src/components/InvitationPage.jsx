@@ -63,7 +63,7 @@ function InvitationPage() {
   };
 
   return (
-    <div className="overlay">
+    <div className="overlay-share">
       <div className="dialog-share">
         <h1 className="invitation-header">הוזמנתם לג׳מג׳ם!</h1>
         <h4 className="invitation-sub-header">{roomName}</h4>

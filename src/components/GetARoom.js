@@ -15,9 +15,10 @@ import LogOut from "./LogOut";
 
 import "./styles/GetARoom.css";
 
-function GetARoom({ uid, isLoading, setIsLoading }) {
+function GetARoom({ isLoading, setIsLoading }) {
   const myRef = useRef(null);
   const [user] = useAuthState(auth);
+  const uid = user?.uid;
   const [values, setValues] = useState(["", "", "", "", "", ""]);
   const [roomNumber, setRoomNumber] = useState("");
   const [roomName, setRoomName] = useState("");
@@ -47,6 +48,9 @@ function GetARoom({ uid, isLoading, setIsLoading }) {
     console.log("new rid: " + rid);
     // TODO: check if this id is not already exists.
 
+    if (roomMaxParticipantsQuantity < 1) {
+      setRoomMaxParticipantsQuantity(10);
+    }
     let roomStr = "room" + rid;
     await setDoc(doc(db, "rooms", roomStr), {
       roomNumber: rid,
@@ -75,7 +79,7 @@ function GetARoom({ uid, isLoading, setIsLoading }) {
   };
 
   const joinRoom = async () => {
-    const uid = user.uid;
+    const uid = user?.uid;
     let rid = roomNumber;
     let isRoomExist = false;
     let isExist = false;
@@ -127,7 +131,7 @@ function GetARoom({ uid, isLoading, setIsLoading }) {
       photoURL: user.photoURL,
       isAdmin: true,
       timestamp: serverTimestamp(),
-      uid: user.uid,
+      uid: user?.uid,
     };
     // Add/update user.
     await setDoc(doc(db, `rooms/room${rid}/users/${uid}`), data);
@@ -152,7 +156,7 @@ function GetARoom({ uid, isLoading, setIsLoading }) {
           photoURL: user.photoURL,
           isAdmin: false,
           timestamp: serverTimestamp(),
-          uid: user.uid,
+          uid: user?.uid,
         };
         await setDoc(doc(db, `rooms/room${rid}/users/${uid}`), data);
 
@@ -223,7 +227,6 @@ function GetARoom({ uid, isLoading, setIsLoading }) {
           createNewRoomURLAndGetInside={createNewRoomURLAndGetInside}
         />
       )}
-      {isLoading && <Loading />}
 
       <ListOfRooms
         // rooms={rooms}

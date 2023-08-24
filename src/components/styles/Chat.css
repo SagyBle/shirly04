@@ -543,6 +543,12 @@ width: 100%;
   border-radius: 20px;  
   display: flex;
   justify-content: space-between;
+  cursor: pointer;
+  transition: 0.15s;
+}
+.suggestion-line-div:hover{
+  transition: 0.15s;
+  background-color: #dad5d53a;
 }
 
 .suggestion-add-song-div{

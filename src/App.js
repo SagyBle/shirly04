@@ -14,6 +14,8 @@ import Test from "./components/Test";
 import Header from "./components/Header";
 import InvitationPage from "./components/InvitationPage";
 import QRGenerator from "./components/QRGenerator";
+import Signin from "./components/Signin";
+import GetARoom from "./components/GetARoom";
 
 // const style = {
 //   appContainer: `max-w-[728px] mx-auto text-center`,
@@ -21,7 +23,12 @@ import QRGenerator from "./components/QRGenerator";
 // }
 
 function App() {
-  // const [user] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
+
+  useState(() => {
+    console.log("user is changed::");
+    console.log(user);
+  }, [user]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -34,9 +41,27 @@ function App() {
         <Route
           path="/"
           element={
-            // <div className={style.appContainer}>
             <div>
-              <Navbar isLoading={isLoading} setIsLoading={setIsLoading} />
+              <div>{!user && <Signin />}</div>
+              {user && (
+                <>
+                  {isLoading && <Loading />}
+
+                  <GetARoom
+                    uid={user.uid}
+                    isLoading={isLoading}
+                    setIsLoading={setIsLoading}
+                  />
+                </>
+              )}
+            </div>
+          }
+        />
+        <Route
+          path="/try"
+          element={
+            <div>
+              <h1>try try try!!!!!!</h1>
             </div>
           }
         />

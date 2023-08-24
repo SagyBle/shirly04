@@ -9,6 +9,7 @@ import PlayingBeach from "./styles/images/PlayingAtTheBeach.webp";
 import YahalomChen from "./styles/images/YahalomChen.webp";
 import SigninEmail from "./SigninEmail";
 import "./styles/Signin.css";
+import { useNavigate } from "react-router-dom";
 
 const googleSignIn = () => {
   const provider = new GoogleAuthProvider();
@@ -18,6 +19,7 @@ const googleSignIn = () => {
 const Signin = () => {
   const [imgIndex, setImageIndex] = useState(0);
   const images = [PlayingGuitar, PlayingPiano, PlayingBeach, YahalomChen];
+  const navigate = useNavigate();
 
   return (
     <div className="container-div-chat">
@@ -26,7 +28,6 @@ const Signin = () => {
           <img className="intro-image" src={images[imgIndex]} alt="" />
           <div className="intro-headers-div">
             <h5>לנגן עם חברים בקלות</h5>
-
             <p className="intro-small-header-p">
               ברוכים הבאים לשירלי, האפליקציה שתשדרג לכם כל ישיבה עם חברים, תקל
               על הנגנים ותשפר את החוויה
@@ -62,7 +63,6 @@ const Signin = () => {
             <img className="button-image-google" src={GoogleIcon} alt="" />
             <span className="button-text-google">התחברו באמצעות גוגל </span>
           </button>
-          {/* <SigninEmail /> */}
         </div>
       </div>
     </div>

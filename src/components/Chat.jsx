@@ -42,7 +42,7 @@ const Chat = (props) => {
   const [isRepeatAllowed, setIsRepeatAllowed] = useState(false);
   const [setCurrPlayingNow, currPlayingNow] = useState("");
 
-  const [maxParticipantsQuantity, setMaxParticipantsQuantity] = useState(null);
+  const [maxParticipantsQuantity, setMaxParticipantsQuantity] = useState(0);
   const [showInvitePopup, setShowInvitePopup] = useState(false);
 
   const { id } = useParams();

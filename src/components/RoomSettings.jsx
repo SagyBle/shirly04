@@ -52,7 +52,7 @@ function RoomSettings({
               </div>
             </div>
             <span className="room-setting-toggle-header-p">
-              {users.length}/{maxParticipantsQuantity} משתמשים בחדר
+              {users.length} משתמשים בחדר
             </span>
           </div>
 

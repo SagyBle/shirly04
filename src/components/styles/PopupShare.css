@@ -1,5 +1,7 @@
 
 
+
+
 .dialog-share {
   outline: #212121;
   
@@ -8,16 +10,16 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 18px 24px 36px 24px;
+  padding: 18px 50px 36px 50px;
   gap: 24px;
   background: #FFFFFF;
   border: 1px solid #F5F5F5;
   border-radius: 40px;
   max-width: 400px;
-  position: absolute;
+  /* position: absolute;
   top: 10%;
   left: 30%;
-  right: 0;
+  right: 0; */
 
   display: flex;
   background-color: #FFFFFF;
